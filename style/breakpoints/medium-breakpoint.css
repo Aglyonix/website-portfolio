@@ -1,0 +1,19 @@
+@media screen and (max-width : 992px) {
+
+    /* ---------------- Banner */
+
+    section#banner div#inner-banner {
+        padding: 8.25rem 0 5.75rem 2.75rem;
+    }
+
+    /* ---------------- Profil */
+
+    section#banner div#profil-banner h1 {
+        font-size: 3.75rem;
+    }
+
+    section#banner div#profil-banner p {
+        font-size: 1.25rem;
+    }
+    
+}

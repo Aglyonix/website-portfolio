@@ -1,0 +1,166 @@
+/* ---------------- Global Attributes */
+
+* {
+    margin: 0;
+}
+
+:root {
+    --white : rgba(255, 255, 255, 1);
+    --black-cover : rgba(0, 0, 0, 0.85);
+}
+
+/* ---------------- Body */
+
+body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    overflow: hidden;
+    
+    background-color: var(--white);
+}
+
+/* ---------------- Font */
+
+.lexend {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* ---------------- Banner */
+
+section#banner {
+    color: var(--white);
+    font-size: 1.5rem;
+
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    background-image: linear-gradient(var(--black-cover), var(--black-cover)), url("../assets/images/banner_background.jpg");
+}
+
+section#banner div#inner-banner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 9.25rem 0 7.75rem 7.25rem;
+    box-sizing: border-box;
+}
+
+/* ---------------- Profil */
+
+section#banner div#image-banner img {
+    overflow: hidden;
+
+    width: 32vw;
+}
+
+section#banner div#profil-banner {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section#banner div#profil-banner {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 1rem;
+
+    text-align: center;
+}
+
+section#banner div#profil-banner h1 {
+    font-size: 7rem;
+    font-weight: 800;
+}
+
+section#banner div#profil-banner p {
+    font-size: 2.5rem;
+    font-weight: 100;
+}
+
+/* ---------------- Links */
+
+section#banner div#profil-banner nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 100%;
+}
+
+nav > a.icon {
+    position: relative;
+    display: block;
+    max-width: 96px;
+
+    padding: 4px 4px 0 4px;
+
+    border: 1px solid transparent;
+    border-radius: 0 16px 0 16px;
+    transition: .3s;
+}
+
+nav > a.icon > img {
+    width: 100%;
+}
+
+nav > a.icon:hover {
+    border-color: var(--white);
+}
+
+nav > a.icon::before, nav > a.icon::after {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+
+    content: "";
+
+    border: 2px solid var(--white);
+    transition: .3s;
+    opacity: 0;
+}
+
+nav > a.icon::before {
+    top: 0;
+    left: 0;
+
+    border-right: transparent;
+    border-bottom: transparent;
+}
+
+nav > a.icon::after {
+    bottom: 0;
+    right: 0;
+
+    border-top: transparent;
+    border-left: transparent;
+}
+
+nav > a.icon:hover:before {
+    transform: translate(-5px, -5px);
+    opacity: 1;
+}
+
+nav > a.icon:hover:after {
+    transform: translate(5px, 5px);
+    opacity: 1;
+}

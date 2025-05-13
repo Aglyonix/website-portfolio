@@ -1,0 +1,38 @@
+@media screen and (max-width : 736px) {
+
+    /* ---------------- Banner */
+
+    section#banner {
+        height: 100vh;
+    }
+
+    section#banner div#inner-banner {
+        flex-direction: column;
+
+        padding: 8rem 1rem 5rem 1rem;
+    }
+
+    /* ---------------- Profil */
+
+    section#banner div#profil-banner {
+        margin: 0;
+        margin-top: auto;
+    }
+
+    section#banner div#image-banner img {
+        width: 60vw;
+    }
+
+    section#banner div#profil-banner h1 {
+        font-size: 3.75rem;
+    }
+
+    section#banner div#profil-banner p {
+        font-size: 1.25rem;
+    }
+
+    nav > a.icon {
+        max-width: 80px;
+    }
+    
+}

@@ -1,0 +1,21 @@
+@media screen and (max-width : 480px) {
+
+    /* ---------------- Profil */
+
+    section#banner div#image-banner img {
+        width: 64vw;
+    }
+
+    section#banner div#profil-banner h1 {
+        font-size: 2.5rem;
+    }
+
+    section#banner div#profil-banner p {
+        font-size: 1.1rem;
+    }
+
+    nav > a.icon {
+        max-width: 64px;
+    }
+    
+}

@@ -1,0 +1,40 @@
+@media screen and (max-width : 926px) and (orientation : landscape) {
+
+    /* ---------------- Banner */
+
+    section#banner {
+        height: 100vh;
+    }
+
+    section#banner div#inner-banner {
+        flex-direction: row;
+
+        padding: 3rem 1.5rem 3rem 1.5rem;
+    }
+
+    /* ---------------- Profil */
+
+    section#banner div#profil-banner {
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    section#banner div#image-banner img {
+        width: 40vw;
+    }
+
+    section#banner div#profil-banner h1 {
+        font-size: 2.5rem;
+    }
+
+    section#banner div#profil-banner p {
+        font-size: 1rem;
+        max-width: 40vw;
+    }
+
+    nav > a.icon {
+        max-width: 64px;
+    }
+
+}
