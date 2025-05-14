@@ -18,4 +18,9 @@
         max-width: 64px;
     }
     
+    /* ---------------- Sidebar */
+
+    :root {
+        --sidebar-translate-x: 18rem;
+    }
 }

@@ -1,4 +1,4 @@
-@media screen and (max-width : 736px) {
+@media screen and (max-width : 736px) and (orientation: portrait) {
 
     /* ---------------- Banner */
 
@@ -9,7 +9,7 @@
     section#banner div#inner-banner {
         flex-direction: column;
 
-        padding: 8rem 1rem 5rem 1rem;
+        padding: 11rem 1rem 5rem 1rem;
     }
 
     /* ---------------- Profil */
@@ -33,6 +33,22 @@
 
     nav > a.icon {
         max-width: 80px;
+    }
+
+    /* ---------------- Button */
+
+    header nav > a {
+        display: none;
+    }
+
+    header button#side-bar-button {
+        display: block;
+    }
+
+    /* ---------------- Sidebar */
+
+    nav#navigation-sidebar-mobile {
+        display: flex;
     }
     
 }

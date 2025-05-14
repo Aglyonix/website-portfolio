@@ -5,6 +5,10 @@
 /* ---------------- Main */
 
 @import url("main.css");
+@import url("contents/banner.css");
+@import url("contents/nav-animation.css");
+@import url("contents/header.css");
+@import url("contents/side-bar.css");
 
 /* ---------------- Breakpoints */
 

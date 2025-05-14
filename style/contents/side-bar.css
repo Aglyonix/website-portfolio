@@ -1,0 +1,49 @@
+/* ---------------- Button */
+
+header button#side-bar-button {
+    display: none;
+
+    margin-top: 4px;
+    background-color: transparent;
+}
+
+/* ---------------- Sidebar */
+
+nav#navigation-sidebar-mobile {
+    display: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: .5rem;
+
+    position: fixed;
+    top: 0; left: 0;
+
+    width: var(--sidebar-translate-x);
+    height: 100vh;
+
+    z-index: 1;
+
+    padding: 5rem 0 0 2.5rem;
+
+    background-color: var(--black);
+    transform: translateX(calc(var(--sidebar-translate-x) * -1));
+}
+
+nav#navigation-sidebar-mobile[data-expanded="false"] {
+
+    transform: translateX(calc(var(--sidebar-translate-x) * -1));
+    transition-duration: var(--sidebar-duration);
+}
+
+nav#navigation-sidebar-mobile[data-expanded="true"] {
+
+    transform: translateX(0);
+    transition-duration: var(--sidebar-duration);
+}
+
+nav#navigation-sidebar-mobile a.navigation {
+    margin: .5rem;
+
+    font-size: 1.75rem;
+    font-weight: 300;
+}

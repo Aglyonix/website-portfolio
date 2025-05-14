@@ -1,0 +1,56 @@
+/* ---------------- Banner */
+
+section#banner {
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    background-image: linear-gradient(var(--black-cover), var(--black-cover)), url("../../assets/images/banner_background.jpg");
+}
+
+section#banner div#inner-banner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 9.25rem 0 7.75rem 7.25rem;
+}
+
+/* ---------------- Profil */
+
+section#banner div#image-banner img {
+    overflow: hidden;
+
+    width: 32vw;
+}
+
+section#banner div#profil-banner {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section#banner div#profil-banner {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 1rem;
+
+    text-align: center;
+}
+
+section#banner div#profil-banner h1 {
+    font-size: 7rem;
+}
+
+section#banner div#profil-banner p {
+    font-size: 2.5rem;
+    font-weight: 100;
+}

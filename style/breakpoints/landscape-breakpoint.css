@@ -9,7 +9,7 @@
     section#banner div#inner-banner {
         flex-direction: row;
 
-        padding: 3rem 1.5rem 3rem 1.5rem;
+        padding: 5rem 1.5rem 3rem 3.5rem;
     }
 
     /* ---------------- Profil */
@@ -21,7 +21,7 @@
     }
 
     section#banner div#image-banner img {
-        width: 40vw;
+        width: 32vw;
     }
 
     section#banner div#profil-banner h1 {
@@ -37,4 +37,13 @@
         max-width: 64px;
     }
 
+    /* ---------------- Button */
+
+    header nav > a {
+        display: block;
+    }
+
+    header button#side-bar-button {
+        display: none;
+    }
 }

@@ -1,4 +1,10 @@
-@media screen and (max-width : 480px) {
+@media screen and (max-width : 360px) {
+
+    /* ---------------- Header */
+
+    a#signature > h1 {
+        font-size: 1.6rem;
+    }
 
     /* ---------------- Profil */
 
@@ -13,5 +19,14 @@
     section#banner div#profil-banner p {
         font-size: 1.05rem;
     }
-    
+
+    /* ---------------- Sidebar */
+
+    :root {
+        --sidebar-translate-x: 17rem;
+    }
+
+    nav#navigation-sidebar-mobile a.navigation {
+        font-size: 1.5rem;
+    }
 }
