@@ -1,6 +1,10 @@
 /* ---------------- Banner */
 
 section#banner {
+    height: 100%;
+
+    padding: 9.25rem 0 7.75rem 7.25rem;
+
     background-size: cover;
     background-position-x: center;
     background-position-y: center;
@@ -16,8 +20,6 @@ section#banner div#inner-banner {
 
     align-items: center;
     justify-content: center;
-
-    padding: 9.25rem 0 7.75rem 7.25rem;
 }
 
 /* ---------------- Profil */

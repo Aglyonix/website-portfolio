@@ -11,27 +11,30 @@ section#banner div#profil-banner nav {
     width: 100%;
 }
 
-nav > a.icon {
+.icon {
     position: relative;
     display: block;
     max-width: 96px;
 
     padding: 4px 4px 0 4px;
 
+}
+
+.icon > img {
+    width: 100%;
+}
+
+nav > a.focus-link {
     border: 1px solid transparent;
     border-radius: 0 16px 0 16px;
     transition: .3s;
 }
 
-nav > a.icon > img {
-    width: 100%;
-}
-
-nav > a.icon:hover {
+nav > a.focus-link:hover {
     border-color: var(--white);
 }
 
-nav > a.icon::before, nav > a.icon::after {
+nav > a.focus-link::before, nav > a.focus-link::after {
     position: absolute;
     width: 16px;
     height: 16px;
@@ -43,7 +46,7 @@ nav > a.icon::before, nav > a.icon::after {
     opacity: 0;
 }
 
-nav > a.icon::before {
+nav > a.focus-link::before {
     top: 0;
     left: 0;
 
@@ -51,7 +54,7 @@ nav > a.icon::before {
     border-bottom: transparent;
 }
 
-nav > a.icon::after {
+nav > a.focus-link::after {
     bottom: 0;
     right: 0;
 
@@ -59,12 +62,12 @@ nav > a.icon::after {
     border-left: transparent;
 }
 
-nav > a.icon:hover:before {
+nav > a.focus-link:hover:before {
     transform: translate(-5px, -5px);
     opacity: 1;
 }
 
-nav > a.icon:hover:after {
+nav > a.focus-link:hover:after {
     transform: translate(5px, 5px);
     opacity: 1;
 }

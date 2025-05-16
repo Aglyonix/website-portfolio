@@ -4,12 +4,12 @@
 
     section#banner {
         height: 100vh;
+
+        padding: 11rem 1rem 5rem 1rem;
     }
 
     section#banner div#inner-banner {
         flex-direction: column;
-
-        padding: 11rem 1rem 5rem 1rem;
     }
 
     /* ---------------- Profil */
@@ -20,7 +20,7 @@
     }
 
     section#banner div#image-banner img {
-        width: 60vw;
+        width: 50vw;
     }
 
     section#banner div#profil-banner h1 {
@@ -50,5 +50,10 @@
     nav#navigation-sidebar-mobile {
         display: flex;
     }
-    
+
+    /* ---------------- Footer */
+
+    nav#navigation-sidebar-mobile footer {
+        display: flex;
+    }
 }

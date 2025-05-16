@@ -1,0 +1,80 @@
+/* ---------------- Footer */
+
+footer {
+    display: grid;
+
+    grid-template-columns: 50% 50%;
+    grid-template-rows: repeat(2, 48px);
+
+    align-items: center;
+
+    width: 100%;
+
+    padding: min(4rem, 5vh) 3.25rem;
+
+    background-color: var(--black);
+}
+
+nav#navigation-sidebar-mobile > footer {
+    display: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    align-items: flex-start;
+
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+footer .lexend {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+nav#navigation-sidebar-mobile > footer .lexend {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+footer section#credit {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+
+    padding: .5rem;
+
+    text-align: left;
+}
+
+nav#navigation-sidebar-mobile section#credit {
+    padding: .5rem 0 .5rem .5rem;
+}
+
+footer section#contact {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
+
+    padding-right: .5rem;
+
+    text-align: right;
+}
+
+footer section#social-networks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+}
+
+footer section#social-networks > a {
+    max-width: 44px;
+}
+
+nav#navigation-sidebar-mobile section#social-networks > a {
+    max-width: 36px;
+}

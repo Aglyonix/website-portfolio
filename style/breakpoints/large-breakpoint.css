@@ -1,8 +1,8 @@
 @media screen and (max-width : 1280px) {
 
     /* ---------------- Banner */
-
-    section#banner div#inner-banner {
+    
+    section#banner {
         padding: 8.5rem 0 6.25rem 3.75rem;
     }
 
@@ -19,5 +19,13 @@
     nav > a.icon {
         max-width: 64px;
     }
+}
+
+@media screen and (min-width : 993px) and (max-width : 1280px) and (max-height: 648px) {
     
+    /* ---------------- Footer */
+
+    footer {
+        display: none;
+    }
 }
