@@ -53,6 +53,10 @@
 
     /* ---------------- Footer */
 
+    footer {
+        display: none;
+    }
+
     nav#navigation-sidebar-mobile footer {
         display: flex;
     }

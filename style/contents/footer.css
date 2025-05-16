@@ -36,6 +36,7 @@ nav#navigation-sidebar-mobile > footer .lexend {
     font-weight: 300;
 }
 
+/* Not in use */
 footer section#credit {
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;

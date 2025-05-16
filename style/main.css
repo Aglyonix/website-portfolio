@@ -17,6 +17,10 @@ html {
     --black : rgba(0, 0, 0, 1);
     --black-cover : rgba(0, 0, 0, 0.85);
 
+    --color-buff : #D4A373;
+    --color-auburn : #AD2831;
+    --color-tekhelet : #5A189A;
+
     --sidebar-translate-x : 24rem;
     --sidebar-duration: .64s;
 }
@@ -38,6 +42,18 @@ body {
 
 main {
     flex: 1;
+}
+
+main#bio {
+    background-color: var(--color-buff);
+}
+
+main#projects {
+    background-color: var(--color-auburn);
+}
+
+main#contact {
+    background-color: var(--color-tekhelet);
 }
 
 /* ---------------- Font */
