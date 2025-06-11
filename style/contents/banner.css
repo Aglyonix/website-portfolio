@@ -3,6 +3,8 @@
 section#banner {
     height: 100%;
 
+    align-items: unset;
+
     padding: 9.25rem 0 7.75rem 7.25rem;
 
     background-size: cover;

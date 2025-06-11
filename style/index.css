@@ -11,6 +11,10 @@
 @import url("contents/side-bar.css");
 @import url("contents/footer.css");
 
+/* ---------------- Pages */
+
+@import url("pages/bio.css");
+
 /* ---------------- Breakpoints */
 
 @import url("breakpoints/main-breakpoints.css");

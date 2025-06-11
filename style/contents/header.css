@@ -8,14 +8,19 @@ header {
     align-items: center;
 
     position: fixed;
-    height: 4.25rem;
     width: 100%;
 
     z-index: 2;
 
-    padding: 0.75rem 2rem 0 2rem;
+    padding: var(--header-padding) 2rem;
 
     background-color: transparent;
+    transition: background-color .3s;
+}
+
+header.black-background {
+    background-color: var(--black);
+    transition: background-color .3s;
 }
 
 a#signature {
@@ -57,4 +62,5 @@ header nav a.navigation {
 
     font-size: 1.5rem;
     font-weight: 300;
+    line-height: var(--header-line-height);
 }

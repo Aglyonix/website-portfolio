@@ -1,0 +1,73 @@
+/* ---------------- Bio */
+
+main#bio section.page-title .content-container-c {
+    background-color: var(--main-color);
+}
+
+/* ---------------- About me */
+
+#about-me > .row:nth-child(2) {
+    gap: 2rem;
+}
+
+#about-me p {
+    font-size: 1.25rem;
+}
+
+/* ---------------- Interest */
+
+#interest h1 {
+    margin-top: 1.5rem;
+}
+
+#interest [class*=tag-] {
+    margin-bottom: .85rem;
+}
+
+/* ---------------- Education */
+
+div.col.size-third:has(#education) {
+    --flex-size: 36%;
+}
+
+#education > h1 {
+    margin: 0;
+    text-align: center;
+}
+
+#education h3 {
+    --line-height: 1.25rem;
+    font-size: 1.25rem;
+}
+
+#education article img {
+    max-width: 64%;
+    float: right;
+}
+
+#education .school {
+    color: var(--main-color);
+}
+
+#education .time-indicator {
+    color: var(--fade);
+}
+
+/* ---------------- Nav */
+
+nav.inner-nav[for="bio-content"] {
+    margin-top: 6rem;
+}
+
+nav.inner-nav[for="bio-content"] > .item-nav.active svg path {
+    fill: var(--white);
+}
+
+nav.inner-nav[for="bio-content"] > .item-nav.active svg path.stroke {
+    fill: none;
+    stroke: var(--white);
+}
+
+nav.inner-nav[for="bio-content"] > .item-nav:nth-child(1) svg path {
+    stroke-width: 2;
+}
