@@ -1,6 +1,8 @@
-import builder from "./ContentItems/ContentItems.js";
+import Json from "../Utils/json.js";
+import builder from "../Items/ContentItems.js";
+import base_url from "../settings.js";
 
-const route_url = "http://127.0.0.1:5500/assets/nav/nav_routing.json";
+const route_url = "assets/nav/routing.json";
 
 const nav = {
 
@@ -13,14 +15,17 @@ const nav = {
     }
 }
 
-class InnerNavigation {
+class InnerNavigation extends Json {
 
     constructor(nav) {
+        super();
+
         if(!nav.classList.contains("inner-nav")) {
             throw TypeError("The given element doesn't contain the class 'inner-nav'");
         }
 
-        this.url = route_url;
+        this.setBaseUrl(base_url);
+        this.setUrl(route_url);
 
         this.nav = nav;
         this.items = nav.querySelectorAll(".inner-nav > .item-nav");
@@ -57,23 +62,9 @@ class InnerNavigation {
         }
     }
 
-    async #json() {
-        try {
-            const response = await fetch(this.url);
-
-            if(!response.ok) {
-                throw new Error(`Response status: ${response.status}`);
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error("Fetch failed : ", error.message);
-        }
-    }
-
     async #init() {
         try {
-            this.route = await this.#json();
+            this.route = await this.json();
             this.#setup();
             this.#build();
         } catch (error) {
@@ -104,7 +95,7 @@ class InnerNavigation {
         });
     }
 
-    #build() {
+    async #build() {
         this.#clear();
 
         if(this.builder.has(this.route[this.active.getAttribute("for")])) {
@@ -113,7 +104,9 @@ class InnerNavigation {
             throw new TypeError(`No content items of this name : No content items named '${this.route[this.active.getAttribute("for")]}' was found, check the syntax again, or add the route in your routing json file`);
         }
 
-        this.container.appendChild(this.builder.build());
+        const buffer = await this.builder.build();
+        ;
+        this.container.insertAdjacentHTML('beforeend', buffer);
     }
 
     #clear() {

@@ -1,7 +1,7 @@
-import sidebar from "./side-bar.js";
-import header from "./header.js";
-import style from "./style.js";
-import nav from "./nav.js";
+import sidebar from "./Modules/side-bar.js";
+import header from "./Modules/header.js";
+import style from "./Modules/style.js";
+import nav from "./Modules/nav.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     sidebar.init();
