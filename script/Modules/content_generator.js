@@ -1,7 +1,7 @@
 import Json from "../Utils/json.js";
 import base_url from "../settings.js";
 
-class ContentItems extends Json {
+export default class ContentGenerator extends Json {
 
     constructor(url, col, row = null) {
         super();
@@ -32,7 +32,7 @@ class ContentItems extends Json {
 
             this.html = this.data["html"];
             this.items = this.data["items"];  
-            this.buffer = "";
+            let buffer = "";
 
             if(typeof this.data["container"] !== 'undefined') {
                 if(typeof this.data["container"]["head"] === 'undefined') {
@@ -41,7 +41,7 @@ class ContentItems extends Json {
                 if(typeof this.data["container"]["foot"] === 'undefined') {
                     throw TypeError(`No param foot found in the container at ${this.url}`);
                 }
-                this.buffer = this.data["container"]["head"];
+                buffer = this.data["container"]["head"];
             }
 
             if(typeof this.html === 'object') {
@@ -90,51 +90,67 @@ class ContentItems extends Json {
                     diff += args[param.name].length - param.length;
                 });
 
-                this.buffer += block;
+                buffer += block;
             });
 
             if(typeof this.data["container"] !== 'undefined') {
-                this.buffer += this.data["container"]["foot"];
+                buffer += this.data["container"]["foot"];
             }
 
-            return this.buffer;
+            return buffer;
         } catch (error) {
             console.error(error.message);
         }
     }
-}
 
-const builder = {
+    async table_of_content() {
+        try {
+            this.data = await this.json();
 
-    self : new Map(),
+            if(typeof this.data["table-of-content"] === 'undefined') {
+                console.log(`No param table-of-content found in ${this.url}`);
+            }
 
-    builder : null,
+            if(typeof this.data["table-of-content"].length === 0) {
+                return "";
+            }
 
-    set : function(key) {
-        this.builder = this.get(key);
-    },
+            let buffer = "";
 
-    get : function(key) {
-        return this.self.get(key);
-    },
+            buffer = this.#build_table(this.data["table-of-content"], buffer);
 
-    has : function(key) {
-        return this.self.has(key);
-    },
+            return buffer;
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
 
-    add : function(key, value) {
-        this.self.set(key, value);
-    },
+    #build_table(items, buffer) {
+        items.forEach(item => {
+            if(typeof item["title"] === 'undefined') {
+                throw TypeError(`No param title found in ${this.url} for item : ${item}`);
+            }
+            if(typeof item["id"] === 'undefined') {
+                throw TypeError(`No param id found in ${this.url} for item : ${item}`);
+            }
 
-    init : function() {
-        this.self.set("ContentItems", new ContentItems("assets/nav/content.json",5));
-    },
+            buffer += `<li><a href="#${item["id"]}"`;
 
-    build : function() {
-        return this.builder.build();
+            if(typeof item["class"] !== 'undefined') {
+                buffer += ` class="${item["class"]}"`;
+            }
+
+            buffer += `>${item["title"]}</a>`;
+
+            if(typeof item["children"] !== 'undefined' && item["children"].length > 0) {
+                buffer += `<ul>`;
+                buffer = this.#build_table(item["children"], buffer);
+                buffer += `</ul>`;
+            }
+
+            buffer += `</li>`;
+        });
+
+        return buffer;
     }
 }
-
-builder.init();
-
-export default builder;
