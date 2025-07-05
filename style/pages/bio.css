@@ -6,10 +6,6 @@ main#bio section.page-title .content-container-c {
 
 /* ---------------- About me */
 
-#about-me .row.links {
-    gap: 2rem;
-}
-
 #about-me p {
     font-size: 1.25rem;
 }
@@ -98,6 +94,126 @@ div.col.size-third:has(#education) {
 
 #experience .tool {
     color: var(--fade);
+}
+
+/* ---------------- Certificates */
+
+.certif-card {
+    position: relative;
+
+    background-color: var(--main-color);
+    border-radius: .25rem;
+}
+
+.certif-card .certif-mention, .certif-card .certif-title {
+    position: absolute;
+
+    width: fit-content;
+    pointer-events: none;
+}
+
+.certif-card .certif-mention {
+    top: .5rem;
+    right: .5rem;
+}
+
+.certif-card .certif-title {
+    bottom: .5rem;
+    left: .5rem;
+}
+
+.certif-card .certif-mention .text, .certif-card .certif-title .text {
+    z-index: 0;
+    position: relative;
+
+    color: var(--white);
+}
+
+.certif-card .certif-mention .text {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.certif-card .certif-title .text {
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.certif-card .certif-mention .text:empty::before,
+.certif-card .certif-title .text:empty::before {
+    display: none;
+}
+
+.certif-card .certif-mention .text::before, .certif-card .certif-title .text::before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+
+    width: calc(100% + .5rem);
+    height: calc(100% + .4rem);
+
+    background-color: var(--main-color);
+    
+}
+
+.certif-card .certif-mention .text::before {
+    top: 0;
+    right: 0;
+
+    border-radius: 0 0 0 .25rem;
+}
+
+.certif-card .certif-title .text::before {
+    bottom: -.15rem;
+    left: 0;
+
+    border-radius: 0 .25rem 0 0;
+}
+
+.certif-card .certif-image {
+    background-size: cover;
+    border-radius: .25rem;
+}
+
+/* ---------------- Certificates */
+
+.skill-card {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+
+    aspect-ratio: 1;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: .5rem;
+
+    background-image: linear-gradient(135deg, transparent, var(--red-400));
+    background-color: var(--red-300);
+    border-radius: .375rem;
+
+    transition: background-color .4s;
+}
+
+.skill-card:hover {
+    background-color: var(--red-500);
+
+    transition: background-color .4s;
+}
+
+.skill-card > svg {
+    width: 64%;
+    height: 64%;
+}
+
+.skill-card h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    color: var(--red-950) !important;
 }
 
 /* ---------------- Nav */

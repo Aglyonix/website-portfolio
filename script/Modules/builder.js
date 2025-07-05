@@ -23,9 +23,9 @@ const builder = {
     },
 
     init : function() {
-        this.add("nav-experiences", new ContentGenerator("assets/nav/experience.json", 1, 1));
-        this.add("nav-certificates", new ContentGenerator("assets/nav/content.json", 5));
-        this.add("nav-skills", new ContentGenerator("assets/nav/content.json", 5));
+        this.add("nav-experiences", new ContentGenerator("assets/nav/experience.json", 1));
+        this.add("nav-certificates", new ContentGenerator("assets/nav/certificate.json", 3));
+        this.add("nav-skills", new ContentGenerator("assets/nav/skill.json", 5));
     },
 
     build : function() {

@@ -1,0 +1,32 @@
+{
+    "table-of-content" : [
+
+    ],
+    "template" : [
+        "<article class=\"col certif-card padding-small\":flex-size>",
+        "<p class=\"certif-mention no-margin\"><span class=\"lexend text\">:mention</span></p>",
+        "<img src=\":src-certif\" alt=\":alt-certif\" class=\"certif-image\">",
+        "<h3 class=\"certif-title no-margin\"><span class=\"lexend text\">:title</span></h3>",
+        "</article>"
+    ],
+    "items" : [
+        {
+            "mention" : "Mention Bien",
+            "src-certif" : "/assets/images/banner_background.jpg",
+            "alt-certif" : "Baccalauréat Mention Bien",
+            "title" : "Baccalauréat Général"
+        },
+        {
+            "mention" : "Parcours A",
+            "src-certif" : "/assets/images/banner_background.jpg",
+            "alt-certif" : "BUT Informatique Parcours A",
+            "title" : "BUT Informatique"
+        },
+        {
+            "mention" : "",
+            "src-certif" : "/assets/images/banner_background.jpg",
+            "alt-certif" : "Brevet des Collèges",
+            "title" : "Brevet des Collèges"
+        }
+    ]
+}

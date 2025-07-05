@@ -1,12 +1,8 @@
 {
-    "container" : {
-        "head" : "",
-        "foot" : ""
-    },
     "table-of-content" : [
 
     ],
-    "html" : [
+    "template" : [
         
     ],
     "items" : [

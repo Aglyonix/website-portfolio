@@ -1,7 +1,6 @@
 {
-    "container" : {
-        "head" : "",
-        "foot" : ""
+    "settings" : {
+        "gap" : "gap-large"
     },
     "table-of-content" : [
         {
@@ -27,21 +26,21 @@
             "class" : "lexend",
             "children" : [
                 {
-                    "title" : "Stage développement imformatique",
+                    "title" : "Stage Ellipses",
                     "id" : "stage-ellipses",
                     "class" : "lexend"
                 }
             ]
         }
     ],
-    "html" : [
-        "<div class=\"col size-third\">",
+    "template" : [
+        "<div class=\"col size-third no-padding\">",
         "<!-- Education section -->",
         "<section id=\"education\" class=\"content-container-c anchor-title\">",
         "<h1 class=\"lexend style-highlight\" data-content=\"Education\">Education</h1>",
 
         "<article id=\"but-info\" class=\"anchor\">",
-        "<h3 class=\"lexend padding-top-meduim\">BUT Informatique &nbsp;&bull;&nbsp; Deuxième année</h3>",
+        "<h3 class=\"lexend padding-top-medium\">BUT Informatique &nbsp;&bull;&nbsp; Deuxième année</h3>",
         "<p class=\"lexend\">",
         "<a href=\"https://www.iut-orsay.universite-paris-saclay.fr\" class=\"school\">IUT Orsay </a>",
         "Gif-sur-Yvette (91)",
@@ -71,7 +70,7 @@
 
 
 
-        "<div class=\"col\">",
+        "<div class=\"col no-padding\">",
         "<!-- Experience section -->",
         "<section id=\"experience\" class=\"content-container-c anchor-title\">",
         "<h1 class=\"lexend style-highlight\">Expérience professionnelle</h1>",

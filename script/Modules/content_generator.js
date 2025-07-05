@@ -13,6 +13,7 @@ export default class ContentGenerator extends Json {
             throw TypeError(`This container has no enough row '${row}' to contain at least 1 item`);
         }
 
+        // TODO : Wrapper view and mechanism
         this.col = col;
         if(row === null) {
             this.row = 1;
@@ -22,6 +23,8 @@ export default class ContentGenerator extends Json {
             this.wrap = true;
         }
 
+        this.predefined = ["flex-size"];
+
         this.setBaseUrl(base_url);
         this.setUrl(url);
     }
@@ -30,27 +33,17 @@ export default class ContentGenerator extends Json {
         try {
             this.data = await this.json();
 
-            this.html = this.data["html"];
+            this.html = this.data["template"];
             this.items = this.data["items"];  
             let buffer = "";
 
-            if(typeof this.data["container"] !== 'undefined') {
-                if(typeof this.data["container"]["head"] === 'undefined') {
-                    throw TypeError(`No param head found in the container at ${this.url}`);
-                }
-                if(typeof this.data["container"]["foot"] === 'undefined') {
-                    throw TypeError(`No param foot found in the container at ${this.url}`);
-                }
-                buffer = this.data["container"]["head"];
+            let gap = "gap-small";
+
+            if(typeof this.data["settings"] !== 'undefined' && typeof this.data["settings"]["gap"] !== 'undefined') {
+                gap = this.data["settings"]["gap"];
             }
 
-            if(typeof this.html === 'object') {
-                let code = "";
-                this.html.forEach(line => {
-                    code += line;
-                });
-                this.html = code;
-            }
+            buffer = `<div class="builder-container ${gap} padding-left-balance padding-right-balance">`;
 
             if(typeof this.html === 'undefined' || this.html === null) {
                 throw TypeError(`No param html found in ${this.url}`);
@@ -64,6 +57,14 @@ export default class ContentGenerator extends Json {
                 throw TypeError(`No param items found in ${this.url}`);
             }
 
+            if(typeof this.html === 'object') {
+                let code = "";
+                this.html.forEach(line => {
+                    code += line;
+                });
+                this.html = code;
+            }
+
             this.params = Array.from(this.html.matchAll(":[A-Za-z0-9-]+"), (match) => match = {
                 name : match[0],
                 index : match["index"],
@@ -72,30 +73,101 @@ export default class ContentGenerator extends Json {
 
             if (this.params === null) {
                 this.params = [];
+            } else {
+                this.params.forEach(param => {
+                    param.name = param.name.substring(1);
+                });
             }
+            
+            let count = 0;
+            let row = 0;
 
             this.items.forEach(args => {
 
-                if(this.params.length != Object.values(args).length) {
-                    throw TypeError(`No enough args set in ${this.args} : expected ${this.params}`);
+                this.predefined.forEach(predefined => {
+                    if(typeof args[predefined] !== 'undefined') {
+                        throw TypeError(`You cannot set predefined param '${predefined}' in ${this.url}`);
+                    }
+                });
+
+                let predefinedfound = 0;
+
+                this.params.forEach(param => {
+                    if(this.predefined.includes(param.name)) {
+                        predefinedfound++;
+                    }
+                });
+
+                if(count%this.col === 0) {
+                    if(this.items.length - count < this.col) {
+                        buffer += `<div class="row ${gap} justify-center">`;
+                    } else {
+                        buffer += `<div class="row ${gap}">`;
+                    }
                 }
 
                 let diff = 0;
                 let block = this.html;
 
                 this.params.forEach(param => {
-                    param.name = param.name.substring(1);
 
-                    block = block.slice(0, param.index + diff) + args[param.name] + block.slice(param.index + diff + param.length);
-                    diff += args[param.name].length - param.length;
+                    if(this.predefined.includes(param.name)) {
+
+                        if(param.name === "flex-size") {
+                            if(this.items.length%this.col !== 0 && count >= this.items.length - this.items.length%this.col) {
+                                let maxWidth = 100 / this.col + "%";
+                                let style = ` style="--flex-size : calc(${maxWidth} - calc(var(--flex-gap)*${this.col-1} / ${this.col}));"`;
+
+                                block = block.slice(0, param.index + diff) + style + block.slice(param.index + diff + param.length);
+                                diff += style.length - param.length;
+                            } else {
+                                block = block.slice(0, param.index + diff) + block.slice(param.index + diff + param.length);
+                                diff += 0 - param.length;
+                            }
+                        }
+                    } else {
+
+                        if(typeof args[param.name] !== 'undefined' && typeof args[param.name] === 'string') {
+
+                            block = block.slice(0, param.index + diff) + args[param.name] + block.slice(param.index + diff + param.length);
+                            diff += args[param.name].length - param.length;
+
+                        } else if(typeof args[param.name] !== 'undefined' && typeof args[param.name] === 'object') {
+
+                            let code = "";
+
+                            args[param.name].forEach(line => {
+                                code += line;
+                            });
+
+                            block = block.slice(0, param.index + diff) + code + block.slice(param.index + diff + param.length);
+                            diff += code.length - param.length;
+                        }
+                    }
                 });
 
+                if(count === 5) {
+                    console.log(block);
+                }
+
+                count++;
                 buffer += block;
+
+                if(count%this.col === 0) {
+                    if (count > 0) {
+                        row++;
+                    }
+                    if(row > 0) {
+                        buffer += "</div>";
+                    }
+                }
             });
 
-            if(typeof this.data["container"] !== 'undefined') {
-                buffer += this.data["container"]["foot"];
+            if(count%this.col !== 0) {
+                buffer += "</div>";
             }
+
+            buffer += "</div>";
 
             return buffer;
         } catch (error) {
