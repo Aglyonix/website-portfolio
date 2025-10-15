@@ -1,16 +1,11 @@
-/* ---------------- Laptop < 1680px */
-@import url("laptop-breakpoint.css");
-/* ---------------- Large Devices < 1280px */
-@import url("large-breakpoint.css");
-/* ---------------- Medium Devices < 992px */
-@import url("medium-breakpoint.css");
-
-/* ---------------- Landscape < 926px */
-@import url("landscape-breakpoint.css");
-
-/* ---------------- Mobile < 736px */
+/* ---------------- Modile Devices > 480px | portrait + Mobile Devices > 736px */
 @import url("mobile-breakpoint.css");
-/* ---------------- Small Devices < 480px */
+/* ---------------- Small Devices > 736 px */ 
 @import url("small-breakpoint.css");
-/* ---------------- Extra Small Devices < 360px */
-@import url("extra-small-breakpoint.css");
+
+/* ---------------- Laptop Devices > 992px  */ 
+@import url("laptop-breakpoint.css");
+/* ---------------- Madium Devices > 1200px */ 
+@import url("medium-breakpoint.css");
+/* ---------------- Large Devices > 1400px  */ 
+@import url("large-breakpoint.css"); 
