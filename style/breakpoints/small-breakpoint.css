@@ -1,26 +1,68 @@
-@media screen and (max-width : 480px) {
+@media screen and (min-width : 768px) {
 
     /* ---------------- Profil */
 
-    section#banner div#image-banner img {
-        width: 64vw;
+    #profil-showcase h1 {
+        font-size: 3rem;
     }
 
-    section#banner div#profil-banner h1 {
-        font-size: 2.5rem;
-    }
-
-    section#banner div#profil-banner p {
-        font-size: 1.1rem;
+    #profil-showcase p {
+        font-size: 1.35rem;
     }
 
     nav > a.icon {
-        max-width: 64px;
+        max-width: 80px;
     }
-    
+
     /* ---------------- Sidebar */
 
-    :root {
-        --sidebar-translate-x: 18rem;
+    header .navbar {
+        display: flex;
+    }
+
+    #side-bar-button {
+        display: none;
+    }
+
+    #navigation-sidebar-mobile {
+        display: none;
+    }
+
+    /* ---------------- Title */
+
+    :not(#page-main) main header {
+        min-height: 16rem;
+    }
+
+    .page-title {
+        padding: calc(var(--header-height) + 1rem) 1.25rem .75rem 1.75rem;
+    }
+
+    /* ---------------- Foot */
+
+    .page-title h1 {
+        font-size: 2.5rem;
+    }
+
+    /* ---------------- Footer */
+
+    app > footer {
+        display: flex;
+    }
+
+    /* ---------------- Grid layout */
+
+    .grid-columns[data-columns="2"] {
+        visibility: hidden;
+        position: absolute;
+        height: 0;
+        overflow: hidden;
+    }
+
+    .grid-columns[data-columns="3"] {
+        visibility: visible;
+        position: unset;
+        height: unset;
+        overflow: unset;
     }
 }

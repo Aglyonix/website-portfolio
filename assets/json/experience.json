@@ -1,0 +1,128 @@
+{
+    "table-of-content" : [
+        {
+            "key" : "table-exprc-00001",
+            "title" : "Experience",
+            "target" : "#experience",
+
+            "childrens" : [
+                {
+                    "key" : "table-exprc-00001-00001",
+                    "title" : "Stage Ellipses",
+                    "target" : "#stage-ellipses"
+                },
+                {
+                    "key" : "table-exprc-00001-00002",
+                    "title" : "Alternance Ellipses",
+                    "target" : "#alternance-ellipses"
+                }
+            ]
+        }
+    ],
+    "items" : [
+        {
+            "id" : "exprc-00000",
+            "active" : true,
+
+            "title" : "Stage développement imformatique",
+            "entity" : {
+                "name" : "Editions Ellipses",
+                "img" : "editions-ellipses.jpg",
+                "href" : "https://www.editions-ellipses.fr/content/9-qui-sommes-nous"
+            },
+            "date" : "— De Avril à Août 2025",
+
+            "caption" : "Stage de 3 mois dans le cadre de ma formation en BUT Informatique. Développement du logiciel ERP \"Elli\" et son environnement. Proximité et contact direct avec les clients.",
+            "details" : [
+                {
+                    "id" : "00000",
+                    "text" : "Développement de l'ERP \"Elli\"",
+                    "muted" : "— Symfony",
+                    "light" : "— VS Code"
+                },
+                {
+                    "id" : "00001",
+                    "text" : "Gestion de la base de donnée",
+                    "muted" : "— SQL",
+                    "light" : "— HeidSQL / MySQL"
+                },
+                {
+                    "id" : "00002",
+                    "text" : "Amélioration de l'interface utilisateur",
+                    "muted" : "",
+                    "light" : "— Twig / HTML / Bootstrap / CSS"
+                },
+                {
+                    "id" : "00003",
+                    "text" : "Deploiment test et production",
+                    "muted" : "— SSH",
+                    "light" : "— Putty"
+                },
+                {
+                    "id" : "00004",
+                    "text" : "Gestion du versionnage",
+                    "muted" : "— Git",
+                    "light" : "— Azure DevOps"
+                },
+                {
+                    "id" : "00005",
+                    "text" : "Gestion de travail",
+                    "muted" : "",
+                    "light" : "— Planner / Outlook"
+                }
+            ]
+        },
+        {
+            "id" : "exprc-00001",
+            "active" : false,
+
+            "title" : "Alternance développement full-stack",
+            "entity" : {
+                "name" : "Editions Ellipses",
+                "img" : "editions-ellipses.jpg",
+                "href" : "https://www.editions-ellipses.fr/content/9-qui-sommes-nous"
+            },
+            "date" : "— Depuis Septembre 2025",
+
+            "caption" : "Alternance",
+            "details" : [
+                {
+                    "id" : "00000",
+                    "text" : "Développement de l'ERP \"Elli\"",
+                    "muted" : "— Symfony",
+                    "light" : "— VS Code"
+                },
+                {
+                    "id" : "00001",
+                    "text" : "Gestion de la base de donnée",
+                    "muted" : "— SQL",
+                    "light" : "— HeidSQL / MySQL"
+                },
+                {
+                    "id" : "00002",
+                    "text" : "Amélioration de l'interface utilisateur",
+                    "muted" : "",
+                    "light" : "— Twig / HTML / Bootstrap / CSS"
+                },
+                {
+                    "id" : "00003",
+                    "text" : "Deploiment test et production",
+                    "muted" : "— SSH",
+                    "light" : "— Putty"
+                },
+                {
+                    "id" : "00004",
+                    "text" : "Gestion du versionnage",
+                    "muted" : "— Git",
+                    "light" : "— Azure DevOps"
+                },
+                {
+                    "id" : "00005",
+                    "text" : "Gestion de travail",
+                    "muted" : "",
+                    "light" : "— Planner / Outlook"
+                }
+            ]
+        }
+    ]
+}

@@ -1,23 +1,11 @@
 /* ---------------- Links */
 
-section#banner div#profil-banner nav {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-
-    align-items: center;
-    justify-content: space-evenly;
-
-    width: 100%;
-}
-
 .icon {
     position: relative;
     display: block;
-    max-width: 96px;
+    max-width: 64px;
 
-    padding: 4px 4px 0 4px;
-
+    padding: 4px;
 }
 
 .icon > img {

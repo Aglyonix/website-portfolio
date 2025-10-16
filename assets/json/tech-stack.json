@@ -1,0 +1,121 @@
+{
+    "table-of-content" : [
+        {
+            "key" : "table-skill-00000",
+            "title" : "Tech-Stack",
+            "target" : "#tech-stacks"
+        }
+    ],
+    "items" : [
+        {
+            "key" : "skill-00000",
+            "sizes" : {
+                "width" : "2",
+                "height" : "1"
+            },
+            "group" : [
+                {
+                    "key" : "skill-00000-00000",
+                    "title" : "C++",
+                    "icon" : "CppIcon"
+                },
+                {
+                    "key" : "skill-00000-00001",
+                    "title" : "C#",
+                    "icon" :  "CSharpIcon"
+                }
+            ]
+        },
+        {
+            "key" : "skill-00001",
+            "title" : "Java",
+            "icon" : "JavaIcon"
+        },
+        {
+            "key" : "skill-00002",
+            "title" : "SQL",
+            "icon" : "SQLIcon"
+        },
+        {
+            "key" : "skill-00003",
+            "sizes" : {
+                "width" : "2",
+                "height" : "1"
+            },
+            "group" : [
+                {
+                    "key" : "skill-00003-00000",
+                    "title" : "Python",
+                    "icon" : "PythonIcon"
+                },
+                {
+                    "key" : "skill-00003-00001",
+                    "title" : "Django",
+                    "icon" : "DjangoIcon"
+                }
+            ]
+        },
+        {
+            "key" : "skill-00005",
+            "sizes" : {
+                "width" : "3",
+                "height" : "1"
+            },
+            "group" : [
+                {
+                    "key" : "skill-00005-00000",
+                    "title" : "PHP",
+                    "icon" : "PHPIcon"
+                },
+                {
+                    "key" : "skill-00005-00001",
+                    "title" : "Symfony",
+                    "icon" : "SymfonyIcon"
+                },
+                {
+                    "key" : "skill-00005-00002",
+                    "title" : "Twig",
+                    "icon" : "TwigIcon"
+                }
+            ]
+        },
+        {
+            "key" : "skill-00004",
+            "sizes" : {
+                "width" : "2",
+                "height" : "2",
+                "lg" : {
+                    "width" : "4",
+                    "height" : "1"
+                }
+            },
+            "group" : [
+                {
+                    "key" : "skill-00004-00000",
+                    "title" : "HTML",
+                    "icon" : "HTMLIcon"
+                },
+                {
+                    "key" : "skill-00004-00001",
+                    "title" : "CSS",
+                    "icon" : "CSSIcon"
+                },
+                {
+                    "key" : "skill-00004-00002",
+                    "title" : "Bootstrap",
+                    "icon" : "BootstrapIcon"
+                },
+                {
+                    "key" : "skill-00004-00003",
+                    "title" : "Javascript",
+                    "icon" : "JavaScriptIcon"
+                }
+            ]
+        },
+        {
+            "key" : "skill-00006",
+            "title" : "Android",
+            "icon" : "AndroidIcon"
+        }
+    ]
+}
