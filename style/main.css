@@ -150,6 +150,22 @@ main {
 
 /* ---------------- Container */
 
+/* Responsive contents */
+
+.content-sm {
+    visibility: visible;
+    position: unset;
+    height: unset;
+    overflow: unset;
+}
+
+.content-md, .content-lg, .content-xl, .content-xxl {
+    visibility: hidden;
+    position: absolute;
+    height: 0;
+    overflow: hidden;
+}
+
 /* Responsive grid layout */
 .grid-columns {
     --grid-items-min-width: 7rem;
@@ -166,20 +182,6 @@ main {
     grid-template-columns: repeat(var(--grid-columns-col), minmax(var(--grid-items-min-width), 1fr));
     grid-auto-rows: var(--grid-items-height);
     grid-auto-flow: dense;
-}
-
-.grid-columns {
-    visibility: hidden;
-    position: absolute;
-    height: 0;
-    overflow: hidden;
-}
-
-.grid-columns[data-columns="2"] {
-    visibility: visible;
-    position: unset;
-    height: unset;
-    overflow: unset;
 }
 
 .grid-columns[data-columns="2"] {
@@ -209,16 +211,56 @@ main {
     flex-direction: column;
 }
 
+.card-pack.row {
+    flex-flow: row nowrap;
+}
+
 .card-pack > .card-group, .grid-columns .card-group > .card {
     flex: 1;
 }
 
-.card-pack > .card-group:not(:first-child) > .card {
+.card-pack:not(.row) > .card-group:not(:first-child) > .card,
+.card-pack > .card-pack.row:not(:first-child) > .card-group > .card {
     margin-top: 0;
     border-top: 0;
 }
 
-.card-pack > .card-group > .card {
+.card-pack.row > .card-group:not(:last-child) {
+    padding-right: 0;
+}
+
+.card-pack.row > .card-group:not(:first-child) {
+    padding-left: 0;
+}
+
+.card-pack.row > .card-group:not(:last-child) > .card:last-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.card-pack.row > .card-group:not(:first-child) > .card:first-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
+}
+
+.card-pack > .card-pack.row:not(:last-child) > .card-group:first-child > .card:first-child {
+    border-bottom-left-radius: 0;
+}
+
+.card-pack > .card-pack.row:not(:last-child) > .card-group:last-child > .card:last-child {
+    border-bottom-right-radius: 0;
+}
+
+.card-pack > .card-pack.row:not(:first-child) > .card-group:first-child > .card:first-child {
+    border-top-left-radius: 0;
+}
+
+.card-pack > .card-pack.row:not(:first-child) > .card-group:last-child > .card:last-child {
+    border-top-right-radius: 0;
+}
+
+.card-pack:not(.row) > .card-group > .card {
     border-radius: 0;
 }
 

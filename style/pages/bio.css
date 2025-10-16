@@ -12,6 +12,14 @@
 
 /* ---------------- Interest */
 
+.bio-interest-card > .card:first-child {
+    flex: 2;
+}
+
+.bio-interest-card > .card:last-child {
+    flex: 3;
+}
+
 /* ---------------- Education */
 
 #education h1 {

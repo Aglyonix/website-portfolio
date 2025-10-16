@@ -38,16 +38,16 @@
         font-size: 2.5rem;
     }
 
-    /* ---------------- Grid layout */
+    /* ---------------- Responsive content */
 
-    .grid-columns[data-columns="3"] {
+    .content-sm:has( ~ .content-lg), .content-md:has( ~ .content-lg) {
         visibility: hidden;
         position: absolute;
         height: 0;
         overflow: hidden;
     }
 
-    .grid-columns[data-columns="4"] {
+    .content-lg {
         visibility: visible;
         position: unset;
         height: unset;

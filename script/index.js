@@ -36,6 +36,14 @@ const pages = [
     { id: "page.-00002",  name: "Contact",  path: "contact.html",   table: "",              active: body.id === "page-contact" }
 ];
 
+const breaks = [
+    {attr: "content-sm"},
+    {attr: "content-md"},
+    {attr: "content-lg"},
+    {attr: "content-xl"},
+    {attr: "content-xxl"}
+];
+
 const asset_dir = body.id === "page-main" ? "assets/" : "../assets/";
 const icon_dir = asset_dir + "icons/";
 const json_dir = asset_dir + "json/";
@@ -147,18 +155,18 @@ function BioHeader() {
 function BioMain() {
     return (
         <main id="content" className="container my-5">
-            <BioMobileContent />
+            <BioContent />
         </main>
     );
 }
 
 // ---------------------------- Content
-function BioMobileContent() {
+function BioContent() {
 
     return (
-        <article className="d-flex flex-column flex-nowrap align-items-center gap-5" data-columns="1">
-            <BioAboutMeSmall />
-            <BioInterestSmall />
+        <article className="d-flex flex-column flex-nowrap align-items-center gap-5">
+            <BioAboutMe />
+            <BioInterest />
             <BioShowcase />
         </article>
     );
@@ -263,7 +271,7 @@ function BioShowcaseContent() {
 
 // ---------------------------- Content Small
 
-function BioAboutMeSmall() {
+function BioAboutMe() {
     return (
         <section id="about-me" className="w-100">
             <h1 className="lexend w-100 text-center">A propos</h1>
@@ -281,12 +289,138 @@ function BioAboutMeSmall() {
     );
 }
 
-function BioInterestSmall() {
+function BioInterest() {
     return (
         <section id="interests" className="w-100">
             <h1 className="lexend w-100 text-center">Centre d'intérêts</h1>
-            <ListGroupWallet id="interests-list" json="interest.json" />
+            <div className="content-sm">
+                <ListGroupWallet id="interests-list" json="interest.json" />
+            </div>
+            <div className="content-md">
+                <BioInterestMedium />
+            </div>
+            <div className="content-lg">
+                <BioInterestLarge />
+            </div>
         </section>
+    );
+}
+
+function BioInterestMedium() {
+    const url = json_dir + "interest.json";
+    const [items, setItems] = React.useState(null);
+    const [rows, setRows] = React.useState([]);
+    const columns = 2; 
+
+    async function fetchItems() {
+        const response = await fetch(url);
+        const json = await response.json();
+        const items = json["items"];
+        return items;
+    };
+
+    React.useEffect(() => {
+        fetchItems().then(result => setItems(result));
+    }, []);
+
+    React.useEffect(() => {
+        if (items) {
+            const pack = []
+            for (var i = 0; i < items.length;) {
+                const row = [];
+                
+                for (var w = 0; w < columns; w++) {
+                    let item = items[i];
+                    row.push(<BioInteresMediumItem item={item} key={item.id + "-md"} />);
+                    i++;
+                }
+
+                pack.push(<div className="card-group" key={"interests-md-row-" + rows.length}>{row}</div>);
+            }
+            setRows(pack);
+        }
+    }, [items]);
+
+    return (
+        <div className="card-pack">
+            {rows}
+        </div>
+    );
+}
+
+function BioInteresMediumItem({ item }) {
+    return (
+        <div className="card text-center shadow-sm">
+            <div className="card-body d-flex align-items-center justify-content-center">
+                {item.desc}
+            </div>
+            <div className="card-footer d-flex align-items-center justify-content-center gap-2">
+                {iconMap[item.icon] ? iconMap[item.icon](20, 20) : null}
+                {item.name}
+            </div>
+        </div>
+    );
+}
+
+function BioInterestLarge() {
+    const url = json_dir + "interest.json";
+    const [items, setItems] = React.useState(null);
+    const [rows, setRows] = React.useState([]);
+    const columns = 2; 
+    
+    async function fetchItems() {
+        const response = await fetch(url);
+        const json = await response.json();
+        const items = json["items"];
+        return items;
+    };
+
+    React.useEffect(() => {
+        fetchItems().then(result => setItems(result));
+    }, []);
+
+    React.useEffect(() => {
+        if (items) {
+            const pack = []
+            for (var i = 0; i < items.length;) {
+                const row = [];
+                
+                for (var w = 0; w < columns; w++) {
+                    let item = items[i];
+                    row.push(<BioInteresLargeItem item={item} key={item.id + "-lg"} />);
+                    i++;
+                }
+
+                pack.push(<div className="card-pack row" key={"interests-lg-row-" + rows.length}>{row}</div>);
+            }
+            setRows(pack);
+        }
+    }, [items]);
+
+    return (
+        <div className="card-pack">
+            {rows}
+        </div>
+    );
+}
+
+function BioInteresLargeItem({ item }) {
+    return (
+        <div className="card-group bio-interest-card">
+            <div className="card text-center shadow-sm">
+                <div className="card-body d-flex align-items-center justify-content-center">
+                    {iconMap[item.icon] ? iconMap[item.icon](32, 32) : null}
+                </div>
+                <div className="card-footer">
+                    {item.name}
+                </div>
+            </div>
+            <div className="card text-center shadow-sm">
+                <div className="card-body d-flex align-items-center justify-content-center">
+                    {item.desc}
+                </div>
+            </div>
+        </div>
     );
 }
 
@@ -838,7 +972,7 @@ function CardCarousel({ json }) {
 function CardGrid({ id, json, card }) {
     const url = json_dir + json ;
     const [items, setItems] = React.useState(null);
-    const breaks = [2, 3, 4, 5];
+    const columns = [2, 3, 4, 5, 5];
     
     async function fetchItems() {
         const response = await fetch(url);
@@ -853,11 +987,11 @@ function CardGrid({ id, json, card }) {
 
     return (
         <div id={id}>
-        {breaks.map((point) => 
-            <div className="grid-columns" data-columns={point} key={id + "-grid-columns-" + point}>
+        {breaks.map((point, index) => 
+            <div className={"grid-columns " + point.attr} data-columns={columns[index]} key={id + "-grid-columns-" + columns[index]}>
             {items ? items.map((item) =>
                 item.group ? (
-                    <CardPack pack={item} card={card} columns={point} key={item.key} />
+                    <CardPack pack={item} card={card} columns={columns[index]} key={item.key} />
                 ) : (
                     card(item)
                 )

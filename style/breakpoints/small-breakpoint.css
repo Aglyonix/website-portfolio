@@ -50,16 +50,16 @@
         display: flex;
     }
 
-    /* ---------------- Grid layout */
+    /* ---------------- Responsive content */
 
-    .grid-columns[data-columns="2"] {
+    .content-sm:has( ~ .content-md) {
         visibility: hidden;
         position: absolute;
         height: 0;
         overflow: hidden;
     }
 
-    .grid-columns[data-columns="3"] {
+    .content-md {
         visibility: visible;
         position: unset;
         height: unset;

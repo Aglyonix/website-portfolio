@@ -16,16 +16,17 @@
         font-weight: 100;
     }
 
-    /* ---------------- Grid layout */
+    /* ---------------- Responsive content */
 
-    .grid-columns[data-columns="4"] {
+    .content-sm:has( ~ .content-xxl), .content-md:has( ~ .content-xxl),
+    .content-lg:has( ~ .content-xxl), .content-xl:has( ~ .content-xxl) {
         visibility: hidden;
         position: absolute;
         height: 0;
         overflow: hidden;
     }
 
-    .grid-columns[data-columns="5"] {
+    .content-xxl {
         visibility: visible;
         position: unset;
         height: unset;

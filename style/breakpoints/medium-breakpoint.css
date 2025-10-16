@@ -13,4 +13,21 @@
     nav > a.icon {
         max-width: 96px;
     }
+
+    /* ---------------- Responsive content */
+
+    .content-sm:has( ~ .content-xl), .content-md:has( ~ .content-xl),
+    .content-lg:has( ~ .content-xl) {
+        visibility: hidden;
+        position: absolute;
+        height: 0;
+        overflow: hidden;
+    }
+
+    .content-xl {
+        visibility: visible;
+        position: unset;
+        height: unset;
+        overflow: unset;
+    }
 }
