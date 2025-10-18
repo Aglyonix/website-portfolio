@@ -6,9 +6,7 @@
             "target" : "experience-panel",
             "active" : true,
 
-            "react" : {
-                "small" : "ExperiencePaneSmall"
-            },
+            "react" : "ExperiencePane",
 
             "name" : "Expériences",
             "icon" : "ExperiencesIcon"
@@ -19,9 +17,7 @@
             "target" : "certificates-panel",
             "active" : false,
 
-            "react" : {
-                "small" : "CertificatesPaneSmall"
-            },
+            "react" : "CertificatesPane",
 
             "name" : "Diplômes",
             "icon" : "CertificatesIcon"
@@ -32,9 +28,7 @@
             "target" : "skills-panel",
             "active" : false,
 
-            "react" : {
-                "small" : "TechStackPaneSmall"
-            },
+            "react" : "TechStackPane",
 
             "name" : "Tech Stack",
             "icon" : "TechStackIcon"

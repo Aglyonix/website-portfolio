@@ -75,9 +75,9 @@ const iconMap = {
 };
 
 const bioMap = {
-    ExperiencePaneSmall: <ExperiencePaneSmall />,
-    CertificatesPaneSmall: <CertificatesPaneSmall />,
-    TechStackPaneSmall: <TechStackPaneSmall />
+    ExperiencePane: <ExperiencePane />,
+    CertificatesPane: <CertificatesPane />,
+    TechStackPane: <TechStackPane />
 };
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------ //
@@ -260,10 +260,14 @@ function BioShowcaseContent() {
         fetchItems().then(result => setItems(result));
     }, []);
 
+    let attr = "tab-pane fade";
+
     return (
         <section className="tab-content w-100 px-4">
             {items ? items.map((item) => (
-                <BioShowcaseContentSmall item={item} key={item.id + "-panel"} />
+                <article key={item.id + "-panel"} id={item.target} className={item.active ? attr + " show active" : attr} role="tabpanel" aria-labelledby={item.idname}>
+                    {bioMap[item.react]}
+                </article>
             )) : null}
         </section>
     );
@@ -335,7 +339,7 @@ function BioInterestMedium() {
                     i++;
                 }
 
-                pack.push(<div className="card-group" key={"interests-md-row-" + rows.length}>{row}</div>);
+                pack.push(<div className="card-group" key={"interests-md-row-" + i}>{row}</div>);
             }
             setRows(pack);
         }
@@ -391,7 +395,7 @@ function BioInterestLarge() {
                     i++;
                 }
 
-                pack.push(<div className="card-pack row" key={"interests-lg-row-" + rows.length}>{row}</div>);
+                pack.push(<div className="card-pack row" key={"interests-lg-row-" + i}>{row}</div>);
             }
             setRows(pack);
         }
@@ -424,29 +428,32 @@ function BioInteresLargeItem({ item }) {
     );
 }
 
-function BioShowcaseContentSmall({ item }) {
-    let attr = "tab-pane fade";
-    attr = item.active ? attr + " show active" : attr;
-
-    return (
-        <article key={item.id} id={item.target} className={attr} role="tabpanel" aria-labelledby={item.idname}>
-            {bioMap[item.react.small]}
-        </article>
-    );
-}
-
 // ---------------------------- Content Small Panes
 // Experience Content
-function ExperiencePaneSmall() {
+function ExperiencePane() {
     const head = (item) => <BioShowcaseItemHead item={item} />;
     const body = (item) => <BioShowcaseItemBody item={item} />;
 
     return(
         <>
-            <h1 className="lexend w-100 text-center mb-3">Education</h1>
-            <ListGroupWallet id="education" json="education.json" body={body} head={head} />
-            <h1 className="lexend w-100 text-center mt-5 mb-3">Experience</h1>
-            <ListGroupWallet id="experience" json="experience.json" body={body} head={head} />
+            <section id="education">
+                <h1 className="lexend w-100 text-center mb-3">Education</h1>
+                <div className="content-sm">
+                    <ListGroupWallet id="education-list-sm" json="education.json" body={body} head={head} />
+                </div>
+                <div className="content-lg d-flex flex-row gap-2">
+                    <ListGroupWallet id="education-list-lg" json="education.json" body={body} head={head} groups="2" />
+                </div>
+            </section>
+            <section id="experience">
+                <h1 className="lexend w-100 text-center mt-5 mb-3">Experience</h1>
+                <div className="content-sm">
+                    <ListGroupWallet id="experience-list-sm" json="experience.json" body={body} head={head} />
+                </div>
+                <div className="content-lg d-flex flex-row gap-2">
+                    <ListGroupWallet id="experience-list-lg" json="experience.json" body={body} head={head} groups="2" />
+                </div>
+            </section>
         </>
     );
 }
@@ -495,7 +502,7 @@ function BioShowcaseListItem({ detail }) {
 }
 
 // Certificates Content
-function CertificatesPaneSmall() {
+function CertificatesPane() {
     return(
         <>
             <h1 id="certificates" className="lexend w-100 text-center mb-3">Diplômes</h1>
@@ -505,13 +512,13 @@ function CertificatesPaneSmall() {
 }
 
 // Certificates Content
-function TechStackPaneSmall() {
+function TechStackPane() {
     const card = (item) => <TechStackCard item={item} key={item.key} />;
 
     return(
         <>
-            <h1 className="lexend w-100 text-center mb-3">Tech Stack</h1>
-            <CardGrid id={"tech-stacks"} json="tech-stack.json" card={card} />
+            <h1 id="tech-stacks" className="lexend w-100 text-center mb-3">Tech Stack</h1>
+            <CardGrid id={"tech-stacks-grid"} json="tech-stack.json" card={card} />
         </>
     );
 }
@@ -806,9 +813,11 @@ function PanelOfContent( { tab, table, refnav } ) {
 
 // ---------------------------- Wallet Group
 
-function ListGroupWallet({ id , json, body, head }) {
+function ListGroupWallet({ id , json, body, head, groups }) {
     const url = json_dir + json;
     const [items, setItems] = React.useState(null);
+    const [grid, setGrid] = React.useState([]);
+    if(!groups) groups = 1;
     
     async function fetchItems() {
         const response = await fetch(url);
@@ -834,28 +843,47 @@ function ListGroupWallet({ id , json, body, head }) {
     React.useEffect(() => {
         fetchItems().then(result => setItems(result));
     }, []);
-
+        
     React.useEffect(() => {
         if (items) {
-            let group = document.querySelectorAll("#" + id + " .list-group-item-action:not(.description)");
-            let last = document.querySelector("#" + id + " .list-group-item-action:last-child");
+            const group = [];
+            let i=0;
 
-            group.forEach((line) => {
-                line.addEventListener("click", expand_desc);
-
-                if(line.nextSibling === last) {
-                    line.classList.add("last-item");
-                }
+            items.forEach((item) => {
+                group.length < groups ? group.push([item]) : group[i%groups].push(item);
+                i++
             });
+
+            setGrid(group);
         }
     }, [items]);
 
+    React.useEffect(() => {
+        if (items && grid) {
+            console.log(grid);
+            grid.forEach((list, index) => {
+                let group = document.querySelectorAll("#" + id + "-" + index + " .list-group-item-action:not(.description)");
+                let last = document.querySelector("#" + id + "-" + index + " .list-group-item-action:last-child");
+                
+                group.forEach((line) => {
+                    line.addEventListener("click", expand_desc);
+                    
+                    if(line.nextSibling === last) {
+                        line.classList.add("last-item");
+                    }
+                });
+            });
+        }
+    }, [grid]);
+
     return (
-        <ul id={id} className="list-group list-group-wallet">
-            {items ? items.map((item) => (
-                <ListGroupWalletItem item={item} body={body} head={head} key={item.id}/>
-            )) : null}
-        </ul>
+        <>{grid ? grid.map((group, index) => (
+            <ul id={id + "-" + index} className="list-group list-group-wallet" key={id + "-group-" + index}>
+                {group ? group.map((item) => (
+                    <ListGroupWalletItem item={item} body={body} head={head} key={item.id}/>
+                )) : null}
+            </ul>
+        )) : null}</>
     );
 }
 
@@ -988,7 +1016,7 @@ function CardGrid({ id, json, card }) {
     return (
         <div id={id}>
         {breaks.map((point, index) => 
-            <div className={"grid-columns " + point.attr} data-columns={columns[index]} key={id + "-grid-columns-" + columns[index]}>
+            <div className={"grid-columns " + point.attr} data-columns={columns[index]} key={id + "-grid-columns-" + index}>
             {items ? items.map((item) =>
                 item.group ? (
                     <CardPack pack={item} card={card} columns={columns[index]} key={item.key} />

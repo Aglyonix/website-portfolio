@@ -20,23 +20,32 @@
     flex: 3;
 }
 
-/* ---------------- Education */
+/* ---------------- Showcase */
 
-#education h1 {
+#showcase .content-lg .list-group-wallet {
+    flex: 1;
+}
+
+#education > * h1,
+#experience > * h1 {
     font-size: 1.2rem;
     font-weight: 500;
     color: var(--black) !important;
 }
 
-#education h3{
-    --line-height: 1.25rem;
+#education h3,
+#experience h3 {
     font-size: 1.25rem;
+    margin-bottom: .25rem;
 }
 
-#education article img {
+#education article img,
+#experience article img {
     max-width: 64%;
     float: right;
 }
+
+/* ---------------- Education */
 
 #education .school {
     color: var(--main-color);
@@ -47,28 +56,6 @@
 }
 
 /* ---------------- Experience */
-
-#experience h1 {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--black) !important;
-}
-
-#experience h3 {
-    --line-height: 1.25rem;
-    font-size: 1.25rem;
-
-    margin-bottom: .25rem;
-}
-
-#experience article img[alt="Editions Ellipses"] {
-    position: relative;
-    top: -2rem;
-
-    float: right;
-    max-width: 24%;
-    overflow: visible;
-}
 
 #experience .description {
     overflow: hidden;
