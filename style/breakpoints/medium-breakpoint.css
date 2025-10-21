@@ -1,27 +1,33 @@
-@media screen and (max-width : 992px) {
-
-    /* ---------------- Banner */
-
-    section#banner {
-        padding: 8.25rem 0 5.75rem 2.75rem;
-    }
+@media screen and (min-width : 1200px) {
 
     /* ---------------- Profil */
 
-    section#banner div#profil-banner h1 {
-        font-size: 3rem;
+    #profil-showcase h1 {
+        font-size: 3.5rem;
     }
 
-    section#banner div#profil-banner p {
-        font-size: 1.2rem;
+    #profil-showcase p {
+        font-size: 1.5rem;
     }
-}
 
-@media screen and (max-width : 992px) and (max-height: 640px) {
-    
-    /* ---------------- Footer */
+    nav > a.icon {
+        max-width: 96px;
+    }
 
-    footer {
-        display: none;
+    /* ---------------- Responsive content */
+
+    .content-sm:has( ~ .content-xl), .content-md:has( ~ .content-xl),
+    .content-lg:has( ~ .content-xl) {
+        visibility: hidden;
+        position: absolute;
+        height: 0;
+        overflow: hidden;
+    }
+
+    .content-xl {
+        visibility: visible;
+        position: unset;
+        height: unset;
+        overflow: unset;
     }
 }

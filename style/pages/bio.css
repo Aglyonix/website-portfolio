@@ -1,0 +1,108 @@
+/* ---------------- Bio */
+
+#page-bio .page-title {
+    background-color: var(--main-color);
+}
+
+/* ---------------- About me */
+
+#about-me p {
+    font-size: 1.25rem;
+}
+
+/* ---------------- Interest */
+
+.bio-interest-card > .card:first-child {
+    flex: 2;
+}
+
+.bio-interest-card > .card:last-child {
+    flex: 3;
+}
+
+/* ---------------- Showcase */
+
+#education > * h1,
+#experience > * h1 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--black) !important;
+}
+
+#education h3,
+#experience h3 {
+    font-size: 1.25rem;
+    margin-bottom: .25rem;
+}
+
+#education article img,
+#experience article img {
+    max-width: 64%;
+    float: right;
+}
+
+/* ---------------- Education */
+
+#education .school {
+    color: var(--main-color);
+}
+
+#education .time-indicator {
+    color: var(--fade);
+}
+
+/* ---------------- Experience */
+
+#experience .description {
+    overflow: hidden;
+}
+
+#experience .company {
+    color: var(--main-color);
+}
+
+#experience .time-indicator {
+    color: var(--fade);
+
+    margin-left: auto;
+}
+
+#experience li.lexend {
+    font-weight: 300;
+}
+
+#experience .tech {
+    color: var(--main-color);
+}
+
+#experience .tool {
+    color: var(--fade);
+}
+
+/* ---------------- Certificates */
+
+#carousel-certificates-card {
+    max-width: 960px;
+}
+
+#carousel-certificates .carousel-inner img {
+    height: 222px;
+    min-width: 100%;
+    
+    object-fit: cover;
+}
+
+/* ---------------- Skills */
+
+#skills-panel .card-columns {
+    column-count: 2;
+    column-gap: .75rem;
+}
+
+#skills-panel .card-columns > .card {
+    margin-bottom: .75rem;
+}
+
+#skills-panel .card-columns .card {
+    max-width: 8rem;
+}

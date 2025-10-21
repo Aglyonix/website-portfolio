@@ -1,60 +1,56 @@
 /* ---------------- Header */
 
 header {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    transition: background-color .3s;
+}
 
-    align-items: center;
+header.container {
+    margin: 0 !important;
+    max-width: 100% !important;
+}
 
-    position: fixed;
-    height: 4.25rem;
-    width: 100%;
+:not(#page-main) header.black-background {
+    background-color: var(--black) !important;
+    transition: background-color .3s;
+}
 
-    z-index: 2;
+header .navbar {
+    display: none;
+}
 
-    padding: 0.75rem 2rem 0 2rem;
+#head-nav {
+    gap: 5rem;
+}
 
-    background-color: transparent;
+#head-nav .nav-link {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--zinc-300) !important;
+}
+
+#head-nav .nav-link.active {
+    color: var(--white) !important;
 }
 
 a#signature {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-
-    align-items: center;
-    gap: 2rem;
-}
-
-a#signature > img#profil-signature {
-    height: 56px;
-    width: 56px;
-
-    object-fit: cover;
-}
-
-a#signature > h1 {
     font-size: 2rem;
     font-weight: 700;
 }
 
-header > nav {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+/* ---------------- Title */
 
-    gap: 4rem;
-    align-items: center;
-
-    color: var(--white);
-
-    margin-left: auto;
+.page-title {
+    padding: var(--header-height) 1.25rem .75rem 1.75rem;
 }
 
-header nav a.navigation {
-    text-align: center;
+/* ---------------- Foot */
 
-    font-size: 1.5rem;
-    font-weight: 300;
+.page-title h1 {
+    font-size: 1.65rem;
+    font-weight: 700;
+}
+
+.page-title p {
+    font-size: 1.25rem;
+    font-weight: 500;
 }

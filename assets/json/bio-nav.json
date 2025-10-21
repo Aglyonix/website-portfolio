@@ -1,0 +1,94 @@
+{
+    "table-of-content" : [
+        {
+            "key" : "table-main.-00000",
+            "title" : "A propos",
+            "target" : "#about-me"
+        },
+        {
+            "key" : "table-main.-00001",
+            "title" : "Intérêts",
+            "target" : "#interests"
+        },
+        {
+            "key" : "table-main.-00002",
+            "title" : "Showcase",
+            "target" : "#showcase",
+
+            "tabpanels" : [
+                {
+                    "key" : "table-main.-00002-panel-00000",
+                    "panelref": "binav-00000",
+
+                    "childrens" : [
+                        {
+                            "key" : "table-main.-00002-panel-00000-00000",
+                            "tableref" : "education.json"
+                        },
+                        {
+                            "key" : "table-main.-00002-panel-00000-00001",
+                            "tableref" : "experience.json"
+                        }
+                    ]
+                },
+                {
+                    "key" : "table-main.-00002-panel-00001",
+                    "panelref": "binav-00001",
+
+                    "childrens" : [
+                        {
+                            "key" : "table-main.-00002-panel-00001-00000",
+                            "tableref" : "certificate.json"
+                        }
+                    ]
+                },
+                {
+                    "key" : "table-main.-00002-panel-00002",
+                    "panelref": "binav-00002",
+
+                    "childrens" : [
+                        {
+                            "key" : "table-main.-00002-panel-00002-00000",
+                            "tableref" : "tech-stack.json"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "items" : [
+        {
+            "key": "binav-00000",
+            "idname" : "experience-tab",
+            "target" : "experience-panel",
+            "active" : true,
+
+            "react" : "ExperiencePane",
+
+            "name" : "Expériences",
+            "icon" : "ExperiencesIcon"
+        },
+        {
+            "key": "binav-00001",
+            "idname" : "certificates-tab",
+            "target" : "certificates-panel",
+            "active" : false,
+
+            "react" : "CertificatesPane",
+
+            "name" : "Diplômes",
+            "icon" : "CertificatesIcon"
+        },
+        {
+            "key": "binav-00002",
+            "idname" : "skills-tab",
+            "target" : "skills-panel",
+            "active" : false,
+
+            "react" : "TechStackPane",
+
+            "name" : "Tech Stack",
+            "icon" : "TechStackIcon"
+        }
+    ]
+}

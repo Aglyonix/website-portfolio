@@ -1,58 +1,57 @@
 /* ---------------- Banner */
 
-section#banner {
+#banner {
     height: 100%;
+    min-height: 100vh;
 
-    padding: 9.25rem 0 7.75rem 7.25rem;
+    padding: 6.5rem 1rem 5rem 1rem;
 
     background-size: cover;
     background-position-x: center;
     background-position-y: center;
-    background-image: linear-gradient(var(--black-cover), var(--black-cover)), url("../../assets/images/banner_background.jpg");
+    background-image: linear-gradient(var(--black-cover), var(--black-cover)), url("../../assets/images/background-landscape-wide.jpg");
 }
 
-section#banner div#inner-banner {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+#inner-banner {
+    flex-direction: column;
 
-    height: 100%;
-
-    align-items: center;
-    justify-content: center;
+    gap: 3rem;
 }
 
 /* ---------------- Profil */
 
-section#banner div#image-banner img {
-    overflow: hidden;
+#profil-image {
+    flex: 1;
+    
+    min-width: 200px;
+    width: 75vw;
+    max-width: 512px;
+    aspect-ratio: 1/1;
 
-    width: 32vw;
+    object-fit: cover;
+    object-position: center top;
+    overflow: hidden;
 }
 
-section#banner div#profil-banner {
+#profil-image > img {
+    transform: scale(1.8) translateY(12.5%);
+}
+
+#profil-showcase {
+    flex: 1;
+    gap: 1rem;
+
+    text-align: center;
+
     margin-left: auto;
     margin-right: auto;
 }
 
-section#banner div#profil-banner {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 1rem;
-
-    text-align: center;
-}
-
-section#banner div#profil-banner h1 {
-    font-size: 7rem;
-}
-
-section#banner div#profil-banner p {
+#profil-showcase h1 {
     font-size: 2.5rem;
-    font-weight: 100;
+}
+
+#profil-showcase p {
+    font-size: 1.15rem;
+    font-weight: 200;
 }

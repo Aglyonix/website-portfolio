@@ -1,7 +1,7 @@
 /* ---------------- Button */
 
-header button#side-bar-button {
-    display: none;
+#side-bar-button {
+    display: block;
 
     margin-top: 4px;
     background-color: transparent;
@@ -9,10 +9,8 @@ header button#side-bar-button {
 
 /* ---------------- Sidebar */
 
-nav#navigation-sidebar-mobile {
-    display: none;
-    flex-direction: column;
-    flex-wrap: nowrap;
+#navigation-sidebar-mobile {
+    display: flex;
 
     position: fixed;
     top: 0; left: 0;
@@ -22,37 +20,47 @@ nav#navigation-sidebar-mobile {
 
     z-index: 1;
 
-    padding: 5rem 0 0 2.5rem;
+    padding: 7rem 0 0 2.5rem;
 
     background-color: var(--black);
     transform: translateX(calc(var(--sidebar-translate-x) * -1));
 }
 
-nav#navigation-sidebar-mobile div#container-sidebar-mobile {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: .5rem;
-
-    width: 100%;
-    height: 100%;
-}
-
-nav#navigation-sidebar-mobile[data-expanded="false"] {
+#navigation-sidebar-mobile[data-expanded="false"] {
 
     transform: translateX(calc(var(--sidebar-translate-x) * -1));
     transition-duration: var(--sidebar-duration);
 }
 
-nav#navigation-sidebar-mobile[data-expanded="true"] {
+#navigation-sidebar-mobile[data-expanded="true"] {
 
     transform: translateX(0);
     transition-duration: var(--sidebar-duration);
 }
+#container-sidebar-mobile {
+    width: 100%;
+    height: 100%;
+}
 
-nav#navigation-sidebar-mobile a.navigation {
-    margin: .5rem;
+#container-sidebar-mobile > li, #container-sidebar-mobile ul {
+    list-style-type: none;
+}
 
-    font-size: 1.75rem;
+#container-sidebar-mobile ul {
+    padding-left: 1.25rem;
+    margin: .5rem 0 0 0;
+}
+
+#container-sidebar-mobile a.navigation {
+    font-size: 2rem;
     font-weight: 300;
+    text-decoration: none;
+}
+
+#container-sidebar-mobile ul a.navigation {
+    font-size: 1.65rem;
+}
+
+#container-sidebar-mobile ul ul a.navigation {
+    font-size: 1.45rem;
 }
