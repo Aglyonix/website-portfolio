@@ -263,7 +263,7 @@ function BioShowcaseContent() {
     let attr = "tab-pane fade";
 
     return (
-        <section className="tab-content w-100 px-4">
+        <section className="tab-content w-100 px-3">
             {items ? items.map((item) => (
                 <article key={item.id + "-panel"} id={item.target} className={item.active ? attr + " show active" : attr} role="tabpanel" aria-labelledby={item.idname}>
                     {bioMap[item.react]}
@@ -506,7 +506,9 @@ function CertificatesPane() {
     return(
         <>
             <h1 id="certificates" className="lexend w-100 text-center mb-3">Diplômes</h1>
-            <CardCarousel json="certificate.json" />
+            <div className="d-flex w-100 justify-content-center">
+                <CardCarousel id="carousel-certificates" json="certificate.json" />
+            </div>
         </>
     );
 }
@@ -937,7 +939,7 @@ function LinkPage({ page, classes, table=false }) {
 
 // ---------------------------- Carousel in a card
 
-function CardCarousel({ json }) {
+function CardCarousel({ id, json }) {
     const url = json_dir + json ;
     const [items, setItems] = React.useState(null);
     const [activeIndex, setActiveIndex] = React.useState(0);
@@ -964,12 +966,12 @@ function CardCarousel({ json }) {
     }, []);
 
     return (
-        <div className="card w-100">
-            <div id="carousel-certificates" className="carousel slide card-img-top" data-bs-ride="carousel">
+        <div id={id + "-card"} className="card w-100">
+            <div id={id} className="carousel slide card-img-top" data-bs-ride="carousel">
                 <div className="carousel-indicators">
-                    <button type="button" data-bs-target="#carousel-certificates" data-bs-slide-to="0" aria-label="Slide 1" className="active" aria-current="true"></button>
-                    <button type="button" data-bs-target="#carousel-certificates" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carousel-certificates" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    {items ? items.map((item, index) => (
+                    <button type="button" data-bs-target={"#" + id} data-bs-slide-to={index} aria-label={"Slide " + (index+1)} key={"indicator-for-" + item.key} className={index===0?'active':null} aria-current={index===0?'True':null}></button>
+                    )) : null}
                 </div>
                 <div className="carousel-inner">
                     {items ? items.map((item, index) => (
@@ -978,11 +980,11 @@ function CardCarousel({ json }) {
                     </div>
                     )) : null}
                 </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carousel-certificates" data-bs-slide="prev">
+                <button className="carousel-control-prev" type="button" data-bs-target={"#" + id} data-bs-slide="prev">
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Previous</span>
                 </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carousel-certificates" data-bs-slide="next">
+                <button className="carousel-control-next" type="button" data-bs-target={"#" + id} data-bs-slide="next">
                     <span className="carousel-control-next-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Next</span>
                 </button>

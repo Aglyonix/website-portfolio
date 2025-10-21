@@ -38,6 +38,12 @@
         font-size: 2.5rem;
     }
 
+    /* ---------------- Certificates */
+
+    #carousel-certificates .carousel-inner img {
+        height: 384px;
+    }
+
     /* ---------------- Responsive content */
 
     .content-sm:has( ~ .content-lg), .content-md:has( ~ .content-lg) {

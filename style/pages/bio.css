@@ -22,10 +22,6 @@
 
 /* ---------------- Showcase */
 
-#showcase .content-lg .list-group-wallet {
-    flex: 1;
-}
-
 #education > * h1,
 #experience > * h1 {
     font-size: 1.2rem;
@@ -85,8 +81,12 @@
 
 /* ---------------- Certificates */
 
+#carousel-certificates-card {
+    max-width: 960px;
+}
+
 #carousel-certificates .carousel-inner img {
-    height: 256px;
+    height: 222px;
     min-width: 100%;
     
     object-fit: cover;

@@ -50,6 +50,12 @@
         display: flex;
     }
 
+    /* ---------------- Certificates */
+
+    #carousel-certificates .carousel-inner img {
+        height: 256px;
+    }
+
     /* ---------------- Responsive content */
 
     .content-sm:has( ~ .content-md) {
