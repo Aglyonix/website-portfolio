@@ -43,9 +43,11 @@ const breaks = [
     {attr: "content-xxl"}
 ];
 
+const root_url = body.id === "page-main" ? "view/" : "";
 const asset_dir = body.id === "page-main" ? "assets/" : "../assets/";
 const icon_dir = asset_dir + "icons/";
 const json_dir = asset_dir + "json/";
+const svg_dir = asset_dir + "svg/";
 const img_dir = asset_dir + "images/";
 
 const iconMap = {
@@ -618,7 +620,7 @@ function FooterPage() {
 // Button
 function SideBarButton() {
 
-    const url = "http://127.0.0.1:5500/assets/svg/expand-sidebar.json";
+    const url = svg_dir + "expand-sidebar.json";
 
     React.useEffect(() => {
         let bar = document.getElementById("navigation-sidebar-mobile");
@@ -662,6 +664,34 @@ function SideBarButton() {
 
 // Side Bar
 function SideBar() {
+
+    React.useEffect(() => {
+        const url = svg_dir + "expand-sidebar.json";
+        const container = document.getElementById("container-sidebar-mobile");
+        const bar = document.getElementById("navigation-sidebar-mobile");
+        const toggle = document.getElementById("side-bar-button");
+
+        const close_sidebar = () => {
+            fetch(url).then(response => response.json()).then(json => {
+                let path = toggle.querySelector("svg path:first-child");
+
+                path.setAttribute("d", json.false);
+                bar.dataset.expanded = false;
+            });
+        };
+
+        const observer = new MutationObserver(() => {
+            const links = container.querySelectorAll("ul a");
+            links.forEach((link) => {
+                link.removeEventListener("click", close_sidebar);
+                link.addEventListener("click", close_sidebar);
+            });
+        });
+
+        observer.observe(container, {childList: true, subtree: true});
+        return () => observer.disconnect();
+    }, []);
+
     return (
 		<nav id="navigation-sidebar-mobile" className="flex-column flex-nowrap">
             <section id="container-sidebar-mobile" className="d-flex flex-column flex-nowrap gap-2">
@@ -907,12 +937,8 @@ function ListGroupWalletItem({ item, body, head }) {
 // ---------------------------- Links
 
 function LinkPage({ page, classes, table=false }) {
-    let href = page.path;
+    let href = root_url + page.path;
     let link;
-
-    if (body.id === "page-main") {
-        href = "view/" + page.path;
-    }
 
     let attr = "navigation lexend my-2";
 
