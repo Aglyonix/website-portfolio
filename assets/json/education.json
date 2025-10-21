@@ -21,7 +21,7 @@
     ],
     "items" : [
         {
-            "id" : "educt-00000",
+            "key" : "educt-00000",
             "active" : true,
 
             "title" : "BUT Informatique 3e année",
@@ -35,7 +35,7 @@
             "caption" : "L’IUT d’Orsay est une référence dans les secteurs de la chimie, de l’informatique et des mesures physiques."
         },
         {
-            "id" : "educt-00001",
+            "key" : "educt-00001",
             "active" : false,
 
             "title" : "Baccalauréat",

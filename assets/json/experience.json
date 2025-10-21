@@ -21,7 +21,7 @@
     ],
     "items" : [
         {
-            "id" : "exprc-00000",
+            "key" : "exprc-00000",
             "active" : true,
 
             "title" : "Stage développement imformatique",
@@ -35,37 +35,37 @@
             "caption" : "Stage de 3 mois dans le cadre de ma formation en BUT Informatique. Développement du logiciel ERP \"Elli\" et son environnement. Proximité et contact direct avec les clients.",
             "details" : [
                 {
-                    "id" : "00000",
+                    "key" : "00000",
                     "text" : "Développement de l'ERP \"Elli\"",
                     "muted" : "— Symfony",
                     "light" : "— VS Code"
                 },
                 {
-                    "id" : "00001",
+                    "key" : "00001",
                     "text" : "Gestion de la base de donnée",
                     "muted" : "— SQL",
                     "light" : "— HeidSQL / MySQL"
                 },
                 {
-                    "id" : "00002",
+                    "key" : "00002",
                     "text" : "Amélioration de l'interface utilisateur",
                     "muted" : "",
                     "light" : "— Twig / HTML / Bootstrap / CSS"
                 },
                 {
-                    "id" : "00003",
+                    "key" : "00003",
                     "text" : "Deploiment test et production",
                     "muted" : "— SSH",
                     "light" : "— Putty"
                 },
                 {
-                    "id" : "00004",
+                    "key" : "00004",
                     "text" : "Gestion du versionnage",
                     "muted" : "— Git",
                     "light" : "— Azure DevOps"
                 },
                 {
-                    "id" : "00005",
+                    "key" : "00005",
                     "text" : "Gestion de travail",
                     "muted" : "",
                     "light" : "— Planner / Outlook"
@@ -73,7 +73,7 @@
             ]
         },
         {
-            "id" : "exprc-00001",
+            "key" : "exprc-00001",
             "active" : false,
 
             "title" : "Alternance développement full-stack",
@@ -87,37 +87,37 @@
             "caption" : "Alternance",
             "details" : [
                 {
-                    "id" : "00000",
+                    "key" : "00000",
                     "text" : "Développement de l'ERP \"Elli\"",
                     "muted" : "— Symfony",
                     "light" : "— VS Code"
                 },
                 {
-                    "id" : "00001",
+                    "key" : "00001",
                     "text" : "Gestion de la base de donnée",
                     "muted" : "— SQL",
                     "light" : "— HeidSQL / MySQL"
                 },
                 {
-                    "id" : "00002",
+                    "key" : "00002",
                     "text" : "Amélioration de l'interface utilisateur",
                     "muted" : "",
                     "light" : "— Twig / HTML / Bootstrap / CSS"
                 },
                 {
-                    "id" : "00003",
+                    "key" : "00003",
                     "text" : "Deploiment test et production",
                     "muted" : "— SSH",
                     "light" : "— Putty"
                 },
                 {
-                    "id" : "00004",
+                    "key" : "00004",
                     "text" : "Gestion du versionnage",
                     "muted" : "— Git",
                     "light" : "— Azure DevOps"
                 },
                 {
-                    "id" : "00005",
+                    "key" : "00005",
                     "text" : "Gestion de travail",
                     "muted" : "",
                     "light" : "— Planner / Outlook"

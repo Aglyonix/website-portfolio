@@ -29,11 +29,10 @@ function AppAssembler() {
 
 // ---------------------------------------------------------------------- Settings ---------------------------------------------------------------------- //
 
-// TODO convert id to key
 const pages = [
-    { id: "page.-00000",  name: "Bio",      path: "bio.html",       table: "bio-nav.json",  active: body.id === "page-bio" },
-    { id: "page.-00001",  name: "Projets",  path: "projects.html",  table: "",              active: body.id === "page-projects" },
-    { id: "page.-00002",  name: "Contact",  path: "contact.html",   table: "",              active: body.id === "page-contact" }
+    { key: "page.-00000",  name: "Bio",      path: "bio.html",       table: "bio-nav.json",  active: body.id === "page-bio" },
+    { key: "page.-00001",  name: "Projets",  path: "projects.html",  table: "",              active: body.id === "page-projects" },
+    { key: "page.-00002",  name: "Contact",  path: "contact.html",   table: "",              active: body.id === "page-contact" }
 ];
 
 const breaks = [
@@ -203,7 +202,7 @@ function BioShowcaseNav() {
             <div className="card-body">
                 <ul className="nav nav-pills nav-fill" role="tablist">
                     {items ? items.map((item, index) => (
-                    <BioShowcaseNavItem item={item} index={index} key={item.id} />
+                    <BioShowcaseNavItem item={item} index={index} key={item.key} />
                     )) : <></>}
                 </ul>
             </div>
@@ -265,7 +264,7 @@ function BioShowcaseContent() {
     return (
         <section className="tab-content w-100 px-3">
             {items ? items.map((item) => (
-                <article key={item.id + "-panel"} id={item.target} className={item.active ? attr + " show active" : attr} role="tabpanel" aria-labelledby={item.idname}>
+                <article key={item.key + "-panel"} id={item.target} className={item.active ? attr + " show active" : attr} role="tabpanel" aria-labelledby={item.idname}>
                     {bioMap[item.react]}
                 </article>
             )) : null}
@@ -335,7 +334,7 @@ function BioInterestMedium() {
                 
                 for (var w = 0; w < columns; w++) {
                     let item = items[i];
-                    row.push(<BioInteresMediumItem item={item} key={item.id + "-md"} />);
+                    row.push(<BioInteresMediumItem item={item} key={item.key + "-md"} />);
                     i++;
                 }
 
@@ -391,7 +390,7 @@ function BioInterestLarge() {
                 
                 for (var w = 0; w < columns; w++) {
                     let item = items[i];
-                    row.push(<BioInteresLargeItem item={item} key={item.id + "-lg"} />);
+                    row.push(<BioInteresLargeItem item={item} key={item.key + "-lg"} />);
                     i++;
                 }
 
@@ -484,7 +483,7 @@ function BioShowcaseItemBody({ item }) {
             <p className="mb-0">{item.caption}</p>
             <ul className="list-group list-group-flush gap-1 mt-2" >
                 {item.details ? item.details.map((detail) => (
-                    <BioShowcaseListItem detail={detail} key={item.id + "-" + detail.id}/>
+                    <BioShowcaseListItem detail={detail} key={item.key + "-" + detail.key}/>
                 )) : null}
             </ul>
         </>
@@ -568,7 +567,7 @@ function HeaderPage() {
             <nav className="navbar p-0 px-4">
                 <ul id="head-nav" className="navbar-nav flex-row flex-grow-1">
                     {pages.map((page) => (
-                    <li className="nav-item" key={page.id} >
+                    <li className="nav-item" key={page.key} >
                         <LinkPage page={page} classes="nav-link" />
                     </li>
                     ))}
@@ -667,7 +666,7 @@ function SideBar() {
 		<nav id="navigation-sidebar-mobile" className="flex-column flex-nowrap">
             <section id="container-sidebar-mobile" className="d-flex flex-column flex-nowrap gap-2">
                 {pages.map((page) => (
-                <li className="mb-2" key={page.id}>
+                <li className="mb-2" key={page.key}>
                     <LinkPage page={page} table={true} />
                 </li>
                 ))}
@@ -786,7 +785,7 @@ function PieceOfContent({ content, refnav }) {
 function PanelOfContent( { tab, table, refnav } ) {
     function getTabAttrs(panelref) {
         if (!refnav) return null;
-        const found = refnav.find(item => item.id === panelref);
+        const found = refnav.find(item => item.key === panelref);
         return found;
     }
 
@@ -848,21 +847,20 @@ function ListGroupWallet({ id , json, body, head, groups }) {
         
     React.useEffect(() => {
         if (items) {
-            const group = [];
+            const elements = [];
             let i=0;
 
             items.forEach((item) => {
-                group.length < groups ? group.push([item]) : group[i%groups].push(item);
+                elements.length < groups ? elements.push([item]) : elements[i%groups].push(item);
                 i++
             });
 
-            setGrid(group);
+            setGrid(elements);
         }
     }, [items]);
 
     React.useEffect(() => {
         if (items && grid) {
-            console.log(grid);
             grid.forEach((list, index) => {
                 let group = document.querySelectorAll("#" + id + "-" + index + " .list-group-item-action:not(.description)");
                 let last = document.querySelector("#" + id + "-" + index + " .list-group-item-action:last-child");
@@ -881,9 +879,9 @@ function ListGroupWallet({ id , json, body, head, groups }) {
     return (
         <>{grid ? grid.map((group, index) => (
             <ul id={id + "-" + index} className="list-group list-group-wallet" key={id + "-group-" + index}>
-                {group ? group.map((item) => (
-                    <ListGroupWalletItem item={item} body={body} head={head} key={item.id}/>
-                )) : null}
+                {group.map((item) => (
+                    <ListGroupWalletItem item={item} body={body} head={head} key={id + "-" + item.key} />
+                ))}
             </ul>
         )) : null}</>
     );
