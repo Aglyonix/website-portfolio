@@ -17,6 +17,10 @@ function AppAssembler() {
         main = <BioPage />;
     }
 
+    if(body.id === "page-projects") {
+        main = <ProjectsPage />;
+    }
+
     return (
         <>
             <HeaderPage />
@@ -96,6 +100,7 @@ function MainPage() {
 }
 
 // ---------------------------- Banner
+
 function Banner() {
     return (
         <section id="banner" className="d-flex flex-column justify-content-center">
@@ -135,6 +140,7 @@ function ProfilShowcase() {
 // ------------------------------------------------------------------------ Bio ------------------------------------------------------------------------ //
 
 // ---------------------------- Bio Main
+
 function BioPage() {
     return (
         <main role="main">
@@ -162,6 +168,7 @@ function BioMain() {
 }
 
 // ---------------------------- Content
+
 function BioContent() {
 
     return (
@@ -174,6 +181,7 @@ function BioContent() {
 }
 
 // ---------------------------- Content Showcase
+
 function BioShowcase() {
     return (
         <section id="showcase" className="w-100">
@@ -430,6 +438,7 @@ function BioInteresLargeItem({ item }) {
 }
 
 // ---------------------------- Content Small Panes
+
 // Experience Content
 function ExperiencePane() {
     const head = (item) => <BioShowcaseItemHead item={item} />;
@@ -521,7 +530,7 @@ function TechStackPane() {
     return(
         <>
             <h1 id="tech-stacks" className="lexend w-100 text-center mb-3">Tech Stack</h1>
-            <CardGrid id={"tech-stacks-grid"} json="tech-stack.json" card={card} />
+            <CardGrid id="tech-stacks-grid" json="tech-stack.json" card={card} />
         </>
     );
 }
@@ -709,134 +718,112 @@ function SideBar() {
     );
 }
 
-// Table Of Content
+// ------------------------------------------------------------------------ Projects ------------------------------------------------------------------------ //
 
-function TableOfContent({ object, json, panel, refnav }) {
-
-    if (object && json) {
-        throw TypeError(`You cannot specified a table from an object and a json file at the same time`);
-    }
-
-    if ((panel && json) || (panel && object)) {
-        throw TypeError(`You cannot specified a panels with a json or objects. Note : You shouln't call TableOfContent withe the param panel`);
-    }
-
-    const url = json_dir + json;
-    const [items, setItems] = React.useState(null);
-    const [table, setTable] = React.useState(null);
-    const [tabPanels, setTabPanels] = React.useState(panel);
-    const [isSubJson, setIsSubJson] = React.useState(false);
-    
-    if (json) {
-        async function fetchTable() {
-            const response = await fetch(url);
-            const json = await response.json();
-            const table = json["table-of-content"];
-            const items = json["items"];
-            return { table: table , items: items };
-        };
-        
-        React.useEffect(() => {
-            fetchTable().then(result => {
-                if (refnav) {
-                    setIsSubJson(true);
-                    setItems(refnav);
-                } else {
-                    setItems(result.items);
-                }
-                setTable(result.table);
-            });
-        }, []);
-    }
-    
-    if (object) {
-        React.useEffect(() => {
-            setTable(object);
-            
-            if(refnav) {
-                setItems(refnav);
-            }
-        }, [object]);
-    }
-
-    if (tabPanels) {
-        return (
-            <div className="tab-content">
-                {tabPanels ? tabPanels.map((tab) => (<PanelOfContent tab={tab} table={tab.childrens} refnav={refnav} key={tab.key} />)) : null}
-            </div>
-        );
-    }
-    
-    if (isSubJson) { return <>{table ? table.map((content) => ( <PieceOfContent content={content} refnav={items} key={content.key} /> )) : null} </>; }
-
+function ProjectsPage() {
     return (
-        <ul>
-        {table ? table.map((content) => (
-            <PieceOfContent content={content} refnav={items} key={content.key} />
-        )) : null}
-        </ul>
+        <main role="main">
+            <ProjectsHeader />
+            <ProjectsMain />
+        </main>
     );
 }
 
-function PieceOfContent({ content, refnav }) {
-    let childrens;
-    let hasChilds = false;
+function ProjectsHeader() {
+    return (
+        <header className="d-flex flex-column flex-nowrap align-items-start justify-content-center gap-2 h-100 page-title">
+            <h1 className="lexend">Projets — Mon univers</h1>
+            <p className="lexend">Explorez les empreintes que je livre au monde !</p>
+        </header>
+    );
+}
 
-    if (content && content.childrens && content.tabpanels) {
-        throw TypeError(`You cannot specified childrens and tabpanels for the same content`);
-    }
-
-    if (content && content.tableref && content.tabpanels) {
-        throw TypeError(`You cannot specified subjson table and tabpanels in the same content. Suggest you move the tabpanels in the subjson`);
-    }
+function ProjectsMain() {
+    const [query, setQuery] = React.useState("");
+    const [vedette, setVedette] = React.useState(null);
+    const [items, setItems] = React.useState([]);
+    const url = json_dir + "projects.json";
     
-    if (content && content.tabpanels) {
-        hasChilds = true;
-        childrens = <TableOfContent panel={content.tabpanels} refnav={refnav} />;
-    }
-
-    if (content && content.tableref) {
-        return <TableOfContent json={content.tableref} refnav={refnav} />;
-    }
-
-    if (content && content.childrens) {
-        hasChilds = true;
-        childrens = <TableOfContent object={content.childrens} refnav={refnav} />;
-    }
-
-    return ( 
-        <li>
-            <a href={content?.target} className="navigation lexend">{content?.title}</a>
-            {hasChilds ? childrens : null}
-        </li>
-    );
-}
-
-function PanelOfContent( { tab, table, refnav } ) {
-    function getTabAttrs(panelref) {
-        if (!refnav) return null;
-        const found = refnav.find(item => item.key === panelref);
-        return found;
-    }
-
-    const item = getTabAttrs(tab.panelref);
+    async function fetchItems() {
+        const response = await fetch(url);
+        const json = await response.json();
+        setVedette(json.vedette);
+        setItems(json.items);
+    };
 
     React.useEffect(() => {
-        if (item) {
-            var panel = new bootstrap.Tab(document.querySelector("#table-" + item?.target + "[role=tabpanel]"));
-        }
-    }, [])
+        fetchItems();
+    }, []);
 
-    let attr = "tab-pane fade";
-    attr = item.active ? attr + " show active" : attr;
-    const role = "tabpanel";
+    const filtered = items.filter(p =>
+        p.title.toLowerCase().includes(query.toLowerCase())
+    );
+    const card = (item) => <ProjectItem item={item} key={item.key} />;
 
     return (
-        <ul key={item?.key} id={"table-" + item?.target} className={attr} role={role} aria-labelledby={item?.idname}>
-            {table ? table.map((content) => (
-                <PieceOfContent content={content} refnav={refnav} key={content.key} />
-            )) : null}
-        </ul>
+        <main id="content" className="container my-5">
+            <h1 className="mb-4">Mes projets</h1>
+
+            {/* Barre de recherche */}
+            <div className="mb-5">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Rechercher un projet..."
+                    value={query}
+                    onChange={e => setQuery(e.target.value)}
+                />
+            </div>
+
+            {/* Projet vedette */}
+            <section className="vedette px-3">
+                {vedette && (<ProjectItem item={vedette} />)}
+            </section>
+
+            {/* Grille des autres projets */}
+            <section className="px-3">
+                {filtered && <CardGrid id="projects-grid" objects={filtered} card={card} columns={[1, 1, 2, 2, 2]} />}
+            </section>
+        </main>
+    );
+}
+
+// ---------------------------- Project Item
+
+function ProjectItem({ item }) {
+    return (
+        <div className="card project-card h-100">
+            <div className="card-body position-relative d-flex flex-row gap-3">
+                <div className="card-content">
+                    <div className="project-catgs mt-4">
+                        {item.domains.map((domain) =>
+                            <span className="badge rounded-pill bg-light text-muted">
+                                {domain}
+                            </span>
+                        )}
+                    </div>
+                    <div className="project-authors mt-4">
+                        {item.authors.map((author, index) =>
+                            <span className="lexend text-muted">
+                                {index != 0 ? "•" : null} {author}
+                            </span>
+                        )}
+                    </div>
+                    <div className="my-auto">
+                        <p className="project-title lexend h1 my-2">{item.title}</p>
+                        <p className="project-text text-muted my-2">{item.description}</p>
+                        <div className="project-tags mt-4">
+                            {item.tags.map((tag, index) =>
+                                <span className="badge rounded-pill bg-light text-muted">
+                                    {tag}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <img src={img_dir + item.image} alt={item.title} className="project-img rounded"/>
+            </div>
+        </div>
     );
 }
 
@@ -1021,35 +1008,183 @@ function CardCarousel({ id, json }) {
     );
 }
 
-// ---------------------------- Masonry-like card grid
+// Table Of Content
 
-function CardGrid({ id, json, card }) {
-    const url = json_dir + json ;
+function TableOfContent({ objects, json, panel, refnav }) {
+
+    if (objects && json) {
+        throw TypeError(`You cannot specified a table from an object and a json file at the same time`);
+    }
+
+    if ((panel && json) || (panel && objects)) {
+        throw TypeError(`You cannot specified a panels with a json or objects. Note : You shouln't call TableOfContent withe the param panel`);
+    }
+
+    const url = json_dir + json;
     const [items, setItems] = React.useState(null);
-    const columns = [2, 3, 4, 5, 5];
+    const [table, setTable] = React.useState(null);
+    const [tabPanels, setTabPanels] = React.useState(panel);
+    const [isSubJson, setIsSubJson] = React.useState(false);
     
-    async function fetchItems() {
-        const response = await fetch(url);
-        const json = await response.json();
-        const items = json["items"];
-        return items;
-    };
+    if (json) {
+        async function fetchTable() {
+            const response = await fetch(url);
+            const json = await response.json();
+            const table = json["table-of-content"];
+            const items = json["items"];
+            return { table: table , items: items };
+        };
+        
+        React.useEffect(() => {
+            fetchTable().then(result => {
+                if (refnav) {
+                    setIsSubJson(true);
+                    setItems(refnav);
+                } else {
+                    setItems(result.items);
+                }
+                setTable(result.table);
+            });
+        }, []);
+    }
+    
+    if (objects) {
+        React.useEffect(() => {
+            setTable(objects);
+            
+            if(refnav) {
+                setItems(refnav);
+            }
+        }, [objects]);
+    }
+
+    if (tabPanels) {
+        return (
+            <div className="tab-content">
+                {tabPanels ? tabPanels.map((tab) => (<PanelOfContent tab={tab} table={tab.childrens} refnav={refnav} key={tab.key} />)) : null}
+            </div>
+        );
+    }
+    
+    if (isSubJson) { return <>{table ? table.map((content) => ( <PieceOfContent content={content} refnav={items} key={content.key} /> )) : null} </>; }
+
+    return (
+        <ul>
+        {table ? table.map((content) => (
+            <PieceOfContent content={content} refnav={items} key={content.key} />
+        )) : null}
+        </ul>
+    );
+}
+
+function PieceOfContent({ content, refnav }) {
+    let childrens;
+    let hasChilds = false;
+
+    if (content && content.childrens && content.tabpanels) {
+        throw TypeError(`You cannot specified childrens and tabpanels for the same content`);
+    }
+
+    if (content && content.tableref && content.tabpanels) {
+        throw TypeError(`You cannot specified subjson table and tabpanels in the same content. Suggest you move the tabpanels in the subjson`);
+    }
+    
+    if (content && content.tabpanels) {
+        hasChilds = true;
+        childrens = <TableOfContent panel={content.tabpanels} refnav={refnav} />;
+    }
+
+    if (content && content.tableref) {
+        return <TableOfContent json={content.tableref} refnav={refnav} />;
+    }
+
+    if (content && content.childrens) {
+        hasChilds = true;
+        childrens = <TableOfContent object={content.childrens} refnav={refnav} />;
+    }
+
+    return ( 
+        <li>
+            <a href={content?.target} className="navigation lexend">{content?.title}</a>
+            {hasChilds ? childrens : null}
+        </li>
+    );
+}
+
+function PanelOfContent( { tab, table, refnav } ) {
+    function getTabAttrs(panelref) {
+        if (!refnav) return null;
+        const found = refnav.find(item => item.key === panelref);
+        return found;
+    }
+
+    const item = getTabAttrs(tab.panelref);
 
     React.useEffect(() => {
-        fetchItems().then(result => setItems(result));
-    }, []);
+        if (item) {
+            var panel = new bootstrap.Tab(document.querySelector("#table-" + item?.target + "[role=tabpanel]"));
+        }
+    }, [])
+
+    let attr = "tab-pane fade";
+    attr = item.active ? attr + " show active" : attr;
+    const role = "tabpanel";
+
+    return (
+        <ul key={item?.key} id={"table-" + item?.target} className={attr} role={role} aria-labelledby={item?.idname}>
+            {table ? table.map((content) => (
+                <PieceOfContent content={content} refnav={refnav} key={content.key} />
+            )) : null}
+        </ul>
+    );
+}
+
+// ---------------------------- Masonry-like card grid
+
+function CardGrid({ id, objects, json, card, columns, attr }) {
+
+    if (objects && json) {
+        throw TypeError(`You cannot specified a table from an object and a json file at the same time`);
+    }
+
+    const url = json_dir + json ;
+    const [items, setItems] = React.useState([]);
+    if (!columns) columns = [2, 3, 4, 5, 5];
+
+    React.useEffect(() => {
+        if (json) {
+            async function fetchItems() {
+                const response = await fetch(url);
+                const json = await response.json();
+                setItems(json["items"]);
+            };
+            fetchItems();
+        } else if (objects) {
+            setItems(objects);
+        }
+
+        const grids = document.querySelectorAll("#" + id + " .grid-columns");
+
+        if (attr) {
+            grids.forEach((grid) => {
+                grid.style.setProperty('--grid-items-min-width', attr?.itemsMinWidth);
+                grid.style.setProperty('--grid-items-height', attr?.itemsHeight);
+                grid.style.setProperty('--grid-columns-gap', attr?.gap);
+            });
+        }
+
+    }, [json, objects, url]);
 
     return (
         <div id={id}>
         {breaks.map((point, index) => 
             <div className={"grid-columns " + point.attr} data-columns={columns[index]} key={id + "-grid-columns-" + index}>
-            {items ? items.map((item) =>
+            {items ? items.map((item) => 
                 item.group ? (
                     <CardPack pack={item} card={card} columns={columns[index]} key={item.key} />
                 ) : (
                     card(item)
-                )
-            ): null}
+            )) : null}
             </div>
         )}
         </div>

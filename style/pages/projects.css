@@ -1,0 +1,66 @@
+/* ---------------- Bio */
+
+#page-projects .page-title {
+    background-color: var(--main-color);
+}
+
+/* ---------------- Project vedette */
+
+.vedette {
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+
+    border-bottom: 1px solid var(--bs-secondary-color);
+}
+
+/* ---------------- Project card */
+
+.project-card {
+    cursor: pointer;
+}
+
+.card-content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.project-img {
+    width: 256px;
+    height: 360px;
+
+    object-fit: cover;
+}
+.project-title {
+    height: 96px;
+}
+
+.project-text {
+    height: 48px;
+}
+
+.project-catgs, .project-authors, .project-tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: .4rem;
+
+    overflow: hidden;
+}
+
+.project-catgs, .project-authors  {
+    min-height: .875rem;
+}
+
+.project-tags {
+    --project-tags-padding: 1rem;
+
+    flex-wrap: wrap;
+
+    padding-top: var(--project-tags-padding);
+    min-height: calc(var(--project-tags-padding) + .875rem);
+
+    border-top: 1px solid var(--bs-secondary-color);
+}
