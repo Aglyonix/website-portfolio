@@ -62,6 +62,7 @@ const iconMap = {
     ExperiencesIcon: (width, height) => <ExperiencesIcon width={width} height={height} />,
     CertificatesIcon: (width, height) => <CertificatesIcon width={width} height={height} />,
     TechStackIcon: (width, height) => <TechStackIcon width={width} height={height} />,
+    FilterIcon: (width, height) => <FilterIcon width={width} height={height} />,
 
     CppIcon: (width, height) => <CppIcon width={width} height={height} />,
     CSharpIcon: (width, height) => <CSharpIcon width={width} height={height} />,
@@ -758,31 +759,36 @@ function ProjectsMain() {
     const filtered = items.filter(p =>
         p.title.toLowerCase().includes(query.toLowerCase())
     );
-    const card = (item) => <ProjectItem item={item} key={item.key} />;
+    const LargeCard = (item) => <ProjectItemLarge item={item} key={item.key} />;
+    const MediumCard = (item) => <ProjectItemMedium item={item} key={item.key} />;
+    const SmallCard = (item) => <ProjectItemSmall item={item} key={item.key} />;
+    const cards = [SmallCard, MediumCard, MediumCard, LargeCard, LargeCard];
 
     return (
         <main id="content" className="container my-5">
             <h1 className="mb-4">Mes projets</h1>
 
             {/* Barre de recherche */}
-            <div className="mb-5">
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Rechercher un projet..."
-                    value={query}
-                    onChange={e => setQuery(e.target.value)}
-                />
+            <div className="d-flex flex-row align-items-center gap-4 mb-5">
+                <div id="filter-btn">
+                    {iconMap["FilterIcon"](32, 32)}
+                </div>
+                <input type="text" className="form-control" placeholder="Rechercher un projet..." value={query} onChange={e => setQuery(e.target.value)} />
             </div>
 
             {/* Projet vedette */}
             <section className="vedette px-3">
-                {vedette && (<ProjectItem item={vedette} />)}
+                <div className="content-sm">
+                    {vedette && (<ProjectItemVedetteSmall item={vedette} />)}
+                </div>
+                <div className="content-md">
+                    {vedette && (<ProjectItemVedette item={vedette} />)}
+                </div>
             </section>
 
             {/* Grille des autres projets */}
             <section className="px-3">
-                {filtered && <CardGrid id="projects-grid" objects={filtered} card={card} columns={[1, 1, 2, 2, 2]} />}
+                {filtered && <CardGrid id="projects-grid" objects={filtered} card={cards} columns={[1, 1, 2, 2, 2]} />}
             </section>
         </main>
     );
@@ -790,21 +796,21 @@ function ProjectsMain() {
 
 // ---------------------------- Project Item
 
-function ProjectItem({ item }) {
+function ProjectItemVedette({ item }) {
     return (
         <div className="card project-card h-100">
             <div className="card-body position-relative d-flex flex-row gap-3">
                 <div className="card-content">
                     <div className="project-catgs mt-4">
-                        {item.domains.map((domain) =>
-                            <span className="badge rounded-pill bg-light text-muted">
+                        {item.domains.map((domain, index) =>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
                                 {domain}
                             </span>
                         )}
                     </div>
                     <div className="project-authors mt-4">
                         {item.authors.map((author, index) =>
-                            <span className="lexend text-muted">
+                            <span className="lexend text-muted" key={item.key + "-author-" + index}>
                                 {index != 0 ? "•" : null} {author}
                             </span>
                         )}
@@ -814,7 +820,7 @@ function ProjectItem({ item }) {
                         <p className="project-text text-muted my-2">{item.description}</p>
                         <div className="project-tags mt-4">
                             {item.tags.map((tag, index) =>
-                                <span className="badge rounded-pill bg-light text-muted">
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
                                     {tag}
                                 </span>
                             )}
@@ -822,6 +828,127 @@ function ProjectItem({ item }) {
                     </div>
                 </div>
                 <img src={img_dir + item.image} alt={item.title} className="project-img rounded"/>
+            </div>
+        </div>
+    );
+}
+
+function ProjectItemVedetteSmall({ item }) {
+    return (
+        <div className="card project-card-vertical h-100">
+            <div className="card-body position-relative d-flex flex-row gap-3">
+                <div className="card-content">
+                    <div className="project-catgs mt-4">
+                        {item.domains.map((domain, index) =>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                                {domain}
+                            </span>
+                        )}
+                    </div>
+                    <div className="my-auto">
+                        <p className="project-title lexend h1 my-2">{item.title}</p>
+                    </div>
+                    <img src={img_dir + item.image} alt={item.title} className="project-img rounded my-2"/>
+                    <div className="my-auto">
+                        <p className="project-text d-flex align-items-center text-muted my-2">{item.description}</p>
+                        <div className="project-tags mt-4">
+                            {item.tags.map((tag, index) =>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                    {tag}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function ProjectItemLarge({ item }) {
+    return (
+        <div className="card project-card-large h-100">
+            <div className="card-body position-relative d-flex flex-row gap-3">
+                <div className="card-content">
+                    <div className="project-catgs">
+                        {item.domains.map((domain, index) =>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                                {domain}
+                            </span>
+                        )}
+                    </div>
+                    <div className="my-auto">
+                        <p className="project-title d-flex align-items-center lexend h3 my-2">{item.title}</p>
+                        <p className="project-text text-muted my-2">{item.description}</p>
+                        <div className="project-tags mt-3">
+                            {item.tags.map((tag, index) =>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                    {tag}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <img src={img_dir + item.image} alt={item.title} className="project-img rounded"/>
+            </div>
+        </div>
+    );
+}
+
+function ProjectItemMedium({ item }) {
+    return (
+        <div className="card project-card-medium h-100">
+            <div className="card-body position-relative d-flex flex-row gap-3">
+                <div className="card-content">
+                    <div className="project-catgs">
+                        {item.domains.map((domain, index) =>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                                {domain}
+                            </span>
+                        )}
+                    </div>
+                    <div className="my-auto">
+                        <p className="project-title d-flex align-items-center lexend h4 my-2">{item.title}</p>
+                        <p className="project-text text-muted my-2">{item.description}</p>
+                        <div className="project-tags mt-3">
+                            {item.tags.map((tag, index) =>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                    {tag}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <img src={img_dir + item.image} alt={item.title} className="project-img rounded"/>
+            </div>
+        </div>
+    );
+}
+
+function ProjectItemSmall({ item }) {
+    return (
+        <div className="card project-card-small h-100">
+            <div className="card-body position-relative d-flex flex-row gap-3">
+                <div className="card-content">
+                    <div className="project-catgs">
+                        {item.domains.map((domain, index) =>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                                {domain}
+                            </span>
+                        )}
+                    </div>
+                    <div className="my-auto">
+                        <p className="project-title d-flex align-items-center lexend h4 my-2">{item.title}</p>
+                        <p className="project-text text-muted my-2">{item.description}</p>
+                        <div className="project-tags mt-3">
+                            {item.tags.map((tag, index) =>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                    {tag}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
@@ -1143,13 +1270,25 @@ function PanelOfContent( { tab, table, refnav } ) {
 
 function CardGrid({ id, objects, json, card, columns, attr }) {
 
+    if (!id) { throw ReferenceError(`You must specified a unique id`); }
+    if (!card) { throw ReferenceError(`You must specified a default card or a array of cards for each break points (` + breaks.length + `)`); }
+
     if (objects && json) {
         throw TypeError(`You cannot specified a table from an object and a json file at the same time`);
+    }
+
+    if (columns && columns.length !== 5) {
+        throw TypeError(breaks.length +` columns are required ` + columns.length + ` given. Give numbers of columns related to each break points`);
+    }
+
+    if (Array.isArray(card) && card.length !== 5) {
+        throw TypeError(breaks.length + ` cards are required ` + card.length + ` given. Give cards related to each break points`);
     }
 
     const url = json_dir + json ;
     const [items, setItems] = React.useState([]);
     if (!columns) columns = [2, 3, 4, 5, 5];
+    if (!Array.isArray(card)) card = [card, card, card, card, card];
 
     React.useEffect(() => {
         if (json) {
@@ -1181,9 +1320,9 @@ function CardGrid({ id, objects, json, card, columns, attr }) {
             <div className={"grid-columns " + point.attr} data-columns={columns[index]} key={id + "-grid-columns-" + index}>
             {items ? items.map((item) => 
                 item.group ? (
-                    <CardPack pack={item} card={card} columns={columns[index]} key={item.key} />
+                    <CardPack pack={item} card={card[index]} columns={columns[index]} key={item.key} />
                 ) : (
-                    card(item)
+                    card[index](item)
             )) : null}
             </div>
         )}
@@ -1269,6 +1408,14 @@ function LinkedinIcon({ attr }) {
         <a href="https://www.linkedin.com/in/aëlig-jimenez-a10046292/" className={attrs}>
             <img src={src} alt="Linkedin" />
         </a>
+    );
+}
+
+function FilterIcon({ width, height }) {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width={width??32} height={height??32} viewBox="0 0 24 24" fill="none">
+            <path d="M3.99961 3H19.9997C20.552 3 20.9997 3.44764 20.9997 3.99987L20.9999 5.58569C21 5.85097 20.8946 6.10538 20.707 6.29295L14.2925 12.7071C14.105 12.8946 13.9996 13.149 13.9996 13.4142L13.9996 19.7192C13.9996 20.3698 13.3882 20.8472 12.7571 20.6894L10.7571 20.1894C10.3119 20.0781 9.99961 19.6781 9.99961 19.2192L9.99961 13.4142C9.99961 13.149 9.89425 12.8946 9.70672 12.7071L3.2925 6.29289C3.10496 6.10536 2.99961 5.851 2.99961 5.58579V4C2.99961 3.44772 3.44732 3 3.99961 3Z" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
     );
 }
 
