@@ -97,6 +97,8 @@ html {
 
     --sidebar-translate-x : 18rem;
     --sidebar-duration : .64s;
+
+    --filter-duration : .64s;
 }
 
 /* ---------------- Body */

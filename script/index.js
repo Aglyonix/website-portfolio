@@ -743,6 +743,7 @@ function ProjectsMain() {
     const [query, setQuery] = React.useState("");
     const [vedette, setVedette] = React.useState(null);
     const [items, setItems] = React.useState([]);
+    const [tags, setTags] = React.useState([]);
     const url = json_dir + "projects.json";
     
     async function fetchItems() {
@@ -752,9 +753,42 @@ function ProjectsMain() {
         setItems(json.items);
     };
 
+    async function fetchTags() {
+        const response = await fetch(json_dir + "filter.json");
+        const json = await response.json();
+        setTags(json.tags);
+    };
+
     React.useEffect(() => {
         fetchItems();
     }, []);
+
+    /*React.useEffect(() => {
+        const btn = document.getElementById("filter-btn");
+        const filter = document.getElementById("filter-container");
+        const project = document.getElementById("vedette");
+        const container = document.getElementById("project-top-content");
+        const padding = 32;
+
+        filter.setAttribute("data-expanded", false);
+        project.setAttribute("data-expanded", false);
+
+        const expand_filter = () => {
+            if(filter.dataset.expanded == "false") {
+                filter.dataset.expanded = true;
+                project.dataset.expanded = false;
+            } else {
+                filter.dataset.expanded = false;
+                project.dataset.expanded = true;
+            }
+
+            const active = filter.dataset.expanded === "true" ? filter : project;
+            container.style.height = (active.offsetHeight + padding) + "px";
+        };
+
+        btn.addEventListener('click', expand_filter);
+        console.log();
+    }, [])*/
 
     const filtered = items.filter(p =>
         p.title.toLowerCase().includes(query.toLowerCase())
@@ -769,21 +803,29 @@ function ProjectsMain() {
             <h1 className="mb-4">Mes projets</h1>
 
             {/* Barre de recherche */}
-            <div className="d-flex flex-row align-items-center gap-4 mb-5">
-                <div id="filter-btn">
+            <section className="d-flex flex-row align-items-center gap-4 mb-5">
+                <div id="filter-btn" type="button" data-bs-toggle="collapse" data-bs-target=".top-content" aria-expanded="false" aria-controls="filter-container vedette">
                     {iconMap["FilterIcon"](32, 32)}
                 </div>
                 <input type="text" className="form-control" placeholder="Rechercher un projet..." value={query} onChange={e => setQuery(e.target.value)} />
-            </div>
+            </section>
 
-            {/* Projet vedette */}
-            <section className="vedette px-3">
-                <div className="content-sm">
-                    {vedette && (<ProjectItemVedetteSmall item={vedette} />)}
-                </div>
-                <div className="content-md">
-                    {vedette && (<ProjectItemVedette item={vedette} />)}
-                </div>
+            <section id="project-top-content">
+                {/* Filter */}
+                <section id="filter-container" className="collapse top-content px-3 bg-white">
+                    <p className="lexend">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </p>
+                </section>
+                {/* Projet vedette */}
+                <section id="vedette" className="collapse show top-content px-3">
+                    <div className="content-sm">
+                        {vedette && (<ProjectItemVedetteSmall item={vedette} />)}
+                    </div>
+                    <div className="content-md">
+                        {vedette && (<ProjectItemVedette item={vedette} />)}
+                    </div>
+                </section>
             </section>
 
             {/* Grille des autres projets */}
@@ -1411,10 +1453,10 @@ function LinkedinIcon({ attr }) {
     );
 }
 
-function FilterIcon({ width, height }) {
+function FilterIcon({ width, height, stroke }) {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width={width??32} height={height??32} viewBox="0 0 24 24" fill="none">
-            <path d="M3.99961 3H19.9997C20.552 3 20.9997 3.44764 20.9997 3.99987L20.9999 5.58569C21 5.85097 20.8946 6.10538 20.707 6.29295L14.2925 12.7071C14.105 12.8946 13.9996 13.149 13.9996 13.4142L13.9996 19.7192C13.9996 20.3698 13.3882 20.8472 12.7571 20.6894L10.7571 20.1894C10.3119 20.0781 9.99961 19.6781 9.99961 19.2192L9.99961 13.4142C9.99961 13.149 9.89425 12.8946 9.70672 12.7071L3.2925 6.29289C3.10496 6.10536 2.99961 5.851 2.99961 5.58579V4C2.99961 3.44772 3.44732 3 3.99961 3Z" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M3.99961 3H19.9997C20.552 3 20.9997 3.44764 20.9997 3.99987L20.9999 5.58569C21 5.85097 20.8946 6.10538 20.707 6.29295L14.2925 12.7071C14.105 12.8946 13.9996 13.149 13.9996 13.4142L13.9996 19.7192C13.9996 20.3698 13.3882 20.8472 12.7571 20.6894L10.7571 20.1894C10.3119 20.0781 9.99961 19.6781 9.99961 19.2192L9.99961 13.4142C9.99961 13.149 9.89425 12.8946 9.70672 12.7071L3.2925 6.29289C3.10496 6.10536 2.99961 5.851 2.99961 5.58579V4C2.99961 3.44772 3.44732 3 3.99961 3Z" stroke={stroke??"#000000"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
     );
 }

@@ -1,0 +1,136 @@
+{
+    "tags" : [
+        {
+            "key" : "filtr-tags.-group-00001",
+
+            "familly" : "Framework",
+            "items" : [
+                {
+                    "key" : "00000",
+                    
+                    "name" : "Symfony",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00001",
+                    
+                    "name" : "Django",
+                    "color" : "#"
+                }
+            ]
+        },
+        {
+            "key" : "filtr-tags.-group-00002",
+
+            "familly" : "Programmations objets",
+            "items" : [
+                {
+                    "key" : "00000",
+                    
+                    "name" : "Java",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00001",
+                    
+                    "name" : "C#",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00002",
+                    
+                    "name" : "C++",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00003",
+                    
+                    "name" : "Python",
+                    "color" : "#"
+                }
+            ]
+        },
+        {
+            "key" : "filtr-tags.-group-00003",
+
+            "familly" : "Programmations web",
+            "items" : [
+                {
+                    "key" : "00000",
+                    
+                    "name" : "HTML",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00001",
+                    
+                    "name" : "CSS",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00002",
+                    
+                    "name" : "Javascript",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00003",
+                    
+                    "name" : "PHP",
+                    "color" : "#"
+                }
+            ]
+        },
+        {
+            "key" : "filtr-tags.-group-00000",
+
+            "familly" : "Bibliothéque",
+            "items" : [
+                {
+                    "key" : "00000",
+                    
+                    "name" : "React",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00001",
+                    
+                    "name" : "Bootstrap",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00002",
+                    
+                    "name" : "Twig",
+                    "color" : "#"
+                }
+            ]
+        },
+        {
+            "key" : "filtr-tags.-group-00004",
+
+            "familly" : "Base de données",
+            "items" : [
+                {
+                    "key" : "00000",
+                    
+                    "name" : "SQL",
+                    "color" : "#"
+                }
+            ]
+        },
+        {
+            "key" : "filtr-tags.-group-00005",
+
+            "familly" : "Programmations mobile",
+            "items" : [
+                {
+                    "key" : "00000",
+                    
+                    "name" : "Android",
+                    "color" : "#"
+                }
+            ]
+        }
+    ]
+}

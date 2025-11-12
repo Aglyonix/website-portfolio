@@ -7,17 +7,18 @@
 /* ---------------- Filter */
 
 #filter-btn path {
-    stroke: var(--zinc-400);
+    stroke: var(--zinc-600);
 }
 
-/* ---------------- Project vedette */
+/* ---------------- Project top content */
 
-.vedette {
+#project-top-content {
     padding-bottom: 2rem;
     margin-bottom: 2rem;
 
     border-bottom: 1px solid var(--bs-secondary-color);
 }
+
 
 /* ---------------- Project card */
 
