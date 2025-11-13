@@ -745,7 +745,8 @@ function ProjectsMain() {
     const [items, setItems] = React.useState([]);
     const [tags, setTags] = React.useState([]);
     const [domains, setDomains] = React.useState([]);
-    const [filter, setFilter] = React.useState({});
+    const [filterObject, setFilterObject] = React.useState({});
+    const [filter, setFilter] = React.useState([]);
     const url = json_dir + "projects.json";
     
     async function fetchItems() {
@@ -770,13 +771,10 @@ function ProjectsMain() {
     React.useEffect(() => {
         if (items && vedette && tags) {
             const tagsSet = new Set(items.flatMap(p => p.tags || []));
-            (vedette?.tags || []).forEach(tag => { 
-                tagsSet.add(tag);
-            });
-
+            (vedette?.tags || []).forEach(tag => { tagsSet.add(tag); });
             const domainsSet = new Set(items.flatMap(p => p.domains || []));
             
-            setFilter({
+            setFilterObject({
                 tags : tags.map(
                     group => ({
                         key : group.key,
@@ -795,9 +793,27 @@ function ProjectsMain() {
         }
     }, [items, vedette, tags, domains]);
 
-    const filtered = items.filter(p =>
-        p.title.toLowerCase().includes(query.toLowerCase())
-    );
+    const filtered = items.filter(project => {
+        const matchQuery = project.title.toLowerCase().includes(query.toLowerCase());
+
+        const matchTags =
+            filter.length === 0 ||
+            filter.every(f =>
+                (project.tags || []).includes(f) || (project.domains || []).includes(f)
+            );
+
+        return matchQuery && matchTags;
+    });
+
+    const filterSelect = (element, name) => {
+        element.classList.toggle('selected');
+
+        if (filter.includes(name)) {
+            setFilter(filter.filter(f => f !== name));
+        } else {
+            setFilter([...filter, name]);
+        }
+    };
 
     const LargeCard = (item) => <ProjectItemLarge item={item} key={item.key} />;
     const MediumCard = (item) => <ProjectItemMedium item={item} key={item.key} />;
@@ -820,26 +836,31 @@ function ProjectsMain() {
                 {/* Filter */}
                 <section id="filter-container" className="collapse top-content px-3 bg-white">
                     <div className="row">
+
                         <div className="filter-group col">
-                        {filter?.tags && filter.tags.map((group) => 
+                        {filterObject?.tags && filterObject.tags.map((group) => 
                             <div className="filter-familly" key={group.key}>
                                 <p className="lexend mb-2">{group.familly}</p>
+                                <div className="d-flex flex-wrap gap-3">
                                 {group.items.map((tag) => 
-                                    <span className="badge rounded-pill bg-light text-muted" key={group.key + "-" + tag.key}>{tag.name}</span>
+                                    <FilterOption item={tag} onclick={filterSelect} key={group.key + "-" + tag.key} />
                                 )}
+                                </div>
                             </div>
-                        )}
-                        </div>
+                        )}</div>
+
                         <div className="filter-group col">
-                        {filter?.domains && filter.domains.map((group) => 
+                        {filterObject?.domains && filterObject.domains.map((group) => 
                             <div className="filter-familly" key={group.key}>
                                 <p className="lexend mb-2">{group.familly}</p>
-                                {group.items.map((tag) => 
-                                    <span className="badge rounded-pill bg-light text-muted" key={group.key + "-" + tag.key}>{tag.name}</span>
+                                <div className="d-flex flex-wrap gap-3">
+                                {group.items.map((domain) => 
+                                    <FilterOption item={domain} onclick={filterSelect} key={group.key + "-" + domain.key} />
                                 )}
+                                </div>
                             </div>
-                        )}
-                        </div>
+                        )}</div>
+                        
                     </div>
                 </section>
                 {/* Projet vedette */}
@@ -859,6 +880,24 @@ function ProjectsMain() {
             </section>
         </main>
     );
+}
+
+// ---------------------------- Project Filter
+
+function FilterOption({ item, onclick }) {
+    let attr = "filter-option ";
+    attr += item.negative ? "black" : "white";
+    attr += " badge rounded-pill bg-light text-muted";
+    
+    const option = React.useRef(null);
+
+    React.useEffect(() => {
+        if (option.current) {
+            option.current.style.setProperty("--data-color", item.color);
+        }
+    }, [item.color, item.name]);
+
+    return (<span ref={option} className={attr} onClick={() => {onclick(option.current, item.name)}} data-color={item.color}>{item.name}</span>);
 }
 
 // ---------------------------- Project Item

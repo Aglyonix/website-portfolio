@@ -32,6 +32,26 @@
     border-right: 1px solid var(--zinc-400);
 }
 
+.filter-option {
+    cursor: pointer;
+}
+
+.filter-option:hover, 
+.filter-option.selected {
+    background-color: var(--data-color) !important;
+    transition: all var(--filter-hover-duration) ease-in;
+}
+
+.filter-option.white:hover,
+.filter-option.white.selected {
+    color: var(--white) !important;
+}
+
+.filter-option.black:hover,
+.filter-option.black.selected {
+    color: var(--black) !important;
+}
+
 /* ---------------- Project card */
 
 .project-card, .project-card-large,

@@ -9,13 +9,15 @@
                     "key" : "00000",
                     
                     "name" : "Symfony",
-                    "color" : "#"
+                    "color" : "#7E3FF2",
+                    "negative": false
                 },
                 {
                     "key" : "00001",
                     
                     "name" : "Django",
-                    "color" : "#"
+                    "color" : "#0C4B33",
+                    "negative": false
                 }
             ]
         },
@@ -28,25 +30,29 @@
                     "key" : "00000",
                     
                     "name" : "Java",
-                    "color" : "#"
+                    "color" : "#CC2927",
+                    "negative": false
                 },
                 {
                     "key" : "00001",
                     
                     "name" : "C#",
-                    "color" : "#"
+                    "color" : "#68217A",
+                    "negative": false
                 },
                 {
                     "key" : "00002",
                     
                     "name" : "C++",
-                    "color" : "#"
+                    "color" : "#00599C",
+                    "negative": false
                 },
                 {
                     "key" : "00003",
                     
                     "name" : "Python",
-                    "color" : "#"
+                    "color" : "#3776AB",
+                    "negative": false
                 }
             ]
         },
@@ -59,25 +65,29 @@
                     "key" : "00000",
                     
                     "name" : "HTML",
-                    "color" : "#"
+                    "color" : "#E34F26",
+                    "negative": false
                 },
                 {
                     "key" : "00001",
                     
                     "name" : "CSS",
-                    "color" : "#"
+                    "color" : "#1572B6",
+                    "negative": false
                 },
                 {
                     "key" : "00002",
                     
                     "name" : "JavaScript",
-                    "color" : "#"
+                    "color" : "#F7DF1E",
+                    "negative": true
                 },
                 {
                     "key" : "00003",
                     
                     "name" : "PHP",
-                    "color" : "#"
+                    "color" : "#777BB4",
+                    "negative": true
                 }
             ]
         },
@@ -90,19 +100,22 @@
                     "key" : "00000",
                     
                     "name" : "React",
-                    "color" : "#"
+                    "color" : "#61DBFB",
+                    "negative": true
                 },
                 {
                     "key" : "00001",
                     
                     "name" : "Bootstrap",
-                    "color" : "#"
+                    "color" : "#7952B3",
+                    "negative": true
                 },
                 {
                     "key" : "00002",
                     
                     "name" : "Twig",
-                    "color" : "#"
+                    "color" : "#73A839",
+                    "negative": true
                 }
             ]
         },
@@ -115,7 +128,8 @@
                     "key" : "00000",
                     
                     "name" : "SQL",
-                    "color" : "#"
+                    "color" : "#E76F00",
+                    "negative": false
                 }
             ]
         },
@@ -128,7 +142,8 @@
                     "key" : "00000",
                     
                     "name" : "Android",
-                    "color" : "#"
+                    "color" : "#3DDC84",
+                    "negative": true
                 }
             ]
         }
@@ -143,31 +158,36 @@
                     "key" : "00000",
                     
                     "name" : "Application",
-                    "color" : "#"
+                    "color" : "#FF9800",
+                    "negative": false
                 },
                 {
                     "key" : "00002",
                     
                     "name" : "Web",
-                    "color" : "#"
+                    "color" : "#1A73E8",
+                    "negative": false
                 },
                 {
                     "key" : "00003",
                     
                     "name" : "Jeux Vidéo",
-                    "color" : "#"
+                    "color" : "#E91E63",
+                    "negative": false
                 },
                 {
                     "key" : "00004",
                     
                     "name" : "Modding",
-                    "color" : "#"
+                    "color" : "#BC4749",
+                    "negative": true
                 },
                 {
                     "key" : "00005",
                     
                     "name" : "API",
-                    "color" : "#"
+                    "color" : "#FF9800",
+                    "negative": false
                 }
             ]
         }

@@ -99,6 +99,7 @@ html {
     --sidebar-duration : .64s;
 
     --filter-duration : .64s;
+    --filter-hover-duration : .25s;
 }
 
 /* ---------------- Body */
