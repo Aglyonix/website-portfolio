@@ -70,7 +70,7 @@
                 {
                     "key" : "00002",
                     
-                    "name" : "Javascript",
+                    "name" : "JavaScript",
                     "color" : "#"
                 },
                 {
@@ -128,6 +128,45 @@
                     "key" : "00000",
                     
                     "name" : "Android",
+                    "color" : "#"
+                }
+            ]
+        }
+    ],
+    "domains" : [
+        {
+            "key" : "filtr-domns-group-00000",
+
+            "familly" : "Domaines",
+            "items" : [
+                {
+                    "key" : "00000",
+                    
+                    "name" : "Application",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00002",
+                    
+                    "name" : "Web",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00003",
+                    
+                    "name" : "Jeux Vidéo",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00004",
+                    
+                    "name" : "Modding",
+                    "color" : "#"
+                },
+                {
+                    "key" : "00005",
+                    
+                    "name" : "API",
                     "color" : "#"
                 }
             ]

@@ -19,6 +19,18 @@
     border-bottom: 1px solid var(--bs-secondary-color);
 }
 
+/* ---------------- Filter */
+
+.filter-familly {
+    margin-bottom: 1rem;
+}
+
+.filter-group:has(+ .filter-group) {
+    padding-right: 1rem;
+    margin-right: 1rem;
+
+    border-right: 1px solid var(--zinc-400);
+}
 
 /* ---------------- Project card */
 

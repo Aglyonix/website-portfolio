@@ -744,6 +744,8 @@ function ProjectsMain() {
     const [vedette, setVedette] = React.useState(null);
     const [items, setItems] = React.useState([]);
     const [tags, setTags] = React.useState([]);
+    const [domains, setDomains] = React.useState([]);
+    const [filter, setFilter] = React.useState({});
     const url = json_dir + "projects.json";
     
     async function fetchItems() {
@@ -753,46 +755,50 @@ function ProjectsMain() {
         setItems(json.items);
     };
 
-    async function fetchTags() {
+    async function fetchFilter() {
         const response = await fetch(json_dir + "filter.json");
         const json = await response.json();
         setTags(json.tags);
+        setDomains(json.domains);
     };
 
     React.useEffect(() => {
         fetchItems();
+        fetchFilter();
     }, []);
 
-    /*React.useEffect(() => {
-        const btn = document.getElementById("filter-btn");
-        const filter = document.getElementById("filter-container");
-        const project = document.getElementById("vedette");
-        const container = document.getElementById("project-top-content");
-        const padding = 32;
+    React.useEffect(() => {
+        if (items && vedette && tags) {
+            const tagsSet = new Set(items.flatMap(p => p.tags || []));
+            (vedette?.tags || []).forEach(tag => { 
+                tagsSet.add(tag);
+            });
 
-        filter.setAttribute("data-expanded", false);
-        project.setAttribute("data-expanded", false);
-
-        const expand_filter = () => {
-            if(filter.dataset.expanded == "false") {
-                filter.dataset.expanded = true;
-                project.dataset.expanded = false;
-            } else {
-                filter.dataset.expanded = false;
-                project.dataset.expanded = true;
-            }
-
-            const active = filter.dataset.expanded === "true" ? filter : project;
-            container.style.height = (active.offsetHeight + padding) + "px";
-        };
-
-        btn.addEventListener('click', expand_filter);
-        console.log();
-    }, [])*/
+            const domainsSet = new Set(items.flatMap(p => p.domains || []));
+            
+            setFilter({
+                tags : tags.map(
+                    group => ({
+                        key : group.key,
+                        familly : group.familly,
+                        items: group.items.filter(item => tagsSet.has(item.name))
+                    })
+                ).filter(group => group.items.length > 0),
+                domains : domains.map(
+                    group => ({
+                        key : group.key,
+                        familly : group.familly,
+                        items: group.items.filter(item => domainsSet.has(item.name))
+                    })
+                )
+            });   
+        }
+    }, [items, vedette, tags, domains]);
 
     const filtered = items.filter(p =>
         p.title.toLowerCase().includes(query.toLowerCase())
     );
+
     const LargeCard = (item) => <ProjectItemLarge item={item} key={item.key} />;
     const MediumCard = (item) => <ProjectItemMedium item={item} key={item.key} />;
     const SmallCard = (item) => <ProjectItemSmall item={item} key={item.key} />;
@@ -813,9 +819,28 @@ function ProjectsMain() {
             <section id="project-top-content">
                 {/* Filter */}
                 <section id="filter-container" className="collapse top-content px-3 bg-white">
-                    <p className="lexend">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    </p>
+                    <div className="row">
+                        <div className="filter-group col">
+                        {filter?.tags && filter.tags.map((group) => 
+                            <div className="filter-familly" key={group.key}>
+                                <p className="lexend mb-2">{group.familly}</p>
+                                {group.items.map((tag) => 
+                                    <span className="badge rounded-pill bg-light text-muted" key={group.key + "-" + tag.key}>{tag.name}</span>
+                                )}
+                            </div>
+                        )}
+                        </div>
+                        <div className="filter-group col">
+                        {filter?.domains && filter.domains.map((group) => 
+                            <div className="filter-familly" key={group.key}>
+                                <p className="lexend mb-2">{group.familly}</p>
+                                {group.items.map((tag) => 
+                                    <span className="badge rounded-pill bg-light text-muted" key={group.key + "-" + tag.key}>{tag.name}</span>
+                                )}
+                            </div>
+                        )}
+                        </div>
+                    </div>
                 </section>
                 {/* Projet vedette */}
                 <section id="vedette" className="collapse show top-content px-3">
