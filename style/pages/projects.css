@@ -4,12 +4,6 @@
     background-color: var(--main-color);
 }
 
-/* ---------------- Filter */
-
-#filter-btn path {
-    stroke: var(--zinc-600);
-}
-
 /* ---------------- Project top content */
 
 #project-top-content {
@@ -20,6 +14,14 @@
 }
 
 /* ---------------- Filter */
+
+#filter-btn path {
+    stroke: var(--zinc-600);
+}
+
+#filter-btn.selected path {
+    stroke: var(--main-color);
+}
 
 .filter-familly {
     margin-bottom: 1rem;

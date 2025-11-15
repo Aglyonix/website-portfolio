@@ -742,6 +742,10 @@ function ProjectsHeader() {
 function ProjectsMain() {
     const [query, setQuery] = React.useState("");
     const [vedette, setVedette] = React.useState(null);
+    const vedetteRef = React.useRef(null);
+    const vedetteInstance = React.useRef(null);
+    const [vedetteVisible, setVedetteVisible] = React.useState(true);
+    const vedetteVisibleRef = React.useRef(true)
     const [items, setItems] = React.useState([]);
     const [tags, setTags] = React.useState([]);
     const [domains, setDomains] = React.useState([]);
@@ -766,10 +770,26 @@ function ProjectsMain() {
     React.useEffect(() => {
         fetchItems();
         fetchFilter();
+
+        if (vedetteRef.current && !vedetteInstance.current) {
+            vedetteInstance.current = window.bootstrap.Collapse.getOrCreateInstance(vedetteRef.current);
+            vedetteRef.current.classList.add("show");
+        }
+
+        const btn = document.querySelector("#filter-btn");
+
+        btn.addEventListener("click", () => {
+            btn.classList.toggle("selected");
+        });
+
+        btn.addEventListener("click", () => {
+            if (!vedetteVisibleRef.current) return;
+            vedetteInstance.current?.toggle();
+        });
     }, []);
 
     React.useEffect(() => {
-        if (items && vedette && tags) {
+        if (items && vedette && tags && domains) {
             const tagsSet = new Set(items.flatMap(p => p.tags || []));
             (vedette?.tags || []).forEach(tag => { tagsSet.add(tag); });
             const domainsSet = new Set(items.flatMap(p => p.domains || []));
@@ -789,11 +809,35 @@ function ProjectsMain() {
                         items: group.items.filter(item => domainsSet.has(item.name))
                     })
                 )
-            });   
+            });
         }
     }, [items, vedette, tags, domains]);
 
-    const filtered = items.filter(project => {
+    React.useEffect(() => {
+        if (vedette && vedetteInstance.current) {
+            let match = vedette.title.toLowerCase().includes(query.toLowerCase());
+            match &&= filter.length === 0 || filter.every(f => (vedette.tags || []).includes(f) || (vedette.domains || []).includes(f));
+            setVedetteVisible(match);
+
+            const btn = document.querySelector("#filter-btn");
+            const target = document.querySelector(btn.dataset.bsTarget);
+
+            if (!match) {
+                vedetteInstance.current.hide();
+            } else {
+                if(!target.classList.contains("show")) {
+                    vedetteInstance.current.show();
+                }
+            }
+        }
+    }, [vedette, query, filter]);
+
+    React.useEffect(() => {
+        vedetteVisibleRef.current = vedetteVisible;
+    }, [vedetteVisible]);
+
+    // Apply the filter on items
+    let filtered = items.filter(project => {
         const matchQuery = project.title.toLowerCase().includes(query.toLowerCase());
 
         const matchTags =
@@ -805,6 +849,7 @@ function ProjectsMain() {
         return matchQuery && matchTags;
     });
 
+    // Handle filter options onclick
     const filterSelect = (element, name) => {
         element.classList.toggle('selected');
 
@@ -815,6 +860,7 @@ function ProjectsMain() {
         }
     };
 
+    // Setup project cards
     const LargeCard = (item) => <ProjectItemLarge item={item} key={item.key} />;
     const MediumCard = (item) => <ProjectItemMedium item={item} key={item.key} />;
     const SmallCard = (item) => <ProjectItemSmall item={item} key={item.key} />;
@@ -826,7 +872,7 @@ function ProjectsMain() {
 
             {/* Barre de recherche */}
             <section className="d-flex flex-row align-items-center gap-4 mb-5">
-                <div id="filter-btn" type="button" data-bs-toggle="collapse" data-bs-target=".top-content" aria-expanded="false" aria-controls="filter-container vedette">
+                <div id="filter-btn" type="button" data-bs-toggle="collapse" data-bs-target="#filter-container" aria-expanded="false" aria-controls="filter-container">
                     {iconMap["FilterIcon"](32, 32)}
                 </div>
                 <input type="text" className="form-control" placeholder="Rechercher un projet..." value={query} onChange={e => setQuery(e.target.value)} />
@@ -864,7 +910,7 @@ function ProjectsMain() {
                     </div>
                 </section>
                 {/* Projet vedette */}
-                <section id="vedette" className="collapse show top-content px-3">
+                <section id="vedette" ref={vedetteRef} className="collapse show px-3">
                     <div className="content-sm">
                         {vedette && (<ProjectItemVedetteSmall item={vedette} />)}
                     </div>
@@ -876,7 +922,14 @@ function ProjectsMain() {
 
             {/* Grille des autres projets */}
             <section className="px-3">
-                {filtered && <CardGrid id="projects-grid" objects={filtered} card={cards} columns={[1, 1, 2, 2, 2]} />}
+                {filtered ?
+                    filtered.length > 0 ?
+                    <CardGrid id="projects-grid" objects={filtered} card={cards} columns={[1, 1, 2, 2, 2]} />
+                    :
+                    <div className="alert alert-light" role="alert">
+                        Aucun projet ne correspond à vos critères de recherche.
+                    </div>
+                : null }
             </section>
         </main>
     );
