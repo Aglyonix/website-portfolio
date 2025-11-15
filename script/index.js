@@ -17,6 +17,10 @@ function AppAssembler() {
         main = <BioPage />;
     }
 
+    if(body.id === "page-projects") {
+        main = <ProjectsPage />;
+    }
+
     return (
         <>
             <HeaderPage />
@@ -58,6 +62,7 @@ const iconMap = {
     ExperiencesIcon: (width, height) => <ExperiencesIcon width={width} height={height} />,
     CertificatesIcon: (width, height) => <CertificatesIcon width={width} height={height} />,
     TechStackIcon: (width, height) => <TechStackIcon width={width} height={height} />,
+    FilterIcon: (width, height) => <FilterIcon width={width} height={height} />,
 
     CppIcon: (width, height) => <CppIcon width={width} height={height} />,
     CSharpIcon: (width, height) => <CSharpIcon width={width} height={height} />,
@@ -96,6 +101,7 @@ function MainPage() {
 }
 
 // ---------------------------- Banner
+
 function Banner() {
     return (
         <section id="banner" className="d-flex flex-column justify-content-center">
@@ -135,6 +141,7 @@ function ProfilShowcase() {
 // ------------------------------------------------------------------------ Bio ------------------------------------------------------------------------ //
 
 // ---------------------------- Bio Main
+
 function BioPage() {
     return (
         <main role="main">
@@ -162,6 +169,7 @@ function BioMain() {
 }
 
 // ---------------------------- Content
+
 function BioContent() {
 
     return (
@@ -174,6 +182,7 @@ function BioContent() {
 }
 
 // ---------------------------- Content Showcase
+
 function BioShowcase() {
     return (
         <section id="showcase" className="w-100">
@@ -430,6 +439,7 @@ function BioInteresLargeItem({ item }) {
 }
 
 // ---------------------------- Content Small Panes
+
 // Experience Content
 function ExperiencePane() {
     const head = (item) => <BioShowcaseItemHead item={item} />;
@@ -521,7 +531,7 @@ function TechStackPane() {
     return(
         <>
             <h1 id="tech-stacks" className="lexend w-100 text-center mb-3">Tech Stack</h1>
-            <CardGrid id={"tech-stacks-grid"} json="tech-stack.json" card={card} />
+            <CardGrid id="tech-stacks-grid" json="tech-stack.json" card={card} />
         </>
     );
 }
@@ -709,134 +719,397 @@ function SideBar() {
     );
 }
 
-// Table Of Content
+// ------------------------------------------------------------------------ Projects ------------------------------------------------------------------------ //
 
-function TableOfContent({ object, json, panel, refnav }) {
-
-    if (object && json) {
-        throw TypeError(`You cannot specified a table from an object and a json file at the same time`);
-    }
-
-    if ((panel && json) || (panel && object)) {
-        throw TypeError(`You cannot specified a panels with a json or objects. Note : You shouln't call TableOfContent withe the param panel`);
-    }
-
-    const url = json_dir + json;
-    const [items, setItems] = React.useState(null);
-    const [table, setTable] = React.useState(null);
-    const [tabPanels, setTabPanels] = React.useState(panel);
-    const [isSubJson, setIsSubJson] = React.useState(false);
-    
-    if (json) {
-        async function fetchTable() {
-            const response = await fetch(url);
-            const json = await response.json();
-            const table = json["table-of-content"];
-            const items = json["items"];
-            return { table: table , items: items };
-        };
-        
-        React.useEffect(() => {
-            fetchTable().then(result => {
-                if (refnav) {
-                    setIsSubJson(true);
-                    setItems(refnav);
-                } else {
-                    setItems(result.items);
-                }
-                setTable(result.table);
-            });
-        }, []);
-    }
-    
-    if (object) {
-        React.useEffect(() => {
-            setTable(object);
-            
-            if(refnav) {
-                setItems(refnav);
-            }
-        }, [object]);
-    }
-
-    if (tabPanels) {
-        return (
-            <div className="tab-content">
-                {tabPanels ? tabPanels.map((tab) => (<PanelOfContent tab={tab} table={tab.childrens} refnav={refnav} key={tab.key} />)) : null}
-            </div>
-        );
-    }
-    
-    if (isSubJson) { return <>{table ? table.map((content) => ( <PieceOfContent content={content} refnav={items} key={content.key} /> )) : null} </>; }
-
+function ProjectsPage() {
     return (
-        <ul>
-        {table ? table.map((content) => (
-            <PieceOfContent content={content} refnav={items} key={content.key} />
-        )) : null}
-        </ul>
+        <main role="main">
+            <ProjectsHeader />
+            <ProjectsMain />
+        </main>
     );
 }
 
-function PieceOfContent({ content, refnav }) {
-    let childrens;
-    let hasChilds = false;
+function ProjectsHeader() {
+    return (
+        <header className="d-flex flex-column flex-nowrap align-items-start justify-content-center gap-2 h-100 page-title">
+            <h1 className="lexend">Projets — Mon univers</h1>
+            <p className="lexend">Explorez les empreintes que je livre au monde !</p>
+        </header>
+    );
+}
 
-    if (content && content.childrens && content.tabpanels) {
-        throw TypeError(`You cannot specified childrens and tabpanels for the same content`);
-    }
-
-    if (content && content.tableref && content.tabpanels) {
-        throw TypeError(`You cannot specified subjson table and tabpanels in the same content. Suggest you move the tabpanels in the subjson`);
-    }
+function ProjectsMain() {
+    const [query, setQuery] = React.useState("");
+    const [vedette, setVedette] = React.useState(null);
+    const vedetteRef = React.useRef(null);
+    const vedetteInstance = React.useRef(null);
+    const [vedetteVisible, setVedetteVisible] = React.useState(true);
+    const vedetteVisibleRef = React.useRef(true)
+    const [items, setItems] = React.useState([]);
+    const [tags, setTags] = React.useState([]);
+    const [domains, setDomains] = React.useState([]);
+    const [filterObject, setFilterObject] = React.useState({});
+    const [filter, setFilter] = React.useState([]);
+    const url = json_dir + "projects.json";
     
-    if (content && content.tabpanels) {
-        hasChilds = true;
-        childrens = <TableOfContent panel={content.tabpanels} refnav={refnav} />;
-    }
+    async function fetchItems() {
+        const response = await fetch(url);
+        const json = await response.json();
+        setVedette(json.vedette);
+        setItems(json.items);
+    };
 
-    if (content && content.tableref) {
-        return <TableOfContent json={content.tableref} refnav={refnav} />;
-    }
-
-    if (content && content.childrens) {
-        hasChilds = true;
-        childrens = <TableOfContent object={content.childrens} refnav={refnav} />;
-    }
-
-    return ( 
-        <li>
-            <a href={content?.target} className="navigation lexend">{content?.title}</a>
-            {hasChilds ? childrens : null}
-        </li>
-    );
-}
-
-function PanelOfContent( { tab, table, refnav } ) {
-    function getTabAttrs(panelref) {
-        if (!refnav) return null;
-        const found = refnav.find(item => item.key === panelref);
-        return found;
-    }
-
-    const item = getTabAttrs(tab.panelref);
+    async function fetchFilter() {
+        const response = await fetch(json_dir + "filter.json");
+        const json = await response.json();
+        setTags(json.tags);
+        setDomains(json.domains);
+    };
 
     React.useEffect(() => {
-        if (item) {
-            var panel = new bootstrap.Tab(document.querySelector("#table-" + item?.target + "[role=tabpanel]"));
-        }
-    }, [])
+        fetchItems();
+        fetchFilter();
 
-    let attr = "tab-pane fade";
-    attr = item.active ? attr + " show active" : attr;
-    const role = "tabpanel";
+        if (vedetteRef.current && !vedetteInstance.current) {
+            vedetteInstance.current = window.bootstrap.Collapse.getOrCreateInstance(vedetteRef.current);
+            vedetteRef.current.classList.add("show");
+        }
+
+        const btn = document.querySelector("#filter-btn");
+
+        btn.addEventListener("click", () => {
+            btn.classList.toggle("selected");
+        });
+
+        btn.addEventListener("click", () => {
+            if (!vedetteVisibleRef.current) return;
+            vedetteInstance.current?.toggle();
+        });
+    }, []);
+
+    React.useEffect(() => {
+        if (items && vedette && tags && domains) {
+            const tagsSet = new Set(items.flatMap(p => p.tags || []));
+            (vedette?.tags || []).forEach(tag => { tagsSet.add(tag); });
+            const domainsSet = new Set(items.flatMap(p => p.domains || []));
+            
+            setFilterObject({
+                tags : tags.map(
+                    group => ({
+                        key : group.key,
+                        familly : group.familly,
+                        items: group.items.filter(item => tagsSet.has(item.name))
+                    })
+                ).filter(group => group.items.length > 0),
+                domains : domains.map(
+                    group => ({
+                        key : group.key,
+                        familly : group.familly,
+                        items: group.items.filter(item => domainsSet.has(item.name))
+                    })
+                )
+            });
+        }
+    }, [items, vedette, tags, domains]);
+
+    React.useEffect(() => {
+        if (vedette && vedetteInstance.current) {
+            let match = vedette.title.toLowerCase().includes(query.toLowerCase());
+            match &&= filter.length === 0 || filter.every(f => (vedette.tags || []).includes(f) || (vedette.domains || []).includes(f));
+            setVedetteVisible(match);
+
+            const btn = document.querySelector("#filter-btn");
+            const target = document.querySelector(btn.dataset.bsTarget);
+
+            if (!match) {
+                vedetteInstance.current.hide();
+            } else {
+                if(!target.classList.contains("show")) {
+                    vedetteInstance.current.show();
+                }
+            }
+        }
+    }, [vedette, query, filter]);
+
+    React.useEffect(() => {
+        vedetteVisibleRef.current = vedetteVisible;
+    }, [vedetteVisible]);
+
+    // Apply the filter on items
+    let filtered = items.filter(project => {
+        const matchQuery = project.title.toLowerCase().includes(query.toLowerCase());
+
+        const matchTags =
+            filter.length === 0 ||
+            filter.every(f =>
+                (project.tags || []).includes(f) || (project.domains || []).includes(f)
+            );
+
+        return matchQuery && matchTags;
+    });
+
+    // Handle filter options onclick
+    const filterSelect = (element, name) => {
+        element.classList.toggle('selected');
+
+        if (filter.includes(name)) {
+            setFilter(filter.filter(f => f !== name));
+        } else {
+            setFilter([...filter, name]);
+        }
+    };
+
+    // Setup project cards
+    const LargeCard = (item) => <ProjectItemLarge item={item} key={item.key} />;
+    const MediumCard = (item) => <ProjectItemMedium item={item} key={item.key} />;
+    const SmallCard = (item) => <ProjectItemSmall item={item} key={item.key} />;
+    const cards = [SmallCard, MediumCard, MediumCard, LargeCard, LargeCard];
 
     return (
-        <ul key={item?.key} id={"table-" + item?.target} className={attr} role={role} aria-labelledby={item?.idname}>
-            {table ? table.map((content) => (
-                <PieceOfContent content={content} refnav={refnav} key={content.key} />
-            )) : null}
-        </ul>
+        <main id="content" className="container my-5">
+            <h1 className="mb-4">Mes projets</h1>
+
+            {/* Barre de recherche */}
+            <section className="d-flex flex-row align-items-center gap-4 mb-5">
+                <div id="filter-btn" type="button" data-bs-toggle="collapse" data-bs-target="#filter-container" aria-expanded="false" aria-controls="filter-container">
+                    {iconMap["FilterIcon"](32, 32)}
+                </div>
+                <input type="text" className="form-control" placeholder="Rechercher un projet..." value={query} onChange={e => setQuery(e.target.value)} />
+            </section>
+
+            <section id="project-top-content">
+                {/* Filter */}
+                <section id="filter-container" className="collapse top-content px-3 bg-white">
+                    <div className="row">
+
+                        <div className="filter-group col">
+                        {filterObject?.tags && filterObject.tags.map((group) => 
+                            <div className="filter-familly" key={group.key}>
+                                <p className="lexend mb-2">{group.familly}</p>
+                                <div className="d-flex flex-wrap gap-3">
+                                {group.items.map((tag) => 
+                                    <FilterOption item={tag} onclick={filterSelect} key={group.key + "-" + tag.key} />
+                                )}
+                                </div>
+                            </div>
+                        )}</div>
+
+                        <div className="filter-group col">
+                        {filterObject?.domains && filterObject.domains.map((group) => 
+                            <div className="filter-familly" key={group.key}>
+                                <p className="lexend mb-2">{group.familly}</p>
+                                <div className="d-flex flex-wrap gap-3">
+                                {group.items.map((domain) => 
+                                    <FilterOption item={domain} onclick={filterSelect} key={group.key + "-" + domain.key} />
+                                )}
+                                </div>
+                            </div>
+                        )}</div>
+                        
+                    </div>
+                </section>
+                {/* Projet vedette */}
+                <section id="vedette" ref={vedetteRef} className="collapse show px-3">
+                    <div className="content-sm">
+                        {vedette && (<ProjectItemVedetteSmall item={vedette} />)}
+                    </div>
+                    <div className="content-md">
+                        {vedette && (<ProjectItemVedette item={vedette} />)}
+                    </div>
+                </section>
+            </section>
+
+            {/* Grille des autres projets */}
+            <section className="px-3">
+                {filtered ?
+                    filtered.length > 0 ?
+                    <CardGrid id="projects-grid" objects={filtered} card={cards} columns={[1, 1, 2, 2, 2]} />
+                    :
+                    <div className="alert alert-light" role="alert">
+                        Aucun projet ne correspond à vos critères de recherche.
+                    </div>
+                : null }
+            </section>
+        </main>
+    );
+}
+
+// ---------------------------- Project Filter
+
+function FilterOption({ item, onclick }) {
+    let attr = "filter-option ";
+    attr += item.negative ? "black" : "white";
+    attr += " badge rounded-pill bg-light text-muted";
+    
+    const option = React.useRef(null);
+
+    React.useEffect(() => {
+        if (option.current) {
+            option.current.style.setProperty("--data-color", item.color);
+        }
+    }, [item.color, item.name]);
+
+    return (<span ref={option} className={attr} onClick={() => {onclick(option.current, item.name)}} data-color={item.color}>{item.name}</span>);
+}
+
+// ---------------------------- Project Item
+
+function ProjectItemVedette({ item }) {
+    return (
+        <div className="card project-card h-100">
+            <div className="card-body position-relative d-flex flex-row gap-3">
+                <div className="card-content">
+                    <div className="project-catgs mt-4">
+                        {item.domains.map((domain, index) =>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                                {domain}
+                            </span>
+                        )}
+                    </div>
+                    <div className="project-authors mt-4">
+                        {item.authors.map((author, index) =>
+                            <span className="lexend text-muted" key={item.key + "-author-" + index}>
+                                {index != 0 ? "•" : null} {author}
+                            </span>
+                        )}
+                    </div>
+                    <div className="my-auto">
+                        <p className="project-title lexend h1 my-2">{item.title}</p>
+                        <p className="project-text text-muted my-2">{item.description}</p>
+                        <div className="project-tags mt-4">
+                            {item.tags.map((tag, index) =>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                    {tag}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <img src={img_dir + item.image} alt={item.title} className="project-img rounded"/>
+            </div>
+        </div>
+    );
+}
+
+function ProjectItemVedetteSmall({ item }) {
+    return (
+        <div className="card project-card-vertical h-100">
+            <div className="card-body position-relative d-flex flex-row gap-3">
+                <div className="card-content">
+                    <div className="project-catgs mt-4">
+                        {item.domains.map((domain, index) =>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                                {domain}
+                            </span>
+                        )}
+                    </div>
+                    <div className="my-auto">
+                        <p className="project-title lexend h1 my-2">{item.title}</p>
+                    </div>
+                    <img src={img_dir + item.image} alt={item.title} className="project-img rounded my-2"/>
+                    <div className="my-auto">
+                        <p className="project-text d-flex align-items-center text-muted my-2">{item.description}</p>
+                        <div className="project-tags mt-4">
+                            {item.tags.map((tag, index) =>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                    {tag}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function ProjectItemLarge({ item }) {
+    return (
+        <div className="card project-card-large h-100">
+            <div className="card-body position-relative d-flex flex-row gap-3">
+                <div className="card-content">
+                    <div className="project-catgs">
+                        {item.domains.map((domain, index) =>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                                {domain}
+                            </span>
+                        )}
+                    </div>
+                    <div className="my-auto">
+                        <p className="project-title d-flex align-items-center lexend h3 my-2">{item.title}</p>
+                        <p className="project-text text-muted my-2">{item.description}</p>
+                        <div className="project-tags mt-3">
+                            {item.tags.map((tag, index) =>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                    {tag}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <img src={img_dir + item.image} alt={item.title} className="project-img rounded"/>
+            </div>
+        </div>
+    );
+}
+
+function ProjectItemMedium({ item }) {
+    return (
+        <div className="card project-card-medium h-100">
+            <div className="card-body position-relative d-flex flex-row gap-3">
+                <div className="card-content">
+                    <div className="project-catgs">
+                        {item.domains.map((domain, index) =>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                                {domain}
+                            </span>
+                        )}
+                    </div>
+                    <div className="my-auto">
+                        <p className="project-title d-flex align-items-center lexend h4 my-2">{item.title}</p>
+                        <p className="project-text text-muted my-2">{item.description}</p>
+                        <div className="project-tags mt-3">
+                            {item.tags.map((tag, index) =>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                    {tag}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <img src={img_dir + item.image} alt={item.title} className="project-img rounded"/>
+            </div>
+        </div>
+    );
+}
+
+function ProjectItemSmall({ item }) {
+    return (
+        <div className="card project-card-small h-100">
+            <div className="card-body position-relative d-flex flex-row gap-3">
+                <div className="card-content">
+                    <div className="project-catgs">
+                        {item.domains.map((domain, index) =>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                                {domain}
+                            </span>
+                        )}
+                    </div>
+                    <div className="my-auto">
+                        <p className="project-title d-flex align-items-center lexend h4 my-2">{item.title}</p>
+                        <p className="project-text text-muted my-2">{item.description}</p>
+                        <div className="project-tags mt-3">
+                            {item.tags.map((tag, index) =>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                    {tag}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 
@@ -1021,35 +1294,195 @@ function CardCarousel({ id, json }) {
     );
 }
 
-// ---------------------------- Masonry-like card grid
+// Table Of Content
 
-function CardGrid({ id, json, card }) {
-    const url = json_dir + json ;
+function TableOfContent({ objects, json, panel, refnav }) {
+
+    if (objects && json) {
+        throw TypeError(`You cannot specified a table from an object and a json file at the same time`);
+    }
+
+    if ((panel && json) || (panel && objects)) {
+        throw TypeError(`You cannot specified a panels with a json or objects. Note : You shouln't call TableOfContent withe the param panel`);
+    }
+
+    const url = json_dir + json;
     const [items, setItems] = React.useState(null);
-    const columns = [2, 3, 4, 5, 5];
+    const [table, setTable] = React.useState(null);
+    const [tabPanels, setTabPanels] = React.useState(panel);
+    const [isSubJson, setIsSubJson] = React.useState(false);
     
-    async function fetchItems() {
-        const response = await fetch(url);
-        const json = await response.json();
-        const items = json["items"];
-        return items;
-    };
+    if (json) {
+        async function fetchTable() {
+            const response = await fetch(url);
+            const json = await response.json();
+            const table = json["table-of-content"];
+            const items = json["items"];
+            return { table: table , items: items };
+        };
+        
+        React.useEffect(() => {
+            fetchTable().then(result => {
+                if (refnav) {
+                    setIsSubJson(true);
+                    setItems(refnav);
+                } else {
+                    setItems(result.items);
+                }
+                setTable(result.table);
+            });
+        }, []);
+    }
+    
+    if (objects) {
+        React.useEffect(() => {
+            setTable(objects);
+            
+            if(refnav) {
+                setItems(refnav);
+            }
+        }, [objects]);
+    }
+
+    if (tabPanels) {
+        return (
+            <div className="tab-content">
+                {tabPanels ? tabPanels.map((tab) => (<PanelOfContent tab={tab} table={tab.childrens} refnav={refnav} key={tab.key} />)) : null}
+            </div>
+        );
+    }
+    
+    if (isSubJson) { return <>{table ? table.map((content) => ( <PieceOfContent content={content} refnav={items} key={content.key} /> )) : null} </>; }
+
+    return (
+        <ul>
+        {table ? table.map((content) => (
+            <PieceOfContent content={content} refnav={items} key={content.key} />
+        )) : null}
+        </ul>
+    );
+}
+
+function PieceOfContent({ content, refnav }) {
+    let childrens;
+    let hasChilds = false;
+
+    if (content && content.childrens && content.tabpanels) {
+        throw TypeError(`You cannot specified childrens and tabpanels for the same content`);
+    }
+
+    if (content && content.tableref && content.tabpanels) {
+        throw TypeError(`You cannot specified subjson table and tabpanels in the same content. Suggest you move the tabpanels in the subjson`);
+    }
+    
+    if (content && content.tabpanels) {
+        hasChilds = true;
+        childrens = <TableOfContent panel={content.tabpanels} refnav={refnav} />;
+    }
+
+    if (content && content.tableref) {
+        return <TableOfContent json={content.tableref} refnav={refnav} />;
+    }
+
+    if (content && content.childrens) {
+        hasChilds = true;
+        childrens = <TableOfContent object={content.childrens} refnav={refnav} />;
+    }
+
+    return ( 
+        <li>
+            <a href={content?.target} className="navigation lexend">{content?.title}</a>
+            {hasChilds ? childrens : null}
+        </li>
+    );
+}
+
+function PanelOfContent( { tab, table, refnav } ) {
+    function getTabAttrs(panelref) {
+        if (!refnav) return null;
+        const found = refnav.find(item => item.key === panelref);
+        return found;
+    }
+
+    const item = getTabAttrs(tab.panelref);
 
     React.useEffect(() => {
-        fetchItems().then(result => setItems(result));
-    }, []);
+        if (item) {
+            var panel = new bootstrap.Tab(document.querySelector("#table-" + item?.target + "[role=tabpanel]"));
+        }
+    }, [])
+
+    let attr = "tab-pane fade";
+    attr = item.active ? attr + " show active" : attr;
+    const role = "tabpanel";
+
+    return (
+        <ul key={item?.key} id={"table-" + item?.target} className={attr} role={role} aria-labelledby={item?.idname}>
+            {table ? table.map((content) => (
+                <PieceOfContent content={content} refnav={refnav} key={content.key} />
+            )) : null}
+        </ul>
+    );
+}
+
+// ---------------------------- Masonry-like card grid
+
+function CardGrid({ id, objects, json, card, columns, attr }) {
+
+    if (!id) { throw ReferenceError(`You must specified a unique id`); }
+    if (!card) { throw ReferenceError(`You must specified a default card or a array of cards for each break points (` + breaks.length + `)`); }
+
+    if (objects && json) {
+        throw TypeError(`You cannot specified a table from an object and a json file at the same time`);
+    }
+
+    if (columns && columns.length !== 5) {
+        throw TypeError(breaks.length +` columns are required ` + columns.length + ` given. Give numbers of columns related to each break points`);
+    }
+
+    if (Array.isArray(card) && card.length !== 5) {
+        throw TypeError(breaks.length + ` cards are required ` + card.length + ` given. Give cards related to each break points`);
+    }
+
+    const url = json_dir + json ;
+    const [items, setItems] = React.useState([]);
+    if (!columns) columns = [2, 3, 4, 5, 5];
+    if (!Array.isArray(card)) card = [card, card, card, card, card];
+
+    React.useEffect(() => {
+        if (json) {
+            async function fetchItems() {
+                const response = await fetch(url);
+                const json = await response.json();
+                setItems(json["items"]);
+            };
+            fetchItems();
+        } else if (objects) {
+            setItems(objects);
+        }
+
+        const grids = document.querySelectorAll("#" + id + " .grid-columns");
+
+        if (attr) {
+            grids.forEach((grid) => {
+                grid.style.setProperty('--grid-items-min-width', attr?.itemsMinWidth);
+                grid.style.setProperty('--grid-items-height', attr?.itemsHeight);
+                grid.style.setProperty('--grid-columns-gap', attr?.gap);
+            });
+        }
+
+    }, [json, objects, url]);
 
     return (
         <div id={id}>
         {breaks.map((point, index) => 
             <div className={"grid-columns " + point.attr} data-columns={columns[index]} key={id + "-grid-columns-" + index}>
-            {items ? items.map((item) =>
+            {items ? items.map((item) => 
                 item.group ? (
-                    <CardPack pack={item} card={card} columns={columns[index]} key={item.key} />
+                    <CardPack pack={item} card={card[index]} columns={columns[index]} key={item.key} />
                 ) : (
-                    card(item)
-                )
-            ): null}
+                    card[index](item)
+            )) : null}
             </div>
         )}
         </div>
@@ -1134,6 +1567,14 @@ function LinkedinIcon({ attr }) {
         <a href="https://www.linkedin.com/in/aëlig-jimenez-a10046292/" className={attrs}>
             <img src={src} alt="Linkedin" />
         </a>
+    );
+}
+
+function FilterIcon({ width, height, stroke }) {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width={width??32} height={height??32} viewBox="0 0 24 24" fill="none">
+            <path d="M3.99961 3H19.9997C20.552 3 20.9997 3.44764 20.9997 3.99987L20.9999 5.58569C21 5.85097 20.8946 6.10538 20.707 6.29295L14.2925 12.7071C14.105 12.8946 13.9996 13.149 13.9996 13.4142L13.9996 19.7192C13.9996 20.3698 13.3882 20.8472 12.7571 20.6894L10.7571 20.1894C10.3119 20.0781 9.99961 19.6781 9.99961 19.2192L9.99961 13.4142C9.99961 13.149 9.89425 12.8946 9.70672 12.7071L3.2925 6.29289C3.10496 6.10536 2.99961 5.851 2.99961 5.58579V4C2.99961 3.44772 3.44732 3 3.99961 3Z" stroke={stroke??"#000000"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
     );
 }
 

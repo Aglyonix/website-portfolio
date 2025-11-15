@@ -97,6 +97,9 @@ html {
 
     --sidebar-translate-x : 18rem;
     --sidebar-duration : .64s;
+
+    --filter-duration : .64s;
+    --filter-hover-duration : .25s;
 }
 
 /* ---------------- Body */
@@ -121,7 +124,7 @@ body {
 }
 
 #page-contact {
-    --main-color: var(--rorange-600);
+    --main-color: var(--orange-600);
 }
 
 main {
@@ -169,19 +172,19 @@ main {
 /* Responsive grid layout */
 .grid-columns {
     --grid-items-min-width: 7rem;
-    --grid-items-height: 7rem;
+    --grid-items-height: fit-content;
     --grid-columns-gap: .735rem;
     --grid-columns-col: auto-fit;
-
-    --grid-items-min-width: attr(data-items-width rem, 4rem);
-    --grid-items-height: attr(data-items-height rem, 12rem);
-    --grid-columns-gap: attr(data-grid-gap rem, .735rem);
 
     display: grid;
     grid-gap: var(--grid-columns-gap);
     grid-template-columns: repeat(var(--grid-columns-col), minmax(var(--grid-items-min-width), 1fr));
     grid-auto-rows: var(--grid-items-height);
     grid-auto-flow: dense;
+}
+
+.grid-columns[data-columns="1"] {
+    --grid-columns-col: 1;
 }
 
 .grid-columns[data-columns="2"] {
