@@ -59,4 +59,11 @@
         height: unset;
         overflow: unset;
     }
+
+    /* ---------------- Contact Email */
+
+    #my-email {
+        --my-email-height: 5.5rem;
+        --my-email-font-size: 2rem;
+    }
 }

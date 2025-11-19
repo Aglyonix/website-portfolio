@@ -2,6 +2,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 
+/* ---------------- Bootstrap */
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+
 /* ---------------- Main */
 
 @import url("main.css");
@@ -15,6 +19,7 @@
 
 @import url("pages/bio.css");
 @import url("pages/projects.css");
+@import url("pages/contact.css");
 
 /* ---------------- Breakpoints */
 

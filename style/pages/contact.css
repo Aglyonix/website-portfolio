@@ -1,0 +1,74 @@
+/* ---------------- Contact */
+
+#page-contact .page-title {
+    background-color: var(--main-color);
+}
+
+/* ---------------- Email */
+
+#my-email {
+    --my-email-height: 4rem;
+    --my-email-font-size: 1.5rem;
+
+    position: relative;
+    flex-wrap: nowrap;
+
+    border: 1px solid var(--main-color);
+    border-radius: .375rem;
+}
+
+#my-email a[href="mailto:aeligj@gmail.com"] {
+    flex: 1;
+    text-decoration: none;
+}
+
+#my-email .bi {
+    font-size:var(--my-email-font-size);
+    color: var(--main-color);
+
+    transition: all var(--copy-hover-duration) ease-in;
+}
+
+#my-email-label {
+    flex: 1;
+    margin: auto 0;
+}
+
+#my-email-clip-btn, #my-email-send-btn {
+    display: flex;
+
+    width: var(--my-email-height);
+    aspect-ratio: 1;
+    overflow: hidden;
+
+    border: none !important;
+    border-radius: 0;
+
+    transition-duration: all var(--copy-hover-duration) ease-in;
+}
+
+#my-email-clip-btn:hover {
+    background-color: var(--main-color);
+
+    transition: all var(--copy-hover-duration) ease-in;
+}
+
+#my-email-clip-btn:hover .bi {
+    color: var(--white);
+
+    transition: all var(--copy-hover-duration) ease-in;
+}
+
+#my-email:has(#my-email-label:hover) #my-email-send-btn,
+#my-email-send-btn:hover {
+    background-color: var(--main-color);
+
+    transition: all var(--copy-hover-duration) ease-in;
+}
+
+#my-email:has(#my-email-label:hover) #my-email-send-btn .bi,
+#my-email-send-btn:hover .bi {
+    color: var(--white);
+
+    transition: all var(--copy-hover-duration) ease-in;
+}

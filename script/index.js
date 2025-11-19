@@ -21,6 +21,10 @@ function AppAssembler() {
         main = <ProjectsPage />;
     }
 
+    if(body.id === "page-contact") {
+        main = <ContactPage />;
+    }
+
     return (
         <>
             <HeaderPage />
@@ -62,6 +66,7 @@ const iconMap = {
     ExperiencesIcon: (width, height) => <ExperiencesIcon width={width} height={height} />,
     CertificatesIcon: (width, height) => <CertificatesIcon width={width} height={height} />,
     TechStackIcon: (width, height) => <TechStackIcon width={width} height={height} />,
+
     FilterIcon: (width, height) => <FilterIcon width={width} height={height} />,
 
     CppIcon: (width, height) => <CppIcon width={width} height={height} />,
@@ -549,176 +554,6 @@ function TechStackCard({ item }) {
     );
 }
 
-// ------------------------------------------------------------------------------------------------------------------------------------------------------ //
-// ------------------------------------------------------------------------ Base ------------------------------------------------------------------------ //
-// ------------------------------------------------------------------------------------------------------------------------------------------------------ //
-
-// ---------------------------- Headers
-
-// Main Header
-function HeaderPage() {
-    const YaxisPivot = 68;
-
-    React.useEffect(() => {
-        let header = document.querySelector("header");
-
-        const update_header = () => {
-            if(window.scrollY > YaxisPivot) {
-                header.classList.add("black-background");
-            } else {
-                header.classList.remove("black-background");
-            }
-        };
-        
-        window.addEventListener('scroll', update_header);
-    });
-
-    return (
-        <header className="container d-flex flex-row align-items-center fixed-top py-4 bg-transparent">
-            <Signature />
-            <nav className="navbar p-0 px-4">
-                <ul id="head-nav" className="navbar-nav flex-row flex-grow-1">
-                    {pages.map((page) => (
-                    <li className="nav-item" key={page.key} >
-                        <LinkPage page={page} classes="nav-link" />
-                    </li>
-                    ))}
-                </ul>
-            </nav>
-            <SideBarButton />
-        </header>
-    );
-}
-
-function Signature() {
-
-    let href = "../index.html";
-
-    if(body.id === "page-main") {
-        href = "index.html";
-    }
-
-    return (
-        <a id="signature" className="navbar-brand mx-4" href={href}>
-            {/* img src="assets/images/profil-signature.gif" alt="Logo" className="-inline-block align-text-top" */}
-            Aëlig Jimenez
-        </a>
-    );
-}
-
-// ---------------------------- Footer
-
-function FooterPage() {
-    return (
-        <footer className="w-100 align-items-center">
-            <article className="col">
-                <Credit />
-                <SocialNetworks />
-            </article>
-            <article className="col">
-                <section id="message" className="row">
-                    <p className="lexend text-end">Site entièrement codé de mes mains</p>
-                    <p className="lexend text-end">Amusez-vous à ajuster la taille du site, il s'adaptera</p>
-                </section>
-            </article>
-        </footer>
-    );
-}
-
-// ---------------------------- Side Bar
-
-// Button
-function SideBarButton() {
-
-    const url = svg_dir + "expand-sidebar.json";
-
-    React.useEffect(() => {
-        let bar = document.getElementById("navigation-sidebar-mobile");
-        bar.setAttribute("data-expanded", false);
-
-        let toggle = document.getElementById("side-bar-button");
-
-        const expand_sidebar = () => {
-            fetch(url).then(response => response.json()).then(json => {
-
-                let path = toggle.querySelector("svg path:first-child");
-
-                if(bar.dataset.expanded == "false") {
-                    path.setAttribute("d", json.true);
-                    bar.dataset.expanded = true;
-                } else {
-                    path.setAttribute("d", json.false);
-                    bar.dataset.expanded = false;
-                }
-            });
-        };
-
-        toggle.addEventListener('click', expand_sidebar);
-
-        let path = toggle.querySelector("svg path:first-child");
-
-        fetch(url).then(response => response.json()).then(json => {
-            path.setAttribute("d", json.false);
-        });
-
-    }, []);
-
-    return (
-        <button id="side-bar-button" type="button">
-            <svg width={32} height={32} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill="white" fillRule="evenodd" />
-            </svg>
-        </button>
-    );
-}
-
-// Side Bar
-function SideBar() {
-
-    React.useEffect(() => {
-        const url = svg_dir + "expand-sidebar.json";
-        const container = document.getElementById("container-sidebar-mobile");
-        const bar = document.getElementById("navigation-sidebar-mobile");
-        const toggle = document.getElementById("side-bar-button");
-
-        const close_sidebar = () => {
-            fetch(url).then(response => response.json()).then(json => {
-                let path = toggle.querySelector("svg path:first-child");
-
-                path.setAttribute("d", json.false);
-                bar.dataset.expanded = false;
-            });
-        };
-
-        const observer = new MutationObserver(() => {
-            const links = container.querySelectorAll("ul a");
-            links.forEach((link) => {
-                link.removeEventListener("click", close_sidebar);
-                link.addEventListener("click", close_sidebar);
-            });
-        });
-
-        observer.observe(container, {childList: true, subtree: true});
-        return () => observer.disconnect();
-    }, []);
-
-    return (
-		<nav id="navigation-sidebar-mobile" className="flex-column flex-nowrap">
-            <section id="container-sidebar-mobile" className="d-flex flex-column flex-nowrap gap-2">
-                {pages.map((page) => (
-                <li className="mb-2" key={page.key}>
-                    <LinkPage page={page} table={true} />
-                </li>
-                ))}
-            </section>
-            <footer className="flex-column flex-nowrap align-itmes-start mb-3">
-                <Credit />
-                <SocialNetworks />
-            </footer>
-        </nav>
-    );
-}
-
 // ------------------------------------------------------------------------ Projects ------------------------------------------------------------------------ //
 
 function ProjectsPage() {
@@ -1110,6 +945,238 @@ function ProjectItemSmall({ item }) {
                 </div>
             </div>
         </div>
+    );
+}
+
+// ------------------------------------------------------------------------ Contact ------------------------------------------------------------------------ //
+
+function ContactPage() {
+    return (
+        <main role="main">
+            <ContactHeader />
+            <ContactMain />
+        </main>
+    );
+}
+
+function ContactHeader() {
+    return (
+        <header className="d-flex flex-column flex-nowrap align-items-start justify-content-center gap-2 h-100 page-title">
+            <h1 className="lexend">Contact — À votre écoute</h1>
+            <p className="lexend">Prêt à établir la connexion ? Je suis disponible pour échanger. Contactez-moi.</p>
+        </header>
+    );
+}
+
+function ContactMain() {
+
+    React.useEffect(() => {
+        const container = document.querySelector("#my-email-clip-btn");
+
+        container.addEventListener('click', () => {
+            navigator.clipboard.writeText("aeligj@gmail.com");
+            
+            const clip = container.querySelector(".bi-copy");
+            const check = container.querySelector(".bi-check-lg");
+
+            clip.classList.toggle("d-none");
+            check.classList.toggle("d-none");
+        });
+    }, []);
+
+    return (
+        <main id="content" className="container my-5">
+            <h1 className="lexend mb-4">Mon adresse email</h1>
+            <section id="my-email" className="input-group input-group-lg">
+                <a href="mailto:aeligj@gmail.com" className="d-flex flex-row">
+                    <div id="my-email-label">
+                        <div className="content-sm">
+                            <span className="lexend h4 ms-4">aeligj@gmail.com</span>
+                        </div>
+                        <div className="content-lg">
+                            <span className="lexend h2 ms-5">aeligj@gmail.com</span>
+                        </div>
+                    </div>
+                    <div id="my-email-send-btn" className="btn my-email-addon align-items-center justify-content-center p-0">
+                        <i className="bi bi-send"></i>
+                    </div>
+                </a>
+                <div id="my-email-clip-btn" className="btn my-email-addon align-items-center justify-content-center p-0">
+                    <i className="bi bi-copy"></i>
+                    <i class="bi bi-check-lg d-none"></i>
+                </div>
+            </section>
+        </main>
+    );
+}
+
+// ------------------------------------------------------------------------------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------ Base ------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------------------------------------------ //
+
+// ---------------------------- Headers
+
+// Main Header
+function HeaderPage() {
+    const YaxisPivot = 68;
+
+    React.useEffect(() => {
+        let header = document.querySelector("header");
+
+        const update_header = () => {
+            if(window.scrollY > YaxisPivot) {
+                header.classList.add("black-background");
+            } else {
+                header.classList.remove("black-background");
+            }
+        };
+        
+        window.addEventListener('scroll', update_header);
+    });
+
+    return (
+        <header className="container d-flex flex-row align-items-center fixed-top py-4 bg-transparent">
+            <Signature />
+            <nav className="navbar p-0 px-4">
+                <ul id="head-nav" className="navbar-nav flex-row flex-grow-1">
+                    {pages.map((page) => (
+                    <li className="nav-item" key={page.key} >
+                        <LinkPage page={page} classes="nav-link" />
+                    </li>
+                    ))}
+                </ul>
+            </nav>
+            <SideBarButton />
+        </header>
+    );
+}
+
+function Signature() {
+
+    let href = "../index.html";
+
+    if(body.id === "page-main") {
+        href = "index.html";
+    }
+
+    return (
+        <a id="signature" className="navbar-brand mx-4" href={href}>
+            {/* img src="assets/images/profil-signature.gif" alt="Logo" className="-inline-block align-text-top" */}
+            Aëlig Jimenez
+        </a>
+    );
+}
+
+// ---------------------------- Footer
+
+function FooterPage() {
+    return (
+        <footer className="w-100 align-items-center">
+            <article className="col">
+                <Credit />
+                <SocialNetworks />
+            </article>
+            <article className="col">
+                <section id="message" className="row">
+                    <p className="lexend text-end">Site entièrement codé de mes mains</p>
+                    <p className="lexend text-end">Amusez-vous à ajuster la taille du site, il s'adaptera</p>
+                </section>
+            </article>
+        </footer>
+    );
+}
+
+// ---------------------------- Side Bar
+
+// Button
+function SideBarButton() {
+
+    const url = svg_dir + "expand-sidebar.json";
+
+    React.useEffect(() => {
+        let bar = document.getElementById("navigation-sidebar-mobile");
+        bar.setAttribute("data-expanded", false);
+
+        let toggle = document.getElementById("side-bar-button");
+
+        const expand_sidebar = () => {
+            fetch(url).then(response => response.json()).then(json => {
+
+                let path = toggle.querySelector("svg path:first-child");
+
+                if(bar.dataset.expanded == "false") {
+                    path.setAttribute("d", json.true);
+                    bar.dataset.expanded = true;
+                } else {
+                    path.setAttribute("d", json.false);
+                    bar.dataset.expanded = false;
+                }
+            });
+        };
+
+        toggle.addEventListener('click', expand_sidebar);
+
+        let path = toggle.querySelector("svg path:first-child");
+
+        fetch(url).then(response => response.json()).then(json => {
+            path.setAttribute("d", json.false);
+        });
+
+    }, []);
+
+    return (
+        <button id="side-bar-button" type="button">
+            <svg width={32} height={32} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="white" fillRule="evenodd" />
+            </svg>
+        </button>
+    );
+}
+
+// Side Bar
+function SideBar() {
+
+    React.useEffect(() => {
+        const url = svg_dir + "expand-sidebar.json";
+        const container = document.getElementById("container-sidebar-mobile");
+        const bar = document.getElementById("navigation-sidebar-mobile");
+        const toggle = document.getElementById("side-bar-button");
+
+        const close_sidebar = () => {
+            fetch(url).then(response => response.json()).then(json => {
+                let path = toggle.querySelector("svg path:first-child");
+
+                path.setAttribute("d", json.false);
+                bar.dataset.expanded = false;
+            });
+        };
+
+        const observer = new MutationObserver(() => {
+            const links = container.querySelectorAll("ul a");
+            links.forEach((link) => {
+                link.removeEventListener("click", close_sidebar);
+                link.addEventListener("click", close_sidebar);
+            });
+        });
+
+        observer.observe(container, {childList: true, subtree: true});
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+		<nav id="navigation-sidebar-mobile" className="flex-column flex-nowrap">
+            <section id="container-sidebar-mobile" className="d-flex flex-column flex-nowrap gap-2">
+                {pages.map((page) => (
+                <li className="mb-2" key={page.key}>
+                    <LinkPage page={page} table={true} />
+                </li>
+                ))}
+            </section>
+            <footer className="flex-column flex-nowrap align-itmes-start mb-3">
+                <Credit />
+                <SocialNetworks />
+            </footer>
+        </nav>
     );
 }
 

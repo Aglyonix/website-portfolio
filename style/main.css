@@ -100,6 +100,8 @@ html {
 
     --filter-duration : .64s;
     --filter-hover-duration : .25s;
+
+    --copy-hover-duration : .25s;
 }
 
 /* ---------------- Body */
@@ -116,7 +118,7 @@ body {
 }
 
 #page-bio {
-    --main-color: var(--red-700);
+    --main-color: var(--red-600);
 }
 
 #page-projects {
@@ -142,6 +144,10 @@ main {
 
 #content .lexend {
     color: var(--black);
+}
+
+#content .lexend.white {
+    color: var(--white);
 }
 
 #content h1 {
