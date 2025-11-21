@@ -36,6 +36,7 @@
 
 #my-email-clip-btn, #my-email-send-btn {
     display: flex;
+    z-index: 1;
 
     width: var(--my-email-height);
     aspect-ratio: 1;
@@ -59,14 +60,14 @@
     transition: all var(--copy-hover-duration) ease-in;
 }
 
-#my-email:has(#my-email-label:hover) #my-email-send-btn,
+#my-email:has(> a:hover) #my-email-send-btn,
 #my-email-send-btn:hover {
     background-color: var(--main-color);
 
     transition: all var(--copy-hover-duration) ease-in;
 }
 
-#my-email:has(#my-email-label:hover) #my-email-send-btn .bi,
+#my-email:has(> a:hover) #my-email-send-btn .bi,
 #my-email-send-btn:hover .bi {
     color: var(--white);
 
