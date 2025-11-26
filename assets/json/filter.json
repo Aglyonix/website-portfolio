@@ -1,19 +1,19 @@
 {
     "tags" : [
         {
-            "key" : "filtr-tags.-group-00001",
+            "key" : "filter.tag.framework",
 
             "familly" : "Framework",
             "items" : [
                 {
-                    "key" : "00000",
+                    "key" : "symfony",
                     
                     "name" : "Symfony",
                     "color" : "#7E3FF2",
                     "negative": false
                 },
                 {
-                    "key" : "00001",
+                    "key" : "django",
                     
                     "name" : "Django",
                     "color" : "#0C4B33",
@@ -22,33 +22,33 @@
             ]
         },
         {
-            "key" : "filtr-tags.-group-00002",
+            "key" : "filter.tag.oriented-object",
 
             "familly" : "Programmations objets",
             "items" : [
                 {
-                    "key" : "00000",
+                    "key" : "java",
                     
                     "name" : "Java",
                     "color" : "#CC2927",
                     "negative": false
                 },
                 {
-                    "key" : "00001",
+                    "key" : "csharp",
                     
                     "name" : "C#",
                     "color" : "#68217A",
                     "negative": false
                 },
                 {
-                    "key" : "00002",
+                    "key" : "cpp",
                     
                     "name" : "C++",
                     "color" : "#00599C",
                     "negative": false
                 },
                 {
-                    "key" : "00003",
+                    "key" : "python",
                     
                     "name" : "Python",
                     "color" : "#3776AB",
@@ -57,33 +57,33 @@
             ]
         },
         {
-            "key" : "filtr-tags.-group-00003",
+            "key" : "filter.tag.web",
 
             "familly" : "Programmations web",
             "items" : [
                 {
-                    "key" : "00000",
+                    "key" : "html",
                     
                     "name" : "HTML",
                     "color" : "#E34F26",
                     "negative": false
                 },
                 {
-                    "key" : "00001",
+                    "key" : "css",
                     
                     "name" : "CSS",
                     "color" : "#1572B6",
                     "negative": false
                 },
                 {
-                    "key" : "00002",
+                    "key" : "javascript",
                     
                     "name" : "JavaScript",
                     "color" : "#F7DF1E",
                     "negative": true
                 },
                 {
-                    "key" : "00003",
+                    "key" : "php",
                     
                     "name" : "PHP",
                     "color" : "#777BB4",
@@ -92,26 +92,26 @@
             ]
         },
         {
-            "key" : "filtr-tags.-group-00000",
+            "key" : "filter.tag.library",
 
             "familly" : "Bibliothéque",
             "items" : [
                 {
-                    "key" : "00000",
+                    "key" : "react",
                     
                     "name" : "React",
                     "color" : "#61DBFB",
                     "negative": true
                 },
                 {
-                    "key" : "00001",
+                    "key" : "bootstrap",
                     
                     "name" : "Bootstrap",
                     "color" : "#7952B3",
                     "negative": true
                 },
                 {
-                    "key" : "00002",
+                    "key" : "twig",
                     
                     "name" : "Twig",
                     "color" : "#73A839",
@@ -120,12 +120,12 @@
             ]
         },
         {
-            "key" : "filtr-tags.-group-00004",
+            "key" : "filter.tag.database",
 
             "familly" : "Base de données",
             "items" : [
                 {
-                    "key" : "00000",
+                    "key" : "sql",
                     
                     "name" : "SQL",
                     "color" : "#E76F00",
@@ -134,12 +134,12 @@
             ]
         },
         {
-            "key" : "filtr-tags.-group-00005",
+            "key" : "filter.tag.mobile",
 
             "familly" : "Programmations mobile",
             "items" : [
                 {
-                    "key" : "00000",
+                    "key" : "android",
                     
                     "name" : "Android",
                     "color" : "#3DDC84",
@@ -150,40 +150,40 @@
     ],
     "domains" : [
         {
-            "key" : "filtr-domns-group-00000",
+            "key" : "filter.domain",
 
             "familly" : "Domaines",
             "items" : [
                 {
-                    "key" : "00000",
+                    "key" : "app",
                     
                     "name" : "Application",
                     "color" : "#FF9800",
                     "negative": false
                 },
                 {
-                    "key" : "00002",
+                    "key" : "web",
                     
                     "name" : "Web",
                     "color" : "#1A73E8",
                     "negative": false
                 },
                 {
-                    "key" : "00003",
+                    "key" : "gaming",
                     
                     "name" : "Jeux Vidéo",
                     "color" : "#E91E63",
                     "negative": false
                 },
                 {
-                    "key" : "00004",
+                    "key" : "modding",
                     
                     "name" : "Modding",
                     "color" : "#BC4749",
                     "negative": true
                 },
                 {
-                    "key" : "00005",
+                    "key" : "api",
                     
                     "name" : "API",
                     "color" : "#FF9800",

@@ -1,6 +1,6 @@
 {
     "vedette" : {
-        "key": "prjct-vedette",
+        "key": "project.vedette",
 
         "title": "Portfolio responsive",
         "link": "#",
@@ -25,7 +25,7 @@
     },
     "items" : [
         {
-            "key": "prjct-00000",
+            "key": "project.web.web-semantique-enrichi",
 
             "title": "Web Sémantique Enrichi",
             "link": "#",
@@ -50,7 +50,7 @@
             ]
         },
         {
-            "key": "prjct-00001",
+            "key": "project.web.application-django-tickets",
 
             "title": "Application Django",
             "link": "#",
