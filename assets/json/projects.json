@@ -2,10 +2,10 @@
     "vedette" : {
         "key": "prjct-vedette",
 
-        "title": "Portfolio interactif",
+        "title": "Portfolio responsive",
         "link": "#",
 
-        "description": "Un site personnel avec animations React et Bootstrap.",
+        "description": "Un site personnel responsive et interactif, qui me représente.",
         "image": "background-landscape-wide.jpg",
 
         "domains" : [
@@ -27,33 +27,10 @@
         {
             "key": "prjct-00000",
 
-            "title": "API Symfony",
+            "title": "Web Sémantique Enrichi",
             "link": "#",
 
-            "description": "Développement d'une API REST sécurisée.",
-            "image": "background-landscape-wide.jpg",
-
-            "domains" : [
-                "Application",
-                "API"
-            ],
-            "tags" : [
-                "Symfony",
-                "PHP",
-                "Bootstrap",
-                "JsChart"
-            ],
-            "authors" : [
-                "Aëlig"
-            ]
-        },
-        {
-            "key": "prjct-00001",
-
-            "title": "Application React",
-            "link": "#",
-
-            "description": "Une interface utilisateur dynamique avec gestion d'état.",
+            "description": "Création et manipulation de graphes RDF. Ecriture et traitement de requête SPARQL avec l'ontologie OWL. Enrichissement avec Wikidata",
             "image": "background-landscape-wide.jpg",
 
             "domains" : [
@@ -61,36 +38,41 @@
                 "Web"
             ],
             "tags" : [
-                "React",
-                "Bootstrap",
-                "HTML",
-                "CSS",
-                "JavaScript"
-            ],
-            "authors" : [
-                "Aëlig"
-            ]
-        },
-        {
-            "key": "prjct-00002",
-
-            "title": "Mod Minecraft",
-            "link": "#",
-
-            "description": "Création d'un mod avec des composants personnalisés.",
-            "image": "background-landscape-wide.jpg",
-
-            "domains" : [
-                "Jeux Vidéo",
-                "Modding"
-            ],
-            "tags" : [
-                "Java",
-                "Gradle"
+                "RDF/S",
+                "OWL",
+                "Wikidata",
+                "Chart.js",
+                "Leaflet.js"
             ],
             "authors" : [
                 "Aëlig",
-                "Dylan"
+                "Matthieu"
+            ]
+        },
+        {
+            "key": "prjct-00001",
+
+            "title": "Application Django",
+            "link": "#",
+
+            "description": "Création d'une application web permettant la gestion complète des tickets de support d’une entreprise. Gestion des utilisateurs et analyse des statistiques.",
+            "image": "background-landscape-wide.jpg",
+
+            "domains" : [
+                "Application",
+                "Web"
+            ],
+            "tags" : [
+                "Django",
+                "Bootstrap",
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Chart.js"
+            ],
+            "authors" : [
+                "Aëlig",
+                "Matthieu"
             ]
         }
     ]

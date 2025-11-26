@@ -20,15 +20,15 @@
             "title" : "Baccalauréat Général",
             "mention" : "Mention Bien",
 
-            "src" : "baccalaureat-trimed.jpg",
+            "src" : "certificates/baccalaureat-trimed.jpg",
             "alt" : "Baccalauréat Mention Bien"
         },
         {
             "key" : "crtfc-00002",
             "title" : "Brevet des Collèges",
-            "mention" : "",
+            "mention" : "Mention Bien",
 
-            "src" : "brevet-trimed.jpg",
+            "src" : "certificates/brevet-trimed.jpg",
             "alt" : "Brevet des Collèges"
         }
     ]

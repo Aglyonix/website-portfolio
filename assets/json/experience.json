@@ -27,12 +27,12 @@
             "title" : "Stage développement imformatique",
             "entity" : {
                 "name" : "Editions Ellipses",
-                "img" : "editions-ellipses.jpg",
+                "img" : "experiences/editions-ellipses.jpg",
                 "href" : "https://www.editions-ellipses.fr/content/9-qui-sommes-nous"
             },
             "date" : "— De Avril à Août 2025",
 
-            "caption" : "Stage de 3 mois dans le cadre de ma formation en BUT Informatique. Développement du logiciel ERP \"Elli\" et son environnement. Proximité et contact direct avec les clients.",
+            "caption" : "Stage de 3 mois dans le cadre de ma formation en BUT Informatique. Développement du logiciel ERP \"Elli\" et son environnement. Proximité et contact direct avec ces utilisateurs.",
             "details" : [
                 {
                     "key" : "00000",
@@ -43,14 +43,14 @@
                 {
                     "key" : "00001",
                     "text" : "Gestion de la base de donnée",
-                    "muted" : "— SQL",
-                    "light" : "— HeidSQL / MySQL"
+                    "muted" : "— MySQL",
+                    "light" : "— HeidSQL"
                 },
                 {
                     "key" : "00002",
                     "text" : "Amélioration de l'interface utilisateur",
-                    "muted" : "",
-                    "light" : "— Twig / HTML / Bootstrap / CSS"
+                    "muted" : "— Javascript / HTML / CSS",
+                    "light" : "— Twig / Bootstrap"
                 },
                 {
                     "key" : "00003",
@@ -79,12 +79,12 @@
             "title" : "Alternance développement full-stack",
             "entity" : {
                 "name" : "Editions Ellipses",
-                "img" : "editions-ellipses.jpg",
+                "img" : "experiences/editions-ellipses.jpg",
                 "href" : "https://www.editions-ellipses.fr/content/9-qui-sommes-nous"
             },
             "date" : "— Depuis Septembre 2025",
 
-            "caption" : "Alternance",
+            "caption" : "Alternance 2025-26 chez les Editions Ellipses. Développement du logiciel ERP en Symfony et du site marchand via PrestaShop.",
             "details" : [
                 {
                     "key" : "00000",
@@ -94,30 +94,36 @@
                 },
                 {
                     "key" : "00001",
-                    "text" : "Gestion de la base de donnée",
-                    "muted" : "— SQL",
-                    "light" : "— HeidSQL / MySQL"
+                    "text" : "Développement du site marchant",
+                    "muted" : "",
+                    "light" : "— PrestaShop / VS Code"
                 },
                 {
                     "key" : "00002",
-                    "text" : "Amélioration de l'interface utilisateur",
-                    "muted" : "",
-                    "light" : "— Twig / HTML / Bootstrap / CSS"
+                    "text" : "Gestion de la base de donnée",
+                    "muted" : "— MySQL",
+                    "light" : "— HeidSQL"
                 },
                 {
                     "key" : "00003",
+                    "text" : "Amélioration de l'interface utilisateur",
+                    "muted" : "— Javascript / HTML / CSS",
+                    "light" : "— Twig / Bootstrap"
+                },
+                {
+                    "key" : "00004",
                     "text" : "Deploiment test et production",
                     "muted" : "— SSH",
                     "light" : "— Putty"
                 },
                 {
-                    "key" : "00004",
+                    "key" : "00005",
                     "text" : "Gestion du versionnage",
                     "muted" : "— Git",
                     "light" : "— Azure DevOps"
                 },
                 {
-                    "key" : "00005",
+                    "key" : "00006",
                     "text" : "Gestion de travail",
                     "muted" : "",
                     "light" : "— Planner / Outlook"

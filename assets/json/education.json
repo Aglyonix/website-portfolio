@@ -27,7 +27,7 @@
             "title" : "BUT Informatique 3e année",
             "entity" : {
                 "name" : "IUT Orsay",
-                "img" : "iut-orsay.png",
+                "img" : "experiences/iut-orsay.png",
                 "href" : "https://www.iut-orsay.universite-paris-saclay.fr"
             },
             "date" : "— Depuis septembre 2023",
@@ -41,7 +41,7 @@
             "title" : "Baccalauréat",
             "entity" : {
                 "name" : "Lycée Descartes",
-                "img" : "lycee-decartes.png",
+                "img" : "experiences/lycee-decartes.png",
                 "href" : "https://lyceedescartesantony.fr"
             },
             "date" : "— Juillet 2023",
