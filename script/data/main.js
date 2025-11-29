@@ -17,9 +17,9 @@ const breaks = [
 ];
 
 const pages = [
-    { key: "page.-00000",  name: "Bio",      path: "bio.html",       table: "bio-nav.json",  active: body.id === "page-bio" },
-    { key: "page.-00001",  name: "Projets",  path: "projects.html",  table: "",              active: body.id === "page-projects" },
-    { key: "page.-00002",  name: "Contact",  path: "contact.html",   table: "",              active: body.id === "page-contact" }
+    { key: "page.bio",      name: "Bio",      path: "bio.html",       table: "bio-nav.json",  active: body.id === "page-bio" },
+    { key: "page.projects", name: "Projets",  path: "projects.html",  table: "",              active: body.id === "page-projects" },
+    { key: "page.contact",  name: "Contact",  path: "contact.html",   table: "",              active: body.id === "page-contact" }
 ];
 
 // Global expose

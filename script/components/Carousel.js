@@ -29,7 +29,7 @@ function CardCarousel({ id, json }) {
             <div id={id} className="carousel slide card-img-top" data-bs-ride="carousel">
                 <div className="carousel-indicators">
                     {items ? items.map((item, index) => (
-                    <button type="button" data-bs-target={"#" + id} data-bs-slide-to={index} aria-label={"Slide " + (index+1)} key={"indicator-for-" + item.key} className={index===0?'active':null} aria-current={index===0?'True':null}></button>
+                    <button type="button" data-bs-target={"#" + id} data-bs-slide-to={index} aria-label={"Slide " + (index+1)} key={"indicator-for." + item.key} className={index===0?'active':null} aria-current={index===0?'True':null}></button>
                     )) : null}
                 </div>
                 <div className="carousel-inner">

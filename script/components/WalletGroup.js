@@ -62,9 +62,9 @@ function ListGroupWallet({ id , json, body, head, groups }) {
 
     return (
         <>{grid ? grid.map((group, index) => (
-            <ul id={id + "-" + index} className="list-group list-group-wallet" key={id + "-group-" + index}>
+            <ul id={id + "-" + index} className="list-group list-group-wallet" key={id + ".group." + index}>
                 {group.map((item) => (
-                    <ListGroupWalletItem item={item} body={body} head={head} key={id + "-" + item.key} />
+                    <ListGroupWalletItem item={item} body={body} head={head} key={id + "." + item.key} />
                 ))}
             </ul>
         )) : null}</>

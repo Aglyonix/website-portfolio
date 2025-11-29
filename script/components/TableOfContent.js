@@ -49,7 +49,7 @@ function TableOfContent({ objects, json, panel, refnav }) {
     if (tabPanels) {
         return (
             <div className="tab-content">
-                {tabPanels ? tabPanels.map((tab) => (<PanelOfContent tab={tab} table={tab.childrens} refnav={refnav} key={tab.key} />)) : null}
+                {tabPanels ? tabPanels.map((tab) => ( <PanelOfContent tab={tab} table={tab.childrens} refnav={refnav} key={tab.key} /> )) : null}
             </div>
         );
     }
@@ -107,6 +107,10 @@ function PanelOfContent( { tab, table, refnav } ) {
     }
 
     const item = getTabAttrs(tab.panelref);
+
+    if (!item) {
+        throw TypeError(`No reference of ` + tab.panelref + ` found. Check your json file. Does your "panelref" match your item key ?`);
+    }
 
     React.useEffect(() => {
         if (item) {

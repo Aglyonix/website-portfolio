@@ -167,7 +167,7 @@ function ProjectsMain() {
                                 <p className="lexend mb-2">{group.familly}</p>
                                 <div className="d-flex flex-wrap gap-3">
                                 {group.items.map((tag) => 
-                                    <FilterOption item={tag} onclick={filterSelect} key={group.key + "-" + tag.key} />
+                                    <FilterOption item={tag} onclick={filterSelect} key={group.key + "." + tag.key} />
                                 )}
                                 </div>
                             </div>
@@ -179,7 +179,7 @@ function ProjectsMain() {
                                 <p className="lexend mb-2">{group.familly}</p>
                                 <div className="d-flex flex-wrap gap-3">
                                 {group.items.map((domain) => 
-                                    <FilterOption item={domain} onclick={filterSelect} key={group.key + "-" + domain.key} />
+                                    <FilterOption item={domain} onclick={filterSelect} key={group.key + "." + domain.key} />
                                 )}
                                 </div>
                             </div>
@@ -240,14 +240,14 @@ function ProjectItemVedette({ item }) {
                 <div className="card-content">
                     <div className="project-catgs mt-4">
                         {item.domains.map((domain, index) =>
-                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + ".domain." + index}>
                                 {domain}
                             </span>
                         )}
                     </div>
                     <div className="project-authors mt-4">
                         {item.authors.map((author, index) =>
-                            <span className="lexend text-muted" key={item.key + "-author-" + index}>
+                            <span className="lexend text-muted" key={item.key + ".author." + index}>
                                 {index != 0 ? "•" : null} {author}
                             </span>
                         )}
@@ -257,7 +257,7 @@ function ProjectItemVedette({ item }) {
                         <p className="project-text text-muted my-2">{item.description}</p>
                         <div className="project-tags mt-4">
                             {item.tags.map((tag, index) =>
-                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + ".tag." + index}>
                                     {tag}
                                 </span>
                             )}
@@ -277,7 +277,7 @@ function ProjectItemVedetteSmall({ item }) {
                 <div className="card-content">
                     <div className="project-catgs mt-4">
                         {item.domains.map((domain, index) =>
-                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + ".domain." + index}>
                                 {domain}
                             </span>
                         )}
@@ -290,7 +290,7 @@ function ProjectItemVedetteSmall({ item }) {
                         <p className="project-text d-flex align-items-center text-muted my-2">{item.description}</p>
                         <div className="project-tags mt-4">
                             {item.tags.map((tag, index) =>
-                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + ".tag." + index}>
                                     {tag}
                                 </span>
                             )}
@@ -309,7 +309,7 @@ function ProjectItemLarge({ item }) {
                 <div className="card-content">
                     <div className="project-catgs">
                         {item.domains.map((domain, index) =>
-                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + ".domain." + index}>
                                 {domain}
                             </span>
                         )}
@@ -319,7 +319,7 @@ function ProjectItemLarge({ item }) {
                         <p className="project-text text-muted my-2">{item.description}</p>
                         <div className="project-tags mt-3">
                             {item.tags.map((tag, index) =>
-                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + ".tag." + index}>
                                     {tag}
                                 </span>
                             )}
@@ -339,7 +339,7 @@ function ProjectItemMedium({ item }) {
                 <div className="card-content">
                     <div className="project-catgs">
                         {item.domains.map((domain, index) =>
-                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + ".domain." + index}>
                                 {domain}
                             </span>
                         )}
@@ -349,7 +349,7 @@ function ProjectItemMedium({ item }) {
                         <p className="project-text text-muted my-2">{item.description}</p>
                         <div className="project-tags mt-3">
                             {item.tags.map((tag, index) =>
-                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + ".tag." + index}>
                                     {tag}
                                 </span>
                             )}
@@ -369,7 +369,7 @@ function ProjectItemSmall({ item }) {
                 <div className="card-content">
                     <div className="project-catgs">
                         {item.domains.map((domain, index) =>
-                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + ".domain." + index}>
                                 {domain}
                             </span>
                         )}
@@ -379,7 +379,7 @@ function ProjectItemSmall({ item }) {
                         <p className="project-text text-muted my-2">{item.description}</p>
                         <div className="project-tags mt-3">
                             {item.tags.map((tag, index) =>
-                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + ".tag." + index}>
                                     {tag}
                                 </span>
                             )}

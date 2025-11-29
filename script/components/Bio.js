@@ -129,7 +129,7 @@ function BioShowcaseContent() {
     return (
         <section className="tab-content w-100 px-3">
             {items ? items.map((item) => (
-                <article key={item.key + "-panel"} id={item.target} className={item.active ? attr + " show active" : attr} role="tabpanel" aria-labelledby={item.idname}>
+                <article key={item.key + ".panel"} id={item.target} className={item.active ? attr + " show active" : attr} role="tabpanel" aria-labelledby={item.idname}>
                     {bioMap[item.react]}
                 </article>
             )) : null}
@@ -227,11 +227,11 @@ function BioInterestMedium() {
                 
                 for (var w = 0; w < columns; w++) {
                     let item = items[i];
-                    row.push(<BioInteresMediumItem item={item} key={item.key + "-md"} />);
+                    row.push(<BioInteresMediumItem item={item} key={item.key + ".md"} />);
                     i++;
                 }
 
-                pack.push(<div className="card-group" key={"interests-md-row-" + i}>{row}</div>);
+                pack.push(<div className="card-group" key={"interests-row.md." + i}>{row}</div>);
             }
             setRows(pack);
         }
@@ -283,11 +283,11 @@ function BioInterestLarge() {
                 
                 for (var w = 0; w < columns; w++) {
                     let item = items[i];
-                    row.push(<BioInteresLargeItem item={item} key={item.key + "-lg"} />);
+                    row.push(<BioInteresLargeItem item={item} key={item.key + ".lg"} />);
                     i++;
                 }
 
-                pack.push(<div className="card-pack row" key={"interests-lg-row-" + i}>{row}</div>);
+                pack.push(<div className="card-pack row" key={"interests-row.lg." + i}>{row}</div>);
             }
             setRows(pack);
         }
@@ -377,7 +377,7 @@ function BioShowcaseItemBody({ item }) {
             <p className="mb-0">{item.caption}</p>
             <ul className="list-group list-group-flush gap-1 mt-2" >
                 {item.details ? item.details.map((detail) => (
-                    <BioShowcaseListItem detail={detail} key={item.key + "-" + detail.key}/>
+                    <BioShowcaseListItem detail={detail} key={item.key + "." + detail.key}/>
                 )) : null}
             </ul>
         </>

@@ -47,7 +47,7 @@ function CardGrid({ id, objects, json, card, columns, attr }) {
     return (
         <div id={id}>
         {breaks.map((point, index) => 
-            <div className={"grid-columns " + point.attr} data-columns={columns[index]} key={id + "-grid-columns-" + index}>
+            <div className={"grid-columns " + point.attr} data-columns={columns[index]} key={id + ".grid-columns." + index}>
             {items ? items.map((item) => 
                 item.group ? (
                     <CardPack pack={item} card={card[index]} columns={columns[index]} key={item.key} />
