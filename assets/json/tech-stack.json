@@ -1,86 +1,86 @@
 {
     "table-of-content" : [
         {
-            "key" : "table-skill-00000",
+            "key" : "content-table.tech-stack",
             "title" : "Tech-Stack",
             "target" : "#tech-stacks"
         }
     ],
     "items" : [
         {
-            "key" : "skill-00000",
+            "key" : "tech-stack.c-languages",
             "sizes" : {
                 "width" : "2",
                 "height" : "1"
             },
             "group" : [
                 {
-                    "key" : "skill-00000-00000",
+                    "key" : "tech-stack.cpp",
                     "title" : "C++",
                     "icon" : "CppIcon"
                 },
                 {
-                    "key" : "skill-00000-00001",
+                    "key" : "tech-stack.csharp",
                     "title" : "C#",
                     "icon" :  "CSharpIcon"
                 }
             ]
         },
         {
-            "key" : "skill-00001",
+            "key" : "tech-stack.java",
             "title" : "Java",
             "icon" : "JavaIcon"
         },
         {
-            "key" : "skill-00002",
+            "key" : "tech-stack.sql",
             "title" : "SQL",
             "icon" : "SQLIcon"
         },
         {
-            "key" : "skill-00003",
+            "key" : "tech-stack.framework-django",
             "sizes" : {
                 "width" : "2",
                 "height" : "1"
             },
             "group" : [
                 {
-                    "key" : "skill-00003-00000",
+                    "key" : "tech-stack.python",
                     "title" : "Python",
                     "icon" : "PythonIcon"
                 },
                 {
-                    "key" : "skill-00003-00001",
+                    "key" : "tech-stack.django",
                     "title" : "Django",
                     "icon" : "DjangoIcon"
                 }
             ]
         },
         {
-            "key" : "skill-00005",
+            "key" : "tech-stack.framework-symfony",
             "sizes" : {
                 "width" : "3",
                 "height" : "1"
             },
             "group" : [
                 {
-                    "key" : "skill-00005-00000",
+                    "key" : "tech-stack.php",
                     "title" : "PHP",
                     "icon" : "PHPIcon"
                 },
                 {
-                    "key" : "skill-00005-00001",
+                    "key" : "tech-stack.symfony",
                     "title" : "Symfony",
                     "icon" : "SymfonyIcon"
                 },
                 {
-                    "key" : "skill-00005-00002",
+                    "key" : "tech-stack.twig",
                     "title" : "Twig",
                     "icon" : "TwigIcon"
                 }
             ]
         },
         {
-            "key" : "skill-00004",
+            "key" : "tech-stack.web",
             "sizes" : {
                 "width" : "2",
                 "height" : "2",
@@ -91,29 +91,29 @@
             },
             "group" : [
                 {
-                    "key" : "skill-00004-00000",
+                    "key" : "tech-stack.html",
                     "title" : "HTML",
                     "icon" : "HTMLIcon"
                 },
                 {
-                    "key" : "skill-00004-00001",
+                    "key" : "tech-stack.css",
                     "title" : "CSS",
                     "icon" : "CSSIcon"
                 },
                 {
-                    "key" : "skill-00004-00002",
+                    "key" : "tech-stack.bootstrap",
                     "title" : "Bootstrap",
                     "icon" : "BootstrapIcon"
                 },
                 {
-                    "key" : "skill-00004-00003",
+                    "key" : "tech-stack.javascript",
                     "title" : "Javascript",
                     "icon" : "JavaScriptIcon"
                 }
             ]
         },
         {
-            "key" : "skill-00006",
+            "key" : "tech-stack.android",
             "title" : "Android",
             "icon" : "AndroidIcon"
         }

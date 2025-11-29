@@ -1,18 +1,18 @@
 {
     "table-of-content" : [
         {
-            "key" : "table-educt-00001",
+            "key" : "content-table.education",
             "title" : "Education",
             "target" : "#education",
 
             "childrens" : [
                 {
-                    "key" : "table-educt-00001-00001",
+                    "key" : "content-table.education.but-info",
                     "title" : "BUT Informatique",
                     "target" : "#but-info"
                 },
                 {
-                    "key" : "table-educt-00001-00002",
+                    "key" : "content-table.education.baccalaureat-generale",
                     "title" : "Baccalauréat",
                     "target" : "#lycee"
                 }
@@ -21,13 +21,13 @@
     ],
     "items" : [
         {
-            "key" : "educt-00000",
+            "key" : "education.but-info",
             "active" : true,
 
             "title" : "BUT Informatique 3e année",
             "entity" : {
                 "name" : "IUT Orsay",
-                "img" : "iut-orsay.png",
+                "img" : "experiences/iut-orsay.png",
                 "href" : "https://www.iut-orsay.universite-paris-saclay.fr"
             },
             "date" : "— Depuis septembre 2023",
@@ -35,13 +35,13 @@
             "caption" : "L’IUT d’Orsay est une référence dans les secteurs de la chimie, de l’informatique et des mesures physiques."
         },
         {
-            "key" : "educt-00001",
+            "key" : "education.baccalaureat-generale",
             "active" : false,
 
             "title" : "Baccalauréat",
             "entity" : {
                 "name" : "Lycée Descartes",
-                "img" : "lycee-decartes.png",
+                "img" : "experiences/lycee-decartes.png",
                 "href" : "https://lyceedescartesantony.fr"
             },
             "date" : "— Juillet 2023",

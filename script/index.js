@@ -38,9 +38,9 @@ function AppAssembler() {
 // ---------------------------------------------------------------------- Settings ---------------------------------------------------------------------- //
 
 const pages = [
-    { key: "page.-00000",  name: "Bio",      path: "bio.html",       table: "bio-nav.json",  active: body.id === "page-bio" },
-    { key: "page.-00001",  name: "Projets",  path: "projects.html",  table: "",              active: body.id === "page-projects" },
-    { key: "page.-00002",  name: "Contact",  path: "contact.html",   table: "",              active: body.id === "page-contact" }
+    { key: "page.bio",      name: "Bio",      path: "bio.html",       table: "bio-nav.json",  active: body.id === "page-bio" },
+    { key: "page.projects", name: "Projets",  path: "projects.html",  table: "",              active: body.id === "page-projects" },
+    { key: "page.contact",  name: "Contact",  path: "contact.html",   table: "",              active: body.id === "page-contact" }
 ];
 
 const breaks = [
@@ -280,7 +280,7 @@ function BioShowcaseContent() {
     return (
         <section className="tab-content w-100 px-3">
             {items ? items.map((item) => (
-                <article key={item.key + "-panel"} id={item.target} className={item.active ? attr + " show active" : attr} role="tabpanel" aria-labelledby={item.idname}>
+                <article key={item.key + ".panel"} id={item.target} className={item.active ? attr + " show active" : attr} role="tabpanel" aria-labelledby={item.idname}>
                     {bioMap[item.react]}
                 </article>
             )) : null}
@@ -350,11 +350,11 @@ function BioInterestMedium() {
                 
                 for (var w = 0; w < columns; w++) {
                     let item = items[i];
-                    row.push(<BioInteresMediumItem item={item} key={item.key + "-md"} />);
+                    row.push(<BioInteresMediumItem item={item} key={item.key + ".md"} />);
                     i++;
                 }
 
-                pack.push(<div className="card-group" key={"interests-md-row-" + i}>{row}</div>);
+                pack.push(<div className="card-group" key={"interests-row.md." + i}>{row}</div>);
             }
             setRows(pack);
         }
@@ -406,11 +406,11 @@ function BioInterestLarge() {
                 
                 for (var w = 0; w < columns; w++) {
                     let item = items[i];
-                    row.push(<BioInteresLargeItem item={item} key={item.key + "-lg"} />);
+                    row.push(<BioInteresLargeItem item={item} key={item.key + ".lg"} />);
                     i++;
                 }
 
-                pack.push(<div className="card-pack row" key={"interests-lg-row-" + i}>{row}</div>);
+                pack.push(<div className="card-pack row" key={"interests-row.lg." + i}>{row}</div>);
             }
             setRows(pack);
         }
@@ -500,7 +500,7 @@ function BioShowcaseItemBody({ item }) {
             <p className="mb-0">{item.caption}</p>
             <ul className="list-group list-group-flush gap-1 mt-2" >
                 {item.details ? item.details.map((detail) => (
-                    <BioShowcaseListItem detail={detail} key={item.key + "-" + detail.key}/>
+                    <BioShowcaseListItem detail={detail} key={item.key + "." + detail.key}/>
                 )) : null}
             </ul>
         </>
@@ -724,7 +724,7 @@ function ProjectsMain() {
                                 <p className="lexend mb-2">{group.familly}</p>
                                 <div className="d-flex flex-wrap gap-3">
                                 {group.items.map((tag) => 
-                                    <FilterOption item={tag} onclick={filterSelect} key={group.key + "-" + tag.key} />
+                                    <FilterOption item={tag} onclick={filterSelect} key={group.key + "." + tag.key} />
                                 )}
                                 </div>
                             </div>
@@ -736,7 +736,7 @@ function ProjectsMain() {
                                 <p className="lexend mb-2">{group.familly}</p>
                                 <div className="d-flex flex-wrap gap-3">
                                 {group.items.map((domain) => 
-                                    <FilterOption item={domain} onclick={filterSelect} key={group.key + "-" + domain.key} />
+                                    <FilterOption item={domain} onclick={filterSelect} key={group.key + "." + domain.key} />
                                 )}
                                 </div>
                             </div>
@@ -797,14 +797,14 @@ function ProjectItemVedette({ item }) {
                 <div className="card-content">
                     <div className="project-catgs mt-4">
                         {item.domains.map((domain, index) =>
-                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + ".domain." + index}>
                                 {domain}
                             </span>
                         )}
                     </div>
                     <div className="project-authors mt-4">
                         {item.authors.map((author, index) =>
-                            <span className="lexend text-muted" key={item.key + "-author-" + index}>
+                            <span className="lexend text-muted" key={item.key + ".author." + index}>
                                 {index != 0 ? "•" : null} {author}
                             </span>
                         )}
@@ -814,7 +814,7 @@ function ProjectItemVedette({ item }) {
                         <p className="project-text text-muted my-2">{item.description}</p>
                         <div className="project-tags mt-4">
                             {item.tags.map((tag, index) =>
-                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + ".tag." + index}>
                                     {tag}
                                 </span>
                             )}
@@ -834,7 +834,7 @@ function ProjectItemVedetteSmall({ item }) {
                 <div className="card-content">
                     <div className="project-catgs mt-4">
                         {item.domains.map((domain, index) =>
-                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + ".domain." + index}>
                                 {domain}
                             </span>
                         )}
@@ -847,7 +847,7 @@ function ProjectItemVedetteSmall({ item }) {
                         <p className="project-text d-flex align-items-center text-muted my-2">{item.description}</p>
                         <div className="project-tags mt-4">
                             {item.tags.map((tag, index) =>
-                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + ".tag." + index}>
                                     {tag}
                                 </span>
                             )}
@@ -866,7 +866,7 @@ function ProjectItemLarge({ item }) {
                 <div className="card-content">
                     <div className="project-catgs">
                         {item.domains.map((domain, index) =>
-                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + ".domain." + index}>
                                 {domain}
                             </span>
                         )}
@@ -876,7 +876,7 @@ function ProjectItemLarge({ item }) {
                         <p className="project-text text-muted my-2">{item.description}</p>
                         <div className="project-tags mt-3">
                             {item.tags.map((tag, index) =>
-                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + ".tag." + index}>
                                     {tag}
                                 </span>
                             )}
@@ -896,7 +896,7 @@ function ProjectItemMedium({ item }) {
                 <div className="card-content">
                     <div className="project-catgs">
                         {item.domains.map((domain, index) =>
-                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + ".domain." + index}>
                                 {domain}
                             </span>
                         )}
@@ -906,7 +906,7 @@ function ProjectItemMedium({ item }) {
                         <p className="project-text text-muted my-2">{item.description}</p>
                         <div className="project-tags mt-3">
                             {item.tags.map((tag, index) =>
-                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + ".tag." + index}>
                                     {tag}
                                 </span>
                             )}
@@ -926,7 +926,7 @@ function ProjectItemSmall({ item }) {
                 <div className="card-content">
                     <div className="project-catgs">
                         {item.domains.map((domain, index) =>
-                            <span className="badge rounded-pill bg-light text-muted" key={item.key + "-domain-" + index}>
+                            <span className="badge rounded-pill bg-light text-muted" key={item.key + ".domain." + index}>
                                 {domain}
                             </span>
                         )}
@@ -936,7 +936,7 @@ function ProjectItemSmall({ item }) {
                         <p className="project-text text-muted my-2">{item.description}</p>
                         <div className="project-tags mt-3">
                             {item.tags.map((tag, index) =>
-                                <span className="badge rounded-pill bg-light text-muted" key={item.key + "-tag-" + index}>
+                                <span className="badge rounded-pill bg-light text-muted" key={item.key + ".tag." + index}>
                                     {tag}
                                 </span>
                             )}
@@ -1248,9 +1248,9 @@ function ListGroupWallet({ id , json, body, head, groups }) {
 
     return (
         <>{grid ? grid.map((group, index) => (
-            <ul id={id + "-" + index} className="list-group list-group-wallet" key={id + "-group-" + index}>
+            <ul id={id + "-" + index} className="list-group list-group-wallet" key={id + ".group." + index}>
                 {group.map((item) => (
-                    <ListGroupWalletItem item={item} body={body} head={head} key={id + "-" + item.key} />
+                    <ListGroupWalletItem item={item} body={body} head={head} key={id + "." + item.key} />
                 ))}
             </ul>
         )) : null}</>
@@ -1334,7 +1334,7 @@ function CardCarousel({ id, json }) {
             <div id={id} className="carousel slide card-img-top" data-bs-ride="carousel">
                 <div className="carousel-indicators">
                     {items ? items.map((item, index) => (
-                    <button type="button" data-bs-target={"#" + id} data-bs-slide-to={index} aria-label={"Slide " + (index+1)} key={"indicator-for-" + item.key} className={index===0?'active':null} aria-current={index===0?'True':null}></button>
+                    <button type="button" data-bs-target={"#" + id} data-bs-slide-to={index} aria-label={"Slide " + (index+1)} key={"indicator-for." + item.key} className={index===0?'active':null} aria-current={index===0?'True':null}></button>
                     )) : null}
                 </div>
                 <div className="carousel-inner">
@@ -1414,7 +1414,7 @@ function TableOfContent({ objects, json, panel, refnav }) {
     if (tabPanels) {
         return (
             <div className="tab-content">
-                {tabPanels ? tabPanels.map((tab) => (<PanelOfContent tab={tab} table={tab.childrens} refnav={refnav} key={tab.key} />)) : null}
+                {tabPanels ? tabPanels.map((tab) => ( <PanelOfContent tab={tab} table={tab.childrens} refnav={refnav} key={tab.key} /> )) : null}
             </div>
         );
     }
@@ -1472,6 +1472,10 @@ function PanelOfContent( { tab, table, refnav } ) {
     }
 
     const item = getTabAttrs(tab.panelref);
+
+    if (!item) {
+        throw TypeError(`No reference of ` + tab.panelref + ` found. Check your json file. Does your "panelref" match your item key ?`);
+    }
 
     React.useEffect(() => {
         if (item) {
@@ -1543,7 +1547,7 @@ function CardGrid({ id, objects, json, card, columns, attr }) {
     return (
         <div id={id}>
         {breaks.map((point, index) => 
-            <div className={"grid-columns " + point.attr} data-columns={columns[index]} key={id + "-grid-columns-" + index}>
+            <div className={"grid-columns " + point.attr} data-columns={columns[index]} key={id + ".grid-columns." + index}>
             {items ? items.map((item) => 
                 item.group ? (
                     <CardPack pack={item} card={card[index]} columns={columns[index]} key={item.key} />
