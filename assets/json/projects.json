@@ -74,6 +74,47 @@
                 "Aëlig",
                 "Matthieu"
             ]
+        },
+        {
+            "key": "project.application.python-console-poker",
+
+            "title": "Poker en Python",
+            "link": "#",
+
+            "description": "Création d'un jeu de poker jouable en console. Système de paris et de bots.",
+            "image": "background-landscape-wide.jpg",
+
+            "domains" : [
+                "Application",
+                "Jeux Vidéo",
+                "Algorithme"
+            ],
+            "tags" : [
+                "Python"
+            ],
+            "authors" : [
+                "Aëlig"
+            ]
+        },
+        {
+            "key": "project.algorithm.dungeon-generator",
+
+            "title": "Générateur de donjon",
+            "link": "#",
+
+            "description": "Générateur de salle disposer aléatoirement.",
+            "image": "background-landscape-wide.jpg",
+
+            "domains" : [
+                "Application",
+                "Algorithme"
+            ],
+            "tags" : [
+                "Python"
+            ],
+            "authors" : [
+                "Aëlig"
+            ]
         }
     ]
 }
