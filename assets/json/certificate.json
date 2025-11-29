@@ -1,14 +1,14 @@
 {
     "table-of-content" : [
         {
-            "key" : "table-crtfc-00000",
+            "key" : "content-table.certificate",
             "title" : "Diplômes",
             "target" : "#certificates"
         }
     ],
     "items" : [
         {
-            "key" : "crtfc-00000",
+            "key" : "certificate.but-info",
             "title" : "BUT Informatique",
             "mention" : "Parcours A",
 
@@ -16,19 +16,19 @@
             "alt" : "BUT Informatique Parcours A"
         },
         {
-            "key" : "crtfc-00001",
+            "key" : "certificate.baccalaureat-general",
             "title" : "Baccalauréat Général",
             "mention" : "Mention Bien",
 
-            "src" : "baccalaureat-trimed.jpg",
+            "src" : "certificates/baccalaureat-trimed.jpg",
             "alt" : "Baccalauréat Mention Bien"
         },
         {
-            "key" : "crtfc-00002",
+            "key" : "certificate.brevet",
             "title" : "Brevet des Collèges",
-            "mention" : "",
+            "mention" : "Mention Bien",
 
-            "src" : "brevet-trimed.jpg",
+            "src" : "certificates/brevet-trimed.jpg",
             "alt" : "Brevet des Collèges"
         }
     ]

@@ -1,28 +1,28 @@
 {
     "items" : [
         {
-            "key": "itrst-00000",
+            "key": "interest.gaming",
 
             "name" : "Jeux vidéo",
             "desc" : "C'est un univers vaste où j'y exprime ma créativité et y vis l'aventure du travail d'équipe",
             "icon" : "VideoGameIcon"
         },
         {
-            "key": "itrst-00001",
+            "key": "interest.puzzles",
 
             "name" : "Enigmes",
             "desc" : "Ma curiosité m'a poussée à flirter avec la complexité, ainsi j'ai pu aiguisé mes sens à résoudre les problèmes",
             "icon" : "ProblemSolvingIcon"
         },
         {
-            "key": "itrst-00002",
+            "key": "interest.manga-anime",
 
             "name" : "Manga/Anime",
             "desc" : "Une véritable immersion culturelle qui annonce de longue soirée devant l'écran, mon auteur préféré, The One",
             "icon" : "MangaIcon"
         },
         {
-            "key": "itrst-00003",
+            "key": "interest.share",
 
             "name" : "Partager",
             "desc" : "Une valeur sûr ! Partager son savoir, ses créations, ses passions c'est pour moi la base",

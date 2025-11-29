@@ -1,54 +1,54 @@
 {
     "table-of-content" : [
         {
-            "key" : "table-main.-00000",
+            "key" : "content-table.main.about-me",
             "title" : "A propos",
             "target" : "#about-me"
         },
         {
-            "key" : "table-main.-00001",
+            "key" : "content-table.main.interests",
             "title" : "Intérêts",
             "target" : "#interests"
         },
         {
-            "key" : "table-main.-00002",
+            "key" : "content-table.main.showcase",
             "title" : "Showcase",
             "target" : "#showcase",
 
             "tabpanels" : [
                 {
-                    "key" : "table-main.-00002-panel-00000",
-                    "panelref": "binav-00000",
+                    "key" : "content-table.main.showcase.panel.1",
+                    "panelref": "bio-navigation.experience",
 
                     "childrens" : [
                         {
-                            "key" : "table-main.-00002-panel-00000-00000",
+                            "key" : "content-table.main.showcase.panel.1.education",
                             "tableref" : "education.json"
                         },
                         {
-                            "key" : "table-main.-00002-panel-00000-00001",
+                            "key" : "content-table.main.showcase.panel.1.experience",
                             "tableref" : "experience.json"
                         }
                     ]
                 },
                 {
-                    "key" : "table-main.-00002-panel-00001",
-                    "panelref": "binav-00001",
+                    "key" : "content-table.main.showcase.panel.2",
+                    "panelref": "bio-navigation.certificate",
 
                     "childrens" : [
                         {
-                            "key" : "table-main.-00002-panel-00001-00000",
+                            "key" : "content-table.main.showcase.panel.2.certificate",
                             "tableref" : "certificate.json"
                         }
                     ]
                 },
                 {
-                    "key" : "table-main.-00002-panel-00002",
-                    "panelref": "binav-00002",
+                    "key" : "content-table.main.showcase.panel.3",
+                    "panelref": "bio-navigation.tech-stack",
 
                     "childrens" : [
                         {
-                            "key" : "table-main.-00002-panel-00002-00000",
+                            "key" : "content-table.main.showcase.panel.3.tech-stack",
                             "tableref" : "tech-stack.json"
                         }
                     ]
@@ -58,7 +58,7 @@
     ],
     "items" : [
         {
-            "key": "binav-00000",
+            "key": "bio-navigation.experience",
             "idname" : "experience-tab",
             "target" : "experience-panel",
             "active" : true,
@@ -69,7 +69,7 @@
             "icon" : "ExperiencesIcon"
         },
         {
-            "key": "binav-00001",
+            "key": "bio-navigation.certificate",
             "idname" : "certificates-tab",
             "target" : "certificates-panel",
             "active" : false,
@@ -80,7 +80,7 @@
             "icon" : "CertificatesIcon"
         },
         {
-            "key": "binav-00002",
+            "key": "bio-navigation.tech-stack",
             "idname" : "skills-tab",
             "target" : "skills-panel",
             "active" : false,
