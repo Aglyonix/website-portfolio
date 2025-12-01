@@ -60,6 +60,7 @@
 .project-card-medium, .project-card-small,
 .project-card-vertical {
     cursor: pointer;
+    text-decoration: none;
 }
 
 .card-content {

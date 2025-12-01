@@ -1,9 +1,84 @@
+// ---------------------------- Project Router
 
-function ProjectsPage() {
+function ProjectRouter() {
+    const [Component, setComponent] = React.useState(null);
+    const [config, setProjectConfig] = React.useState(null);
+    const [project, setProject] = React.useState(null);
+    const [key, setKey] = React.useState(null);
+    const [loading, setLoading] = React.useState(false);
+
+    React.useEffect(() => {
+        function onHashChange() {
+            setKey(getProjectIdFromHash());
+        }
+
+        window.addEventListener('hashchange', onHashChange);
+
+        setKey(getProjectIdFromHash());
+
+        return () => window.removeEventListener('hashchange', onHashChange);
+    }, []);
+
+    React.useEffect(() => {
+        if (!key) {
+            setProjectConfig(null);
+            setProject(null);
+            setComponent(null);
+            return;
+        }
+
+        const cfg = getComponentByKey(key);
+
+        if (!cfg) {
+            setComponent(null);
+            setProject(null);
+            setProjectConfig(null);
+            return;
+        }
+
+        setProjectConfig(cfg);
+        setLoading(true);
+
+        (async () => {
+            const prj = await getProjectInRegistry(key);
+            setProject(prj);
+
+            const cmp = await loadComponent(cfg);
+            setComponent(() => cmp || null);
+
+            setLoading(false);
+        })();
+    }, [key]);
+
+    // Default Projects Page
+    if (!key) return <ProjectsPage />;
+
+    // Loading Page
+    if (loading && !project) return <LoadingProjectsPage />;
+
+    // Projects Page with "Project not found" Error
+    if (!loading && !project) return <ProjectsPage flag={{ message: `Aucun projet trouvé au nom de ${key}`, level: "danger"}} />;
+
+    // Projects Page with "Project page doesn't exist" Error
+    if (!config.path) return <ProjectPage project={project} flag={{ message: `Aucune page pour ce projet`, level: "danger"}} />;
+
+    // Projects Page with "Project page not found" Error
+    if (!config.path) return <ProjectPage project={project} flag={{ message: `Aucune page trouvée vers ${window.project_components_dir + config.path}`, level: "danger"}} />;
+    
+    // Projects Page with "Project page undefined" Warnning
+    if (!Component) return <ProjectPage project={project} flag={{ message: `La page ${config.component} n'existe pas`, level: "warning"}} />;
+
+    // Project Page
+    return <LoadingProjectsPage />;
+}
+
+// ---------------------------- Projects Page
+
+function ProjectsPage({ flag }) {
     return (
         <main role="main">
             <ProjectsHeader />
-            <ProjectsMain />
+            <ProjectsMain flag={flag} />
         </main>
     );
 }
@@ -17,7 +92,7 @@ function ProjectsHeader() {
     );
 }
 
-function ProjectsMain() {
+function ProjectsMain({ flag }) {
     const [query, setQuery] = React.useState("");
     const [vedette, setVedette] = React.useState(null);
     const vedetteRef = React.useRef(null);
@@ -146,6 +221,11 @@ function ProjectsMain() {
 
     return (
         <main id="content" className="container my-5">
+            <section>
+                {flag ? <div className={`alert alert-${flag.level} mb-5`} role="alert">
+                   {flag.message}
+                </div> : null}
+            </section>
             <h1 className="mb-4">Mes projets</h1>
 
             {/* Barre de recherche */}
@@ -213,6 +293,59 @@ function ProjectsMain() {
     );
 }
 
+// ---------------------------- Project Page
+
+function ProjectPage({ project, flag }) {
+    return (
+        <main role="main">
+            <ProjectHeader project={project} />
+            <ProjectMain project={project} flag={flag} />
+        </main>
+    );
+}
+
+function ProjectHeader({ project }) {
+    return (
+        <header className="d-flex flex-column flex-nowrap align-items-start justify-content-center gap-2 h-100 page-title">
+            <h1 className="lexend">Projet — {project.title}</h1>
+            <p className="lexend">{project.description}</p>
+        </header>
+    );
+}
+
+function ProjectMain({ project, flag }) {
+    return (
+        <main id="content" className="container my-5">
+            <section>
+                {flag ? <div className={`alert alert-${flag.level} mb-5`} role="alert">
+                   {flag.message}
+                </div> : null}
+            </section>
+        </main>
+    );
+}
+
+function LoadingProjectsPage() {
+    return (
+        <main role="main">
+            <ProjectsHeader />
+            <LoadingProjectsPageMain />
+        </main>
+    );
+}
+
+function LoadingProjectsPageMain() {
+    return (
+        <main id="content" className="container my-5">
+            <div className="d-flex justify-content-center mt-5">
+                <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </main>
+    );
+}
+
 // ---------------------------- Project Filter
 
 function FilterOption({ item, onclick }) {
@@ -235,7 +368,7 @@ function FilterOption({ item, onclick }) {
 
 function ProjectItemVedette({ item }) {
     return (
-        <div className="card project-card h-100">
+        <a href={`#project=${item.key}`} className="card project-card h-100">
             <div className="card-body position-relative d-flex flex-row gap-3">
                 <div className="card-content">
                     <div className="project-catgs mt-4">
@@ -266,13 +399,13 @@ function ProjectItemVedette({ item }) {
                 </div>
                 <img src={img_dir + item.image} alt={item.title} className="project-img rounded"/>
             </div>
-        </div>
+        </a>
     );
 }
 
 function ProjectItemVedetteSmall({ item }) {
     return (
-        <div className="card project-card-vertical h-100">
+        <a href={`#project=${item.key}`} className="card project-card-vertical h-100">
             <div className="card-body position-relative d-flex flex-row gap-3">
                 <div className="card-content">
                     <div className="project-catgs mt-4">
@@ -298,13 +431,13 @@ function ProjectItemVedetteSmall({ item }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     );
 }
 
 function ProjectItemLarge({ item }) {
     return (
-        <div className="card project-card-large h-100">
+        <a href={`#project=${item.key}`} className="card project-card-large h-100">
             <div className="card-body position-relative d-flex flex-row gap-3">
                 <div className="card-content">
                     <div className="project-catgs">
@@ -328,13 +461,13 @@ function ProjectItemLarge({ item }) {
                 </div>
                 <img src={img_dir + item.image} alt={item.title} className="project-img rounded"/>
             </div>
-        </div>
+        </a>
     );
 }
 
 function ProjectItemMedium({ item }) {
     return (
-        <div className="card project-card-medium h-100">
+        <a href={`#project=${item.key}`} className="card project-card-medium h-100">
             <div className="card-body position-relative d-flex flex-row gap-3">
                 <div className="card-content">
                     <div className="project-catgs">
@@ -358,13 +491,13 @@ function ProjectItemMedium({ item }) {
                 </div>
                 <img src={img_dir + item.image} alt={item.title} className="project-img rounded"/>
             </div>
-        </div>
+        </a>
     );
 }
 
 function ProjectItemSmall({ item }) {
     return (
-        <div className="card project-card-small h-100">
+        <a href={`#project=${item.key}`} className="card project-card-small h-100">
             <div className="card-body position-relative d-flex flex-row gap-3">
                 <div className="card-content">
                     <div className="project-catgs">
@@ -387,14 +520,20 @@ function ProjectItemSmall({ item }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     );
 }
 
 // Global expose
+window.ProjectRouter = ProjectRouter;
+
 window.ProjectsPage = ProjectsPage;
 window.ProjectsHeader = ProjectsHeader;
 window.ProjectsMain = ProjectsMain;
+
+window.ProjectPage = ProjectPage;
+window.ProjectHeader = ProjectHeader;
+window.ProjectMain = ProjectMain;
 
 window.FilterOption = FilterOption;
 

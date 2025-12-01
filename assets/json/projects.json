@@ -1,9 +1,8 @@
 {
     "vedette" : {
-        "key": "project.vedette",
+        "key": "project.web.website-portfolio",
 
         "title": "Portfolio responsive",
-        "link": "#",
 
         "description": "Un site personnel responsive et interactif, qui me représente.",
         "image": "background-landscape-wide.jpg",
@@ -28,7 +27,6 @@
             "key": "project.web.web-semantique-enrichi",
 
             "title": "Web Sémantique Enrichi",
-            "link": "#",
 
             "description": "Création et manipulation de graphes RDF. Ecriture et traitement de requête SPARQL avec l'ontologie OWL. Enrichissement avec Wikidata",
             "image": "background-landscape-wide.jpg",
@@ -53,7 +51,6 @@
             "key": "project.web.application-django-tickets",
 
             "title": "Application Django",
-            "link": "#",
 
             "description": "Création d'une application web permettant la gestion complète des tickets de support d’une entreprise. Gestion des utilisateurs et analyse des statistiques.",
             "image": "background-landscape-wide.jpg",
@@ -79,7 +76,6 @@
             "key": "project.application.python-console-poker",
 
             "title": "Poker en Python",
-            "link": "#",
 
             "description": "Création d'un jeu de poker jouable en console. Système de paris et de bots.",
             "image": "background-landscape-wide.jpg",
@@ -100,7 +96,6 @@
             "key": "project.algorithm.dungeon-generator",
 
             "title": "Générateur de donjon",
-            "link": "#",
 
             "description": "Générateur de salle disposer aléatoirement.",
             "image": "background-landscape-wide.jpg",

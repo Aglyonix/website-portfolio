@@ -418,6 +418,15 @@ svg.center-verticaly {
     margin: auto 0;
 }
 
+/* ---------------- Spinner */
+
+.spinner-border {
+    color: var(--main-color);
+
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+}
+
 /* ---------------- Button */
 
 .btn.lexend {

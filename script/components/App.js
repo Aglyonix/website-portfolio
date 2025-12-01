@@ -11,7 +11,7 @@ function AppAssembler() {
     }
 
     if(body.id === "page-projects") {
-        main = <ProjectsPage />;
+        main = <ProjectRouter />;
     }
 
     if(body.id === "page-contact") {

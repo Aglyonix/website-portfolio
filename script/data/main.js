@@ -8,6 +8,8 @@ const json_dir = asset_dir + "json/";
 const svg_dir = asset_dir + "svg/";
 const img_dir = asset_dir + "images/";
 
+const project_components_dir = (body.id === "page-main" ? "script/" : "../script/") + "components/projects/";
+
 const breaks = [
     {attr: "content-sm"},
     {attr: "content-md"},
@@ -31,6 +33,8 @@ window.asset_dir = asset_dir;
 window.icon_dir = icon_dir;
 window.svg_dir = svg_dir;
 window.img_dir = img_dir;
+
+window.project_components_dir = project_components_dir;
 
 window.breaks = breaks;
 window.pages = pages;
