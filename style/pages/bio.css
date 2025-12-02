@@ -79,6 +79,10 @@
     color: var(--fade);
 }
 
+#experience .btn {
+    width: fit-content;
+}
+
 /* ---------------- Certificates */
 
 #carousel-certificates-card {

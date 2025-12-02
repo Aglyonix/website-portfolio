@@ -16,10 +16,10 @@ async function getProjectInRegistry(key) {
     return json.items.find(item => item.key === key) || null;
 }
 
-function getComponentByKey(key) {
+function getProjectComponentByKey(key) {
     return projectComponents.find(cmp => cmp.key === key);
 }
 
 // Global expose
 window.getProjectInRegistry = getProjectInRegistry;
-window.getComponentByKey = getComponentByKey;
+window.getProjectComponentByKey = getProjectComponentByKey;

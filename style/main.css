@@ -319,6 +319,12 @@ main {
     transition: .4s;
 }
 
+.list-group-wallet :has(+ .description.expanded) {
+    border-color: var(--main-color);
+
+    transition: .4s;
+}
+
 .list-group-wallet .last-item:has(+ .description) {
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;

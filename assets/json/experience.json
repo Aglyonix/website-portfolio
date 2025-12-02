@@ -30,45 +30,45 @@
                 "img" : "experiences/editions-ellipses.jpg",
                 "href" : "https://www.editions-ellipses.fr/content/9-qui-sommes-nous"
             },
-            "date" : "— De Avril à Août 2025",
+            "date" : "De Avril à Août 2025",
 
             "caption" : "Stage de 3 mois dans le cadre de ma formation en BUT Informatique. Développement du logiciel ERP \"Elli\" et son environnement. Proximité et contact direct avec ces utilisateurs.",
             "details" : [
                 {
                     "key" : "detail.dev.intern-software",
                     "text" : "Développement de l'ERP \"Elli\"",
-                    "muted" : "— Symfony",
-                    "light" : "— VS Code"
+                    "muted" : "Symfony",
+                    "light" : "VS Code"
                 },
                 {
                     "key" : "detail.database",
                     "text" : "Gestion de la base de donnée",
-                    "muted" : "— MySQL",
-                    "light" : "— HeidSQL"
+                    "muted" : "MySQL",
+                    "light" : "HeidSQL"
                 },
                 {
                     "key" : "detail.interface",
                     "text" : "Amélioration de l'interface utilisateur",
-                    "muted" : "— Javascript / HTML / CSS",
-                    "light" : "— Twig / Bootstrap"
+                    "muted" : "Javascript / HTML / CSS",
+                    "light" : "Twig / Bootstrap"
                 },
                 {
                     "key" : "detail.deployment",
                     "text" : "Deploiment test et production",
-                    "muted" : "— SSH",
-                    "light" : "— Putty"
+                    "muted" : "SSH",
+                    "light" : "Putty"
                 },
                 {
                     "key" : "detail.versionning",
                     "text" : "Gestion du versionnage",
-                    "muted" : "— Git",
-                    "light" : "— Azure DevOps"
+                    "muted" : "Git",
+                    "light" : "Azure DevOps"
                 },
                 {
                     "key" : "detail.team-management",
                     "text" : "Gestion de travail",
                     "muted" : "",
-                    "light" : "— Planner / Outlook"
+                    "light" : "Planner / Outlook"
                 }
             ]
         },
@@ -82,51 +82,51 @@
                 "img" : "experiences/editions-ellipses.jpg",
                 "href" : "https://www.editions-ellipses.fr/content/9-qui-sommes-nous"
             },
-            "date" : "— Depuis Septembre 2025",
+            "date" : "Depuis Septembre 2025",
 
             "caption" : "Alternance 2025-26 chez les Editions Ellipses. Développement du logiciel ERP en Symfony et du site marchand via PrestaShop.",
             "details" : [
                 {
                     "key" : "detail.dev.intern-software",
                     "text" : "Développement de l'ERP \"Elli\"",
-                    "muted" : "— Symfony",
-                    "light" : "— VS Code"
+                    "muted" : "Symfony",
+                    "light" : "VS Code"
                 },
                 {
                     "key" : "detail.dev.website",
                     "text" : "Développement du site marchant",
                     "muted" : "",
-                    "light" : "— PrestaShop / VS Code"
+                    "light" : "PrestaShop / VS Code"
                 },
                 {
                     "key" : "detail.database",
                     "text" : "Gestion de la base de donnée",
-                    "muted" : "— MySQL",
-                    "light" : "— HeidSQL"
+                    "muted" : "MySQL",
+                    "light" : "HeidSQL"
                 },
                 {
                     "key" : "detail.interface",
                     "text" : "Amélioration de l'interface utilisateur",
-                    "muted" : "— Javascript / HTML / CSS",
-                    "light" : "— Twig / Bootstrap"
+                    "muted" : "Javascript / HTML / CSS",
+                    "light" : "Twig / Bootstrap"
                 },
                 {
                     "key" : "detail.deployment",
                     "text" : "Deploiment test et production",
-                    "muted" : "— SSH",
-                    "light" : "— Putty"
+                    "muted" : "SSH",
+                    "light" : "Putty"
                 },
                 {
                     "key" : "detail.versionning",
                     "text" : "Gestion du versionnage",
-                    "muted" : "— Git",
-                    "light" : "— Azure DevOps"
+                    "muted" : "Git",
+                    "light" : "Azure DevOps"
                 },
                 {
                     "key" : "detail.team-management",
                     "text" : "Gestion de travail",
                     "muted" : "",
-                    "light" : "— Planner / Outlook"
+                    "light" : "Planner / Outlook"
                 }
             ]
         }

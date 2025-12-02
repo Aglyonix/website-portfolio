@@ -1,8 +1,100 @@
-function BioPage() {
+// ---------------------------- Bio Router
+
+function BioRouter() {
+    const [Component, setComponent] = React.useState(null);
+    const [config, setConfig] = React.useState(null);
+    const [experience, setExperience] = React.useState(null);
+    const [key, setKey] = React.useState(null);
+    const [loading, setLoading] = React.useState(false);
+    const [debug, setDebug] = React.useState(false);
+    const [ressource, setRessource] = React.useState(false);
+
+    React.useEffect(() => {
+        function onHashChange() {
+            setKey(getExperienceIdFromHash());
+        }
+
+        window.addEventListener('hashchange', onHashChange);
+
+        setKey(getExperienceIdFromHash());
+        setDebug(false);
+
+        return () => window.removeEventListener('hashchange', onHashChange);
+    }, []);
+
+    React.useEffect(() => {
+        if (!key) {
+            setConfig(null);
+            setExperience(null);
+            setComponent(null);
+            return;
+        }
+
+        const cfg = getExperienceComponentByKey(key);
+
+        if (!cfg) {
+            setComponent(null);
+            setExperience(null);
+            setConfig(null);
+            return;
+        }
+
+        setConfig(cfg);
+        setLoading(true);
+        setRessource(false);
+
+        (async () => {
+            const exp = await getExperienceInRegistry(key);
+            setExperience(exp);
+
+            const cmp = await loadComponent(cfg);
+            setComponent(() => cmp || null);
+
+            const exist = await doFileExist(cfg.path)
+            setRessource(exist);
+
+            setLoading(false);
+        })();
+    }, [key]);
+
+    if (debug) {
+        console.log("Router key :", key);
+        console.log("Router config :", config);
+        console.log("Router experience :", experience);
+        console.log("Router Component :", Component);
+        console.log("Router ressource :", ressource);
+        console.log("");
+    }
+
+    // Default Bio Page
+    if (!key) return <BioPage />;
+
+    // Loading Page
+    if (loading && !experience) return <LoadingPage header={<BioHeader />} />;
+
+    // Bio Page with "Experience not found" Error
+    if (!loading && !experience) return <BioPage flag={{ message: `Aucune experience trouvé au nom de ${key}`, level: "danger"}} />;
+
+    // Bio Page with "Experience page doesn't exist" Error
+    if (!config.path) return <ExperiencePage experience={experience} flag={{ message: `Aucune ressource spécifiée pour cette experience`, level: "danger"}} />;
+
+    // Bio Page with "Project page not found" Error
+    if (!ressource) return <ExperiencePage experience={experience} flag={{ message: `Aucune ressource trouvée vers ${window.experience_components_dir + config.path}`, level: "danger"}} />;
+
+    // Bio Page with "Experience page undefined" Warnning
+    if (!Component) return <ExperiencePage experience={experience} flag={{ message: `La page ${config.component} n'existe pas`, level: "warning"}} />;
+
+    // Experience Page
+    return <ExperiencePage experience={experience} />;
+}
+
+// ---------------------------- Bio Page
+
+function BioPage({ flag }) {
     return (
         <main role="main">
             <BioHeader />
-            <BioMain />
+            <BioMain flag={flag}/>
         </main>
     );
 }
@@ -16,10 +108,48 @@ function BioHeader() {
     );
 }
 
-function BioMain() {
+function BioMain({ flag }) {
     return (
         <main id="content" className="container my-5">
+            <section>
+                {flag ? <div className={`alert alert-${flag.level} mb-5`} role="alert">
+                   {flag.message}
+                </div> : null}
+            </section>
             <BioContent />
+        </main>
+    );
+}
+
+// ---------------------------- Experience Page
+
+function ExperiencePage({ experience, flag }) {
+    return (
+        <main role="main">
+            <ExperienceHeader experience={experience} />
+            <ExperienceMain experience={experience} flag={flag} />
+        </main>
+    );
+}
+
+function ExperienceHeader({ experience }) {
+    return (
+        <header className="d-flex flex-column flex-nowrap align-items-start justify-content-center gap-2 h-100 page-title">
+            <h1 className="lexend">Experience — {experience.title}</h1>
+            <p className="lexend">{experience.date}</p>
+        </header>
+    );
+}
+
+function ExperienceMain({ experience, flag }) {
+    return (
+        <main id="content" className="container my-5">
+            <section>
+                {flag ? <div className={`alert alert-${flag.level} mb-5`} role="alert">
+                   {flag.message}
+                </div> : null}
+            </section>
+            <p className="lexend">{experience.caption}</p>
         </main>
     );
 }
@@ -36,108 +166,6 @@ function BioContent() {
         </article>
     );
 }
-
-// ---------------------------- Content Showcase
-
-function BioShowcase() {
-    return (
-        <section id="showcase" className="w-100">
-            <h1 className="lexend w-100 text-center">Showcase</h1>
-            <BioShowcaseNav />
-            <BioShowcaseContent />
-        </section>
-    );
-}
-
-function BioShowcaseNav() {
-    const url = json_dir + "bio-nav.json";
-    const [items, setItems] = React.useState(null);
-    
-    async function fetchItems() {
-        const response = await fetch(url);
-        const json = await response.json();
-        const items = json["items"];
-        return items;
-    };
-
-    React.useEffect(() => {
-        fetchItems().then(result => setItems(result));
-    }, []);
-
-    return (
-        <div className="card w-100 mb-5">
-            <div className="card-body">
-                <ul className="nav nav-pills nav-fill" role="tablist">
-                    {items ? items.map((item, index) => (
-                    <BioShowcaseNavItem item={item} index={index} key={item.key} />
-                    )) : <></>}
-                </ul>
-            </div>
-        </div>
-    );
-}
-
-function BioShowcaseNavItem({ item }) {
-    
-    let attr = "nav-link nav-link-main";
-    attr = item.active ? attr + " active" : attr;
-
-    React.useEffect(() => {
-        let btn = document.querySelector("#" + item.idname);
-
-        btn.addEventListener("click", () => {
-            var target = document.querySelector("#container-sidebar-mobile ul#table-" + item.target + "[role=tabpanel]");
-            var others = document.querySelectorAll("#container-sidebar-mobile ul:not(#table-" + item.target + ")[role=tabpanel]");
-
-            others.forEach((element) => {
-                element.classList.remove("show", "active");
-            });
-
-            target.classList.add("show", "active");
-        });
-    }, [])
-    
-    return (
-        <li className="nav-item" role="presentation">
-            <button id={item.idname} className={attr} data-bs-toggle="tab" data-bs-target={"#" + item.target} type="button" role="tab" aria-controls={item.target} aria-selected={item.active}>
-                <div className="d-flex flex-row flex-nowrap align-items-center justify-content-center gap-3">
-                    {iconMap[item.icon](32, 32)}
-                    {item.name}
-                </div>
-            </button>
-        </li>
-    );
-}
-
-function BioShowcaseContent() {
-    const url = json_dir + "bio-nav.json";
-    const [items, setItems] = React.useState(null);
-    
-    async function fetchItems() {
-        const response = await fetch(url);
-        const json = await response.json();
-        const items = json["items"];
-        return items;
-    };
-
-    React.useEffect(() => {
-        fetchItems().then(result => setItems(result));
-    }, []);
-
-    let attr = "tab-pane fade";
-
-    return (
-        <section className="tab-content w-100 px-3">
-            {items ? items.map((item) => (
-                <article key={item.key + ".panel"} id={item.target} className={item.active ? attr + " show active" : attr} role="tabpanel" aria-labelledby={item.idname}>
-                    {bioMap[item.react]}
-                </article>
-            )) : null}
-        </section>
-    );
-}
-
-// ---------------------------- Content Small
 
 function BioAboutMe() {
     return (
@@ -184,6 +212,8 @@ function ProjectsLinkButton() {
         </a>
     );
 }
+
+// ---------------------------- Interest
 
 function BioInterest() {
     return (
@@ -320,7 +350,107 @@ function BioInteresLargeItem({ item }) {
     );
 }
 
-// ---------------------------- Content Small Panes
+// ---------------------------- Showcase
+
+function BioShowcase() {
+    return (
+        <section id="showcase" className="w-100">
+            <h1 className="lexend w-100 text-center">Showcase</h1>
+            <BioShowcaseNav />
+            <BioShowcaseContent />
+        </section>
+    );
+}
+
+function BioShowcaseNav() {
+    const url = json_dir + "bio-nav.json";
+    const [items, setItems] = React.useState(null);
+    
+    async function fetchItems() {
+        const response = await fetch(url);
+        const json = await response.json();
+        const items = json["items"];
+        return items;
+    };
+
+    React.useEffect(() => {
+        fetchItems().then(result => setItems(result));
+    }, []);
+
+    return (
+        <div className="card w-100 mb-5">
+            <div className="card-body">
+                <ul className="nav nav-pills nav-fill" role="tablist">
+                    {items ? items.map((item, index) => (
+                    <BioShowcaseNavItem item={item} index={index} key={item.key} />
+                    )) : <></>}
+                </ul>
+            </div>
+        </div>
+    );
+}
+
+function BioShowcaseNavItem({ item }) {
+    
+    let attr = "nav-link nav-link-main";
+    attr = item.active ? attr + " active" : attr;
+
+    React.useEffect(() => {
+        let btn = document.querySelector("#" + item.idname);
+
+        btn.addEventListener("click", () => {
+            var target = document.querySelector("#container-sidebar-mobile ul#table-" + item.target + "[role=tabpanel]");
+            var others = document.querySelectorAll("#container-sidebar-mobile ul:not(#table-" + item.target + ")[role=tabpanel]");
+
+            others.forEach((element) => {
+                element.classList.remove("show", "active");
+            });
+
+            target.classList.add("show", "active");
+        });
+    }, [])
+    
+    return (
+        <li className="nav-item" role="presentation">
+            <button id={item.idname} className={attr} data-bs-toggle="tab" data-bs-target={"#" + item.target} type="button" role="tab" aria-controls={item.target} aria-selected={item.active}>
+                <div className="d-flex flex-row flex-nowrap align-items-center justify-content-center gap-3">
+                    {iconMap[item.icon](32, 32)}
+                    {item.name}
+                </div>
+            </button>
+        </li>
+    );
+}
+
+function BioShowcaseContent() {
+    const url = json_dir + "bio-nav.json";
+    const [items, setItems] = React.useState(null);
+    
+    async function fetchItems() {
+        const response = await fetch(url);
+        const json = await response.json();
+        const items = json["items"];
+        return items;
+    };
+
+    React.useEffect(() => {
+        fetchItems().then(result => setItems(result));
+    }, []);
+
+    let attr = "tab-pane fade";
+
+    return (
+        <section className="tab-content w-100 px-3">
+            {items ? items.map((item) => (
+                <article key={item.key + ".panel"} id={item.target} className={item.active ? attr + " show active" : attr} role="tabpanel" aria-labelledby={item.idname}>
+                    {bioMap[item.react]}
+                </article>
+            )) : null}
+        </section>
+    );
+}
+
+// ---------------------------- Panes
 
 // Experience Content
 function ExperiencePane() {
@@ -361,7 +491,7 @@ function BioShowcaseItemHead({ item }) {
             <div className="d-flex flex-row entity">
                 <div className="col p-0">
                     <p className="text-muted mb-0">{entity.name}</p>
-                    <small className="text-muted">{item.date}</small>
+                    <small className="text-muted">— {item.date}</small>
                 </div>
                 <div href={entity.href} className="entity rounded">
                     <img src={src} className="img-fluid float-end" alt={entity.name} />
@@ -375,11 +505,17 @@ function BioShowcaseItemBody({ item }) {
     return (
         <>
             <p className="mb-0">{item.caption}</p>
-            <ul className="list-group list-group-flush gap-1 mt-2" >
-                {item.details ? item.details.map((detail) => (
-                    <BioShowcaseListItem detail={detail} key={item.key + "." + detail.key}/>
-                )) : null}
-            </ul>
+            {item.key.startsWith('experience.') ?
+            <a href={`#experience=${item.key}`} className="btn btn-main lexend mt-3 px-4">
+                Voir
+                <i className="bi bi-rocket-takeoff ms-3"></i>
+            </a> : null}
+            {item.details ?
+            <ul className="list-group list-group-flush gap-1 mt-3">
+                {item.details.map((detail) => (
+                <BioShowcaseListItem detail={detail} key={item.key + "." + detail.key}/>
+                ))}
+            </ul> : null}
         </>
     );
 }
@@ -388,8 +524,8 @@ function BioShowcaseListItem({ detail }) {
     return (
         <li className="list-group-item border-0 p-0">
             {detail.text}
-            {detail.muted ? <span className="text-muted"> {detail.muted}</span> : <></> }
-            {detail.light ? <span className="text-main"> {detail.light}</span> : <></> }
+            {detail.muted ? <span className="text-muted"> — {detail.muted}</span> : <></> }
+            {detail.light ? <span className="text-main"> — {detail.light}</span> : <></> }
         </li>
     );
 }
@@ -406,7 +542,7 @@ function CertificatesPane() {
     );
 }
 
-// Certificates Content
+// TechStack Content
 function TechStackPane() {
     const card = (item) => <TechStackCard item={item} key={item.key} />;
 
@@ -438,16 +574,17 @@ const bioMap = {
 };
 
 // Global expose
+window.BioRouter = BioRouter;
+
+window.ExperiencePage = ExperiencePage;
+window.ExperienceHeader = ExperienceHeader;
+window.ExperienceMain = ExperienceMain;
+
 window.BioPage = BioPage;
 window.BioHeader = BioHeader;
 window.BioMain = BioMain;
+
 window.BioContent = BioContent;
-
-window.BioShowcase = BioShowcase;
-window.BioShowcaseNav = BioShowcaseNav;
-window.BioShowcaseNavItem = BioShowcaseNavItem;
-window.BioShowcaseContent = BioShowcaseContent;
-
 window.BioAboutMe = BioAboutMe;
 window.CVButton = CVButton;
 window.ProjectsLinkButton = ProjectsLinkButton;
@@ -457,6 +594,11 @@ window.BioInterestMedium = BioInterestMedium;
 window.BioInteresMediumItem = BioInteresMediumItem;
 window.BioInterestLarge = BioInterestLarge;
 window.BioInteresLargeItem = BioInteresLargeItem;
+
+window.BioShowcase = BioShowcase;
+window.BioShowcaseNav = BioShowcaseNav;
+window.BioShowcaseNavItem = BioShowcaseNavItem;
+window.BioShowcaseContent = BioShowcaseContent;
 
 window.ExperiencePane = ExperiencePane;
 window.BioShowcaseItemHead = BioShowcaseItemHead;
