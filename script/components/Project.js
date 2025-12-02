@@ -6,6 +6,8 @@ function ProjectRouter() {
     const [project, setProject] = React.useState(null);
     const [key, setKey] = React.useState(null);
     const [loading, setLoading] = React.useState(false);
+    const [debug, setDebug] = React.useState(false);
+    const [ressource, setRessource] = React.useState(false);
 
     React.useEffect(() => {
         function onHashChange() {
@@ -15,6 +17,7 @@ function ProjectRouter() {
         window.addEventListener('hashchange', onHashChange);
 
         setKey(getProjectIdFromHash());
+        setDebug(false);
 
         return () => window.removeEventListener('hashchange', onHashChange);
     }, []);
@@ -27,7 +30,7 @@ function ProjectRouter() {
             return;
         }
 
-        const cfg = getComponentByKey(key);
+        const cfg = getProjectComponentByKey(key);
 
         if (!cfg) {
             setComponent(null);
@@ -38,6 +41,7 @@ function ProjectRouter() {
 
         setProjectConfig(cfg);
         setLoading(true);
+        setRessource(false);
 
         (async () => {
             const prj = await getProjectInRegistry(key);
@@ -46,30 +50,42 @@ function ProjectRouter() {
             const cmp = await loadComponent(cfg);
             setComponent(() => cmp || null);
 
+            const exist = await doFileExist(cfg.path)
+            setRessource(exist);
+
             setLoading(false);
         })();
     }, [key]);
+
+    if (debug) {
+        console.log("Router key :", key);
+        console.log("Router config :", config);
+        console.log("Router project :", project);
+        console.log("Router Component :", Component);
+        console.log("Router ressource :", ressource);
+        console.log("");
+    }
 
     // Default Projects Page
     if (!key) return <ProjectsPage />;
 
     // Loading Page
-    if (loading && !project) return <LoadingProjectsPage />;
+    if (loading && !project) return <LoadingPage header={<ProjectsHeader />} />;
 
     // Projects Page with "Project not found" Error
     if (!loading && !project) return <ProjectsPage flag={{ message: `Aucun projet trouvé au nom de ${key}`, level: "danger"}} />;
 
     // Projects Page with "Project page doesn't exist" Error
-    if (!config.path) return <ProjectPage project={project} flag={{ message: `Aucune page pour ce projet`, level: "danger"}} />;
+    if (!config.path) return <ProjectPage project={project} flag={{ message: `Aucune ressource spécifiée pour ce projet`, level: "danger"}} />;
 
     // Projects Page with "Project page not found" Error
-    if (!config.path) return <ProjectPage project={project} flag={{ message: `Aucune page trouvée vers ${window.project_components_dir + config.path}`, level: "danger"}} />;
+    if (!ressource) return <ProjectPage project={project} flag={{ message: `Aucune ressource trouvée vers ${window.project_components_dir + config.path}`, level: "danger"}} />;
     
     // Projects Page with "Project page undefined" Warnning
     if (!Component) return <ProjectPage project={project} flag={{ message: `La page ${config.component} n'existe pas`, level: "warning"}} />;
 
     // Project Page
-    return <LoadingProjectsPage />;
+    return <ProjectPage project={project} />;
 }
 
 // ---------------------------- Projects Page
@@ -321,27 +337,6 @@ function ProjectMain({ project, flag }) {
                    {flag.message}
                 </div> : null}
             </section>
-        </main>
-    );
-}
-
-function LoadingProjectsPage() {
-    return (
-        <main role="main">
-            <ProjectsHeader />
-            <LoadingProjectsPageMain />
-        </main>
-    );
-}
-
-function LoadingProjectsPageMain() {
-    return (
-        <main id="content" className="container my-5">
-            <div className="d-flex justify-content-center mt-5">
-                <div className="spinner-border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </div>
-            </div>
         </main>
     );
 }

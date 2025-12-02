@@ -9,6 +9,7 @@ const svg_dir = asset_dir + "svg/";
 const img_dir = asset_dir + "images/";
 
 const project_components_dir = (body.id === "page-main" ? "script/" : "../script/") + "components/projects/";
+const experience_components_dir = (body.id === "page-main" ? "script/" : "../script/") + "components/experiences/";
 
 const breaks = [
     {attr: "content-sm"},
@@ -35,6 +36,7 @@ window.svg_dir = svg_dir;
 window.img_dir = img_dir;
 
 window.project_components_dir = project_components_dir;
+window.experience_components_dir = experience_components_dir;
 
 window.breaks = breaks;
 window.pages = pages;

@@ -7,7 +7,7 @@ function AppAssembler() {
     let main = <MainPage />;
 
     if(body.id === "page-bio") {
-        main = <BioPage />;
+        main = <BioRouter />;
     }
 
     if(body.id === "page-projects") {

@@ -6,6 +6,12 @@ function getProjectIdFromHash() {
     return hash.slice('#project='.length);
 }
 
+function getExperienceIdFromHash() {
+    const hash = window.location.hash;
+    if (!hash.startsWith('#experience=')) return null;
+    return hash.slice('#experience='.length);
+}
+
 // Component Loader
 
 async function loadComponent(config) {
@@ -30,6 +36,21 @@ function loadScript(src) {
     });
 }
 
+// API
+
+async function doFileExist(path) {
+  try {
+    const res = await fetch(path, { method: 'HEAD' });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 // Global expose
 window.getProjectIdFromHash = getProjectIdFromHash;
+window.getExperienceIdFromHash = getExperienceIdFromHash;
+
 window.loadComponent = loadComponent;
+
+window.doFileExist = doFileExist;
