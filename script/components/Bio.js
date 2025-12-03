@@ -69,7 +69,7 @@ function BioRouter() {
     if (!key) return <BioPage />;
 
     // Loading Page
-    if (loading && !experience) return <LoadingPage header={<BioHeader />} />;
+    if (loading) return <LoadingPage header={<BioHeader />} />;
 
     // Bio Page with "Experience not found" Error
     if (!loading && !experience) return <BioPage flag={{ message: `Aucune experience trouvé au nom de ${key}`, level: "danger"}} />;

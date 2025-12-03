@@ -69,7 +69,7 @@ function ProjectRouter() {
     if (!key) return <ProjectsPage />;
 
     // Loading Page
-    if (loading && !project) return <LoadingPage header={<ProjectsHeader />} />;
+    if (loading) return <LoadingPage header={<ProjectsHeader />} />;
 
     // Projects Page with "Project not found" Error
     if (!loading && !project) return <ProjectsPage flag={{ message: `Aucun projet trouvé au nom de ${key}`, level: "danger"}} />;
