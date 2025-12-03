@@ -6,7 +6,7 @@ function ProjectRouter() {
     const [project, setProject] = React.useState(null);
     const [key, setKey] = React.useState(null);
     const [loading, setLoading] = React.useState(false);
-    const [debug, setDebug] = React.useState(false);
+    const [debug] = React.useState(false);
     const [ressource, setRessource] = React.useState(false);
 
     React.useEffect(() => {
@@ -17,7 +17,6 @@ function ProjectRouter() {
         window.addEventListener('hashchange', onHashChange);
 
         setKey(getProjectIdFromHash());
-        setDebug(false);
 
         return () => window.removeEventListener('hashchange', onHashChange);
     }, []);
@@ -47,11 +46,11 @@ function ProjectRouter() {
             const prj = await getProjectInRegistry(key);
             setProject(prj);
 
-            const cmp = await loadComponent(cfg);
-            setComponent(() => cmp || null);
-
-            const exist = await doFileExist(cfg.path)
+            const exist = await doFileExist(window.project_components_dir + cfg.path)
             setRessource(exist);
+
+            const cmp = await loadComponent(window.project_components_dir, cfg);
+            setComponent(() => cmp || null);
 
             setLoading(false);
         })();
@@ -82,10 +81,10 @@ function ProjectRouter() {
     if (!ressource) return <ProjectPage project={project} flag={{ message: `Aucune ressource trouvée vers ${window.project_components_dir + config.path}`, level: "danger"}} />;
     
     // Projects Page with "Project page undefined" Warnning
-    if (!Component) return <ProjectPage project={project} flag={{ message: `La page ${config.component} n'existe pas`, level: "warning"}} />;
+    if (!Component) return <ProjectPage project={project} flag={{ message: `La page ${config.component} n'existe pas`, level: "danger"}} />;
 
     // Project Page
-    return <ProjectPage project={project} />;
+    return <Component project={project} />;
 }
 
 // ---------------------------- Projects Page
