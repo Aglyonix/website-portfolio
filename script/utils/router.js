@@ -14,37 +14,46 @@ function getExperienceIdFromHash() {
 
 // Component Loader
 
-async function loadComponent(config) {
+async function loadComponent(root, config) {
     if(!config.path || !config.component) return null;
 
     const name = config.component;
     if (window[name]) return window[name];
+    
+    await loadScript(root + config.path);
+    if(!window[name]) return null;
 
-    await loadScript(window.project_components_dir + config.path);
-    return window[name] || null;
-}
-
-function loadScript(src) {
-    return new Promise((resolve, reject) => {
-        const s = document.createElement('script');
-        s.type = 'text/babel';
-        s.src = src;
-        s.onload = resolve;
-        s.onerror = reject;
-        document.body.appendChild(s);
-        console.log('imported', src);
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
     });
+
+    return window[name];
 }
+
+async function loadScript(src) {
+    const script = await fetch(src).then(r => r.text());
+
+    const compiled = Babel.transform(script, {
+        presets: ["react", "env"]
+    }).code;
+
+    const node = document.createElement("script");
+    node.type = "text/javascript";
+    node.text = compiled;
+    document.body.appendChild(node);
+}
+
 
 // API
 
 async function doFileExist(path) {
-  try {
-    const res = await fetch(path, { method: 'HEAD' });
-    return res.ok;
-  } catch {
-    return false;
-  }
+    try {
+        const res = await fetch(path, { method: 'HEAD' });
+        return res.ok;
+    } catch {
+        return false;
+    }
 }
 
 // Global expose

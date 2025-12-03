@@ -6,7 +6,7 @@ function BioRouter() {
     const [experience, setExperience] = React.useState(null);
     const [key, setKey] = React.useState(null);
     const [loading, setLoading] = React.useState(false);
-    const [debug, setDebug] = React.useState(false);
+    const [debug] = React.useState(true);
     const [ressource, setRessource] = React.useState(false);
 
     React.useEffect(() => {
@@ -17,7 +17,6 @@ function BioRouter() {
         window.addEventListener('hashchange', onHashChange);
 
         setKey(getExperienceIdFromHash());
-        setDebug(false);
 
         return () => window.removeEventListener('hashchange', onHashChange);
     }, []);
@@ -47,11 +46,11 @@ function BioRouter() {
             const exp = await getExperienceInRegistry(key);
             setExperience(exp);
 
-            const cmp = await loadComponent(cfg);
-            setComponent(() => cmp || null);
-
-            const exist = await doFileExist(cfg.path)
+            const exist = await doFileExist(window.experience_components_dir + cfg.path)
             setRessource(exist);
+
+            const cmp = await loadComponent(window.experience_components_dir, cfg);
+            setComponent(() => cmp || null);
 
             setLoading(false);
         })();
@@ -82,10 +81,10 @@ function BioRouter() {
     if (!ressource) return <ExperiencePage experience={experience} flag={{ message: `Aucune ressource trouvée vers ${window.experience_components_dir + config.path}`, level: "danger"}} />;
 
     // Bio Page with "Experience page undefined" Warnning
-    if (!Component) return <ExperiencePage experience={experience} flag={{ message: `La page ${config.component} n'existe pas`, level: "warning"}} />;
+    if (!Component) return <ExperiencePage experience={experience} flag={{ message: `La page ${config.component} n'existe pas`, level: "danger"}} />;
 
     // Experience Page
-    return <ExperiencePage experience={experience} />;
+    return <Component experience={experience} />;
 }
 
 // ---------------------------- Bio Page
