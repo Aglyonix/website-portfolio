@@ -48,6 +48,24 @@
             ]
         },
         {
+            "key": "project.application.image-processor-cpp",
+
+            "title": "Traiteur d'image C++",
+
+            "description": "Ce projet est un traiteur d'image, il permet de traîter les images .ppm à travers différentes fonctionnalitées interactives.",
+            "image": "background-landscape-wide.jpg",
+
+            "domains" : [
+                "Application"
+            ],
+            "tags" : [
+                "C++"
+            ],
+            "authors" : [
+                "Aëlig"
+            ]
+        },
+        {
             "key": "project.web.application-django-tickets",
 
             "title": "Application Django",

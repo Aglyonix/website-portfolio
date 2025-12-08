@@ -1,5 +1,6 @@
 const projectComponents = [
     { key: "project.algorithm.dungeon-generator",           path: "DungeonGenerator.js",            component: "DungeonGenerator" },
+    { key: "project.application.image-processor-cpp",       path: "ImageProcessor.js",              component: "ImageProcessor" },
     { key: "project.application.python-console-poker",      path: "PokerPython.js",                 component: "PokerPython" },
     { key: "project.web.application-django-tickets",        path: "AppDjangoTickets.js",            component: "AppDjangoTickets" },
     { key: "project.web.website-portfolio",                 path: "WebsitePortfolio.js",            component: "WebsitePortfolio" },

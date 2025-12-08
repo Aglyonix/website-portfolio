@@ -119,14 +119,17 @@ body {
 
 #page-bio {
     --main-color: var(--red-600);
+    --main-color-rgb: 201, 53, 59;
 }
 
 #page-projects {
     --main-color: var(--violet-700);
+    --main-color-rgb: 112, 8, 231;
 }
 
 #page-contact {
     --main-color: var(--orange-600);
+    --main-color-rgb: 255, 105, 0;
 }
 
 main {
@@ -312,16 +315,10 @@ main {
 
 .list-group-wallet .description.expanded {
     max-height: 512px;
-
+    
     padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
     border-bottom: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color);
-
-    transition: .4s;
-}
-
-.list-group-wallet :has(+ .description.expanded) {
-    border-color: var(--main-color);
-
+    
     transition: .4s;
 }
 
@@ -337,6 +334,15 @@ main {
 
 .list-group-wallet .list-group-item {
     color: var(--black);
+}
+
+.list-group-wallet .list-group-item:not(.description):hover {
+    box-shadow:
+        rgba(17, 17, 26, 0.1) 0px 4px 16px,
+        rgba(17, 17, 26, 0.1) 0px 8px 24px,
+        rgba(17, 17, 26, 0.1) 0px 16px 56px;
+
+    transition: .2s;
 }
 
 .list-group-wallet .list-group-item-action .list-group-item {
