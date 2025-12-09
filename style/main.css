@@ -120,16 +120,19 @@ body {
 #page-bio {
     --main-color: var(--red-600);
     --main-color-rgb: 201, 53, 59;
+    --secondary-color: var(--red-400);
 }
 
 #page-projects {
     --main-color: var(--violet-700);
     --main-color-rgb: 112, 8, 231;
+    --secondary-color: var(--violet-500);
 }
 
 #page-contact {
     --main-color: var(--orange-600);
     --main-color-rgb: 255, 105, 0;
+    --secondary-color: var(--orange-400);
 }
 
 main {
@@ -154,9 +157,6 @@ main {
 }
 
 #content h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
-
     color: var(--main-color) !important;
 }
 
@@ -357,6 +357,10 @@ main {
     max-height: 48px;
 }
 
+.sticky-top.header-action {
+    top: calc(var(--header-height) + 1.25rem);
+}
+
 /* ---------------- Nav */
 
 .nav-pills .nav-link-main.active {
@@ -397,7 +401,6 @@ a {
     font-optical-sizing: auto;
     font-style: normal;
 
-    font-size: 1rem;
     font-weight: 400;
 
     color: var(--white);
@@ -405,6 +408,16 @@ a {
 
 .text-main {
     color: var(--main-color);
+}
+
+.link-main {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.link-main:hover {
+    color: var(--main-color);
+    transition: color ease-in-out .15s;
 }
 
 /* ---------------- Image */
@@ -483,6 +496,10 @@ svg.center-verticaly {
     --bs-gradient: none;
 }
 
+.btn-hover-main:hover {
+    --bs-btn-hover-color: var(--main-color) !important;
+}
+
 .btn-main svg path, .btn-main svg path.stroke,
 .btn-outline-main:hover svg path, .btn-outline-main:hover svg path.stroke {
     fill: var(--white);
@@ -495,4 +512,13 @@ svg.center-verticaly {
 .btn-main svg path, .btn-main svg path.stroke,
 .btn-outline-main svg path, .btn-outline-main svg path.stroke {
     transition: .2s;
+}
+
+/* ---------------- Decoration */
+
+.shadow {
+    box-shadow:
+        rgba(17, 17, 26, 0.1) 0px 4px 16px,
+        rgba(17, 17, 26, 0.1) 0px 8px 24px,
+        rgba(17, 17, 26, 0.1) 0px 16px 56px;
 }

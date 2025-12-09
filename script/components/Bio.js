@@ -139,7 +139,7 @@ function ExperiencePage({ experience, flag }) {
 function ExperienceHeader({ experience }) {
     return (
         <header className="d-flex flex-column flex-nowrap align-items-start justify-content-center gap-2 h-100 page-title">
-            <h1 className="lexend">Experience — {experience.title}</h1>
+            <h1 className="lexend">{experience.title}</h1>
             <p className="lexend">{experience.date}</p>
         </header>
     );
@@ -174,8 +174,8 @@ function BioContent() {
 function BioAboutMe() {
     return (
         <section id="about-me" className="w-100">
-            <h1 className="lexend w-100 text-center">A propos</h1>
-            <p className="lexend w-100 text-center">
+            <h1 className="lexend fw-bold w-100">A propos</h1>
+            <p className="lexend w-100">
                 Je suis Aëlig Jimenez,
                 je suis étudiant 2e année à l’IUT de Paris-Saclay.
                 Je suis un grand passionné par l'informatique, et surtout par la programmation,
@@ -222,7 +222,7 @@ function ProjectsLinkButton() {
 function BioInterest() {
     return (
         <section id="interests" className="w-100">
-            <h1 className="lexend w-100 text-center">Centre d'intérêts</h1>
+            <h1 className="lexend fw-bold w-100">Centre d'intérêts</h1>
             <div className="content-sm">
                 <ListGroupWallet id="interests-list" json="interest.json" />
             </div>
@@ -261,7 +261,7 @@ function BioInterestMedium() {
                 
                 for (var w = 0; w < columns; w++) {
                     let item = items[i];
-                    row.push(<BioInteresMediumItem item={item} key={item.key + ".md"} />);
+                    row.push(<BioInterestMediumItem item={item} key={item.key + ".md"} />);
                     i++;
                 }
 
@@ -278,7 +278,7 @@ function BioInterestMedium() {
     );
 }
 
-function BioInteresMediumItem({ item }) {
+function BioInterestMediumItem({ item }) {
     return (
         <div className="card text-center shadow-sm">
             <div className="card-body d-flex align-items-center justify-content-center">
@@ -317,7 +317,7 @@ function BioInterestLarge() {
                 
                 for (var w = 0; w < columns; w++) {
                     let item = items[i];
-                    row.push(<BioInteresLargeItem item={item} key={item.key + ".lg"} />);
+                    row.push(<BioInterestLargeItem item={item} key={item.key + ".lg"} />);
                     i++;
                 }
 
@@ -334,7 +334,7 @@ function BioInterestLarge() {
     );
 }
 
-function BioInteresLargeItem({ item }) {
+function BioInterestLargeItem({ item }) {
     return (
         <div className="card-group bio-interest-card">
             <div className="card text-center shadow-sm">
@@ -359,7 +359,7 @@ function BioInteresLargeItem({ item }) {
 function BioShowcase() {
     return (
         <section id="showcase" className="w-100">
-            <h1 className="lexend w-100 text-center">Showcase</h1>
+            <h1 className="lexend fw-bold w-100">Showcase</h1>
             <BioShowcaseNav />
             <BioShowcaseContent />
         </section>
@@ -464,7 +464,7 @@ function ExperiencePane() {
     return(
         <>
             <section id="education">
-                <h1 className="lexend w-100 text-center mb-3">Education</h1>
+                <h1 className="lexend fw-bold w-100 mb-3">Education</h1>
                 <div className="content-sm">
                     <ListGroupWallet id="education-list-sm" json="education.json" body={body} head={head} />
                 </div>
@@ -473,7 +473,7 @@ function ExperiencePane() {
                 </div>
             </section>
             <section id="experience">
-                <h1 className="lexend w-100 text-center mt-5 mb-3">Experience</h1>
+                <h1 className="lexend fw-bold w-100 mt-5 mb-3">Experience</h1>
                 <div className="content-sm">
                     <ListGroupWallet id="experience-list-sm" json="experience.json" body={body} head={head} />
                 </div>
@@ -595,9 +595,9 @@ window.ProjectsLinkButton = ProjectsLinkButton;
 
 window.BioInterest = BioInterest;
 window.BioInterestMedium = BioInterestMedium;
-window.BioInteresMediumItem = BioInteresMediumItem;
+window.BioInterestMediumItem = BioInterestMediumItem;
 window.BioInterestLarge = BioInterestLarge;
-window.BioInteresLargeItem = BioInteresLargeItem;
+window.BioInterestLargeItem = BioInterestLargeItem;
 
 window.BioShowcase = BioShowcase;
 window.BioShowcaseNav = BioShowcaseNav;
