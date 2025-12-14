@@ -174,8 +174,8 @@ function BioContent() {
 function BioAboutMe() {
     return (
         <section id="about-me" className="w-100">
-            <h1 className="lexend fw-bold w-100">A propos</h1>
-            <p className="lexend w-100">
+            <h1 className="lexend fw--normal w-100 text-center">A propos</h1>
+            <p className="lexend w-100 text-center">
                 Je suis Aëlig Jimenez,
                 je suis étudiant 2e année à l’IUT de Paris-Saclay.
                 Je suis un grand passionné par l'informatique, et surtout par la programmation,
@@ -191,7 +191,7 @@ function BioAboutMe() {
 
 function CVButton() {
     return (
-        <a href="../assets/pdf/Aëlig JIMENEZ CV.pdf" className="btn btn-outline-main lexend"> {/* TODO : Href to CV */}
+        <a href="../assets/pdf/Aëlig JIMENEZ CV.pdf" className="btn btn-outline-main w-100 lexend">
             <div className="d-flex flex-row flex-nowrap align-items-center justify-content-center gap-3">
                 <svg className="i-document center-verticaly" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
                     <path fillRule="evenodd" clipRule="evenodd" d="M9.29289 1.29289C9.48043 1.10536 9.73478 1 10 1H18C19.6569 1 21 2.34315 21 4V20C21 21.6569 19.6569 23 18 23H6C4.34315 23 3 21.6569 3 20V8C3 7.73478 3.10536 7.48043 3.29289 7.29289L9.29289 1.29289ZM18 3H11V8C11 8.55228 10.5523 9 10 9H5V20C5 20.5523 5.44772 21 6 21H18C18.5523 21 19 20.5523 19 20V4C19 3.44772 18.5523 3 18 3ZM6.41421 7H9V4.41421L6.41421 7ZM7 13C7 12.4477 7.44772 12 8 12H16C16.5523 12 17 12.4477 17 13C17 13.5523 16.5523 14 16 14H8C7.44772 14 7 13.5523 7 13ZM7 17C7 16.4477 7.44772 16 8 16H16C16.5523 16 17 16.4477 17 17C17 17.5523 16.5523 18 16 18H8C7.44772 18 7 17.5523 7 17Z" />
@@ -204,7 +204,7 @@ function CVButton() {
 
 function ProjectsLinkButton() {
     return (
-        <a href="projects.html" className="btn btn-main lexend"> {/* TODO : Href to Projects */}
+        <a href="projects.html" className="btn btn-main w-100 lexend">
             <div className="d-flex flex-row flex-nowrap align-items-center justify-content-center gap-3">
                 <svg className="i-code center-verticaly" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
                     <path d="M14.1809 4.2755C14.581 4.3827 14.8185 4.79396 14.7113 5.19406L10.7377 20.0238C10.6304 20.4239 10.2192 20.6613 9.81909 20.5541C9.41899 20.4469 9.18156 20.0356 9.28876 19.6355L13.2624 4.80583C13.3696 4.40573 13.7808 4.16829 14.1809 4.2755Z" />
@@ -222,7 +222,7 @@ function ProjectsLinkButton() {
 function BioInterest() {
     return (
         <section id="interests" className="w-100">
-            <h1 className="lexend fw-bold w-100">Centre d'intérêts</h1>
+            <h1 className="lexend fw--normal w-100 text-center">Centre d'intérêts</h1>
             <div className="content-sm">
                 <ListGroupWallet id="interests-list" json="interest.json" />
             </div>
@@ -359,7 +359,7 @@ function BioInterestLargeItem({ item }) {
 function BioShowcase() {
     return (
         <section id="showcase" className="w-100">
-            <h1 className="lexend fw-bold w-100">Showcase</h1>
+            <h1 className="lexend fw--normal w-100 text-center">Showcase</h1>
             <BioShowcaseNav />
             <BioShowcaseContent />
         </section>
@@ -464,7 +464,7 @@ function ExperiencePane() {
     return(
         <>
             <section id="education">
-                <h1 className="lexend fw-bold w-100 mb-3">Education</h1>
+                <h1 className="lexend fw--normal w-100 text-center mb-3">Education</h1>
                 <div className="content-sm">
                     <ListGroupWallet id="education-list-sm" json="education.json" body={body} head={head} />
                 </div>
@@ -473,7 +473,7 @@ function ExperiencePane() {
                 </div>
             </section>
             <section id="experience">
-                <h1 className="lexend fw-bold w-100 mt-5 mb-3">Experience</h1>
+                <h1 className="lexend fw--normal w-100 text-center mt-5 mb-3">Experience</h1>
                 <div className="content-sm">
                     <ListGroupWallet id="experience-list-sm" json="experience.json" body={body} head={head} />
                 </div>
@@ -538,7 +538,7 @@ function BioShowcaseListItem({ detail }) {
 function CertificatesPane() {
     return(
         <>
-            <h1 id="certificates" className="lexend w-100 text-center mb-3">Diplômes</h1>
+            <h1 id="certificates" className="lexend fw--normal w-100 text-center mb-3">Diplômes</h1>
             <div className="d-flex w-100 justify-content-center">
                 <CardCarousel id="carousel-certificates" json="certificate.json" />
             </div>
@@ -552,7 +552,7 @@ function TechStackPane() {
 
     return(
         <>
-            <h1 id="tech-stacks" className="lexend w-100 text-center mb-3">Tech Stack</h1>
+            <h1 id="tech-stacks" className="lexend fw--normal w-100 text-center mb-3">Tech Stack</h1>
             <CardGrid id="tech-stacks-grid" json="tech-stack.json" card={card} />
         </>
     );
@@ -565,7 +565,7 @@ function TechStackCard({ item }) {
                 {iconMap[item.icon] && iconMap[item.icon](96, 96)}
             </div>
             <div className="card-footer">
-                <h6 className="card-title mt-2">{item.title}</h6>
+                <h6 className="card-title lexend black mt-2">{item.title}</h6>
             </div>
         </div>
     );

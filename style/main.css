@@ -152,11 +152,20 @@ main {
     color: var(--black);
 }
 
-#content .lexend.white {
-    color: var(--white);
+#content .lexend.black {
+    color: var(--black) !important;
 }
 
-#content h1 {
+#content .lexend.white {
+    color: var(--white) !important;
+}
+
+#content h1, 
+#content h2, 
+#content h3, 
+#content h4, 
+#content h5, 
+#content h6 {
     color: var(--main-color) !important;
 }
 
@@ -357,8 +366,14 @@ main {
     max-height: 48px;
 }
 
+pre {
+    display: block;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: .875rem;
+}
+
 .sticky-top.header-action {
-    top: calc(var(--header-height) + 1.25rem);
+    top: calc(var(--header-height));
 }
 
 /* ---------------- Nav */
@@ -389,11 +404,151 @@ main {
     color: var(--black) !important;
 }
 
+/* ---------------- Highlight */
+
+.box-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.box-group.vertical-group {
+    flex-direction: column;
+}
+
+.box-group > .box {
+    flex: 1;
+}
+
+.box-group.vertical-group > .box {
+    flex: unset;
+    margin-bottom: 0;
+}
+
+.box-group.vertical-group > .box:last-child {
+    margin-bottom: 1rem;
+}
+
+.box-group > .box + .box {
+    margin-left: 0;
+    border-left-width: 0;
+}
+
+.box-group.vertical-group > .box + .box {
+    border-left-width: 1px;
+    border-top-width: 0;
+}
+
+.box-group > .box:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.box-group.vertical-group > .box:not(:first-child) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: var(--box-border-radius);
+}
+
+.box-group > .box:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.box-group.vertical-group > .box:not(:last-child) {
+    border-top-right-radius: var(--box-border-radius);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+
+    --box-bg: var(--zinc-50);
+    --box-bg-example: var(--zinc-100);
+
+    --box-border-color: var(--zinc-300);
+    --box-border-radius: .375rem;
+
+    border: 1px solid var(--box-border-color);
+    border-radius: var(--box-border-radius);
+
+    margin-bottom: 1rem;
+}
+
+.box > *:first-child {
+    border-top-left-radius: var(--box-border-radius);
+    border-top-right-radius: var(--box-border-radius);
+}
+
+.box > *:last-child {
+    border-bottom-left-radius: var(--box-border-radius);
+    border-bottom-right-radius: var(--box-border-radius);
+}
+
+.box > *.border-top {
+    border-top: 1px solid var(--box-border-color) !important;
+}
+
+.box > *.border-bottom {
+    border-bottom: 1px solid var(--box-border-color) !important;
+}
+
+.box > *.border-start {
+    border-left: 1px solid var(--box-border-color) !important;
+}
+
+.box > *.border-end {
+    border-right: 1px solid var(--box-border-color) !important;
+}
+
+.box > .highlight-example {
+    padding: 1.5rem;
+    
+    border-color: var(--box-border-color);
+    background-color: var(--box-bg-example);
+}
+
+.box > .highlight-toolbar {
+    padding: .25rem .5rem .25rem 1rem;
+    
+    border-color: var(--box-border-color);
+    background-color: var(--box-bg);
+}
+
+.box > .highlight-toolbar *[type="button"]:hover {
+    color: var(--main-color);
+}
+
+.box > .highlight {
+    padding: .75rem 1.25rem;
+    
+    border-color: var(--box-border-color);
+    background-color: var(--box-bg);
+}
+
+.box > .highlight pre {
+    margin: 0;
+    white-space: pre;
+    border: 0;
+
+    overflow: overlay;
+    background-color: transparent;
+}
+
+.box > .highlight pre code {
+    color: var(--zinc-900);
+    word-wrap: normal;
+}
+
+.box .btn-download {
+    background-color: var(--box-bg);
+}
+
 /* ---------------- Font */
 
 a {
     text-decoration: none;
-    width: 100%;
 }
 
 .lexend {
@@ -406,13 +561,33 @@ a {
     color: var(--white);
 }
 
+.fw--boldest {
+    font-weight: 900 !important;
+}
+
+.fw--bold {
+    font-weight: 700 !important;
+}
+
+.fw--normal {
+    font-weight: 500 !important;
+}
+
+.fw--light {
+    font-weight: 400 !important;
+}
+
+.fw--lightest {
+    font-weight: 200 !important;
+}
+
 .text-main {
     color: var(--main-color);
 }
 
 .link-main {
     color: var(--secondary-color);
-    text-decoration: none;
+    text-decoration: underline var(--secondary-color);
 }
 
 .link-main:hover {
@@ -514,6 +689,18 @@ svg.center-verticaly {
     transition: .2s;
 }
 
+.btn-download {
+    display: block;
+    line-height: 1;
+    padding: .5rem;
+
+    color: var(--black);
+    background-color: var(--white);
+
+    border: 0;
+    border-radius: .25rem;
+}
+
 /* ---------------- Decoration */
 
 .shadow {
@@ -521,4 +708,8 @@ svg.center-verticaly {
         rgba(17, 17, 26, 0.1) 0px 4px 16px,
         rgba(17, 17, 26, 0.1) 0px 8px 24px,
         rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+.tooltip-main {
+    --bs-tooltip-bg: var(--main-color) !important;
 }
