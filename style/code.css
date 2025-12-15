@@ -1,0 +1,118 @@
+/* ---------------- Colors */
+
+:root {
+    --code-color-comment: #5c6773;
+    --code-color-string: #bae67e;
+    --code-color-regexp-escape: #95e6cb;
+    --code-color-number: #9dd2bb;
+    --code-color-number-css: #f07178;
+    --code-color-const-builtin: #f29668;
+    --code-color-const-boolean: #d4bfff;
+    --code-color-variable: #dadbc0;
+    --code-color-variable-constant: #d4bfff;
+    --code-color-variable-member: #f28779;
+    --code-color-variable-language: #ffa759;
+    --code-color-variable-this: #f28779;
+    --code-color-ts-support-variable: #ffa759;
+    --code-color-storage: #ffa759;
+    --code-color-storage-type: #ffa759;
+    --code-color-storage-async: #f07178;
+    --code-color-storage-class: #f07178;
+    --code-color-keyword: #ffa759;
+    --code-color-keyword-control: #f07178;
+    --code-color-operator: #ff6188;
+    --code-color-operator-new: #f07178;
+    --code-color-punctuation-separator: #cbccc6b3;
+    --code-color-punctuation: #dadbc0;
+    --code-color-accessor: #f29e74;
+    --code-color-type-fixed: #95e6cb;
+    --code-color-type-inherited: #ff8f40;
+    --code-color-lambda-arrow: #ffa759;
+    --code-color-lambda-arrow-js: #f07178;
+    --code-color-java-primitive: #95e6cb;
+    --code-color-function-arg: #d4bfff;
+    --code-color-function-call: #ffcc66;
+    --code-color-function-library: #ffd580;
+    --code-color-function-console: #ffd580;
+    --code-color-import-package: #bae67e;
+    --code-color-entity-name: #f28779;
+    --code-color-function-name: #ffcc66;
+    --code-color-entity-class-es6: #ff8f40;
+    --code-color-tag: #fc4085;
+    --code-color-tag-bracket: #b3b1ad;
+    --code-color-html-text: #dadbc0;
+    --code-color-tag-attribute: #ffcc66;
+    --code-color-library-constant: #f28779;
+    --code-color-library-class: #f28779;
+    --code-color-library-class-promise: #ffa759;
+    --code-color-decorator: #dadbc0;
+    --code-color-invalid: #ff3333;
+    --code-color-diff-header: #c594c5;
+    --code-color-ruby-method: #ffd580;
+    --code-color-css-tag: #95e6cb;
+    --code-color-css-prefix: #5c6773;
+    --code-color-css-property: #bae67e;
+    --code-color-css-class: #bae67e;
+    --code-color-css-id: #ffcc66;
+    --code-color-css-property-name: #dadbc0;
+    --code-color-search-line-number: #5c6773;
+    --code-color-search-match-number: #ffa759;
+    --code-color-search-line: #bae67e;
+    --code-color-message-error: #ff3333;
+    --code-color-markup-heading: #bae67e;
+    --code-color-markup-link: #95e6cb;
+    --code-color-markup-italic: #f28779;
+    --code-color-markup-bold: #f28779;
+    --code-color-markup-code-bg: #cbccc605;
+    --code-color-markup-code-inline-bg: #cbccc60f;
+    --code-color-markup-separator: #5c6773;
+    --code-color-markup-quote: #95e6cb;
+    --code-color-markup-list-bullet: #ffd580;
+    --code-color-markup-added: #a6cc70;
+    --code-color-markup-modified: #77a8d9;
+    --code-color-markup-removed: #f27983;
+    --code-color-markup-strike: #ffe6b3;
+    --code-color-markup-table: #5ccfe6;
+    --code-color-markup-raw-inline: #f29e74;
+    --code-color-markdown-line-break: #5c6773;
+    --code-color-markdown-fence: #5c6773;
+    --code-color-json-tag: #f29e74;
+    --code-color-json-tag-lv1: #e6b450;
+    --code-color-json-tag-lv2: #f2ae49;
+    --code-color-json-constant: #d4bfff;
+    --code-color-json-constant-numeric: #f27983;
+    --code-color-json-tag-unquoted: #e6b450;
+    --code-color-bracket-colorizer: #b3b1ad;
+    --code-color-template-literal: #ffa759;
+    --code-color-ts-object-literal: #ffb454;
+    --code-color-ts-entity-type: #ff8f40;
+    --code-color-ts-entity-class: #f07178;
+    --code-color-ts-primitive: #ff8f40;
+    --code-color-gitignore: #ffd76d;
+    --code-color-mute: var(--zinc-500);
+    --code-color-highlight: #fc4085;
+    --code-color-default: var(--zinc-900);
+}
+
+/* ---------------- Easy Output */
+
+.language-output {
+    color: var(--code-color-default);
+}
+
+.language-output .line:before {
+    display: inline-block;
+    color: var(--code-color-default);
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none
+}
+
+.language-output .token.mute {
+    color: var(--code-color-mute);
+}
+
+.language-output .token.highlight {
+    color: var(--code-color-highlight);
+}

@@ -52,8 +52,9 @@
 
             "title": "Traiteur d'image C++",
 
-            "description": "Ce projet est un traiteur d'image, il permet de traîter les images .ppm à travers différentes fonctionnalitées interactives.",
+            "description": "Un petit outil de traitement d’images en C++ pour manipuler des fichiers .ppm avec des fonctions interactives.",
             "image": "background-landscape-wide.jpg",
+            "c" : "https://github.com/Aglyonix/image-processor-cpp",
 
             "domains" : [
                 "Application"

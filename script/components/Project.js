@@ -84,7 +84,12 @@ function ProjectRouter() {
     if (!Component) return <ProjectPage project={project} flag={{ message: `La page ${config.component} n'existe pas`, level: "danger"}} />;
 
     // Project Page
-    return <Component project={project} />;
+    return (
+        <main role="main">
+            <ProjectHeader project={project} />
+            <Component project={project} />
+        </main>
+    );
 }
 
 // ---------------------------- Projects Page
@@ -241,7 +246,7 @@ function ProjectsMain({ flag }) {
                    {flag.message}
                 </div> : null}
             </section>
-            <h1 className="mb-4">Mes projets</h1>
+            <h1 className="fw-bold mb-4">Mes projets</h1>
 
             {/* Barre de recherche */}
             <section className="d-flex flex-row align-items-center gap-4 mb-5">
@@ -322,7 +327,7 @@ function ProjectPage({ project, flag }) {
 function ProjectHeader({ project }) {
     return (
         <header className="d-flex flex-column flex-nowrap align-items-start justify-content-center gap-2 h-100 page-title">
-            <h1 className="lexend">Projet — {project.title}</h1>
+            <h1 className="lexend">{project.title}</h1>
             <p className="lexend">{project.description}</p>
         </header>
     );

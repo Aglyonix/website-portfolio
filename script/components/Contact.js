@@ -34,7 +34,7 @@ function ContactMain() {
 
     return (
         <main id="content" className="container my-5">
-            <h1 className="lexend mb-4">Mon adresse email</h1>
+            <h1 className="lexend fw-bold mb-4">Mon adresse email</h1>
             <section id="my-email" className="input-group input-group-lg">
                 <a href="mailto:aeligj@gmail.com" className="d-flex flex-row">
                     <div id="my-email-label">

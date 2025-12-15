@@ -9,6 +9,8 @@
 /* ---------------- Main */
 
 @import url("main.css");
+@import url("code.css");
+
 @import url("contents/banner.css");
 @import url("contents/nav-animation.css");
 @import url("contents/header.css");
